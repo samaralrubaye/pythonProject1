@@ -11,3 +11,4 @@ m=folium.Map(location=myaddress, zoom_start=4)
 
 folium.Marker(myaddress).add_to(m)
 m.save("m.html")
+print("test test")
