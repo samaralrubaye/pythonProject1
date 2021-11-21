@@ -1,21 +1,18 @@
-
-
 import Model.connection
+f = open("script.js", "w")  # open the script file
 
-lists=[]
-class location:
+Model.connection.conection.mycursor.execute('SELECT idviber_msg,viber_Latitude, vlongitude FROM viber_msg')
+viber_msgs = Model.connection.conection.mycursor.fetchall()
 
 
-    def __init__(self ,longitude,latitude, marker):
+class location :
+
+    def __init__(self ,marker,longitude,latitude ):
         self.longitude=longitude
         self.latitude=latitude
         self.marker=marker
-        self.f = open("script.js", "w")  # open the script file
 
-    Model.connection.conection.mycursor.execute('SELECT idviber_msg,viber_Latitude, vlongitude FROM viber_msg')
-    viber_msgs = Model.connection.conection.mycursor.fetchall()
 
-    #lists = list(viber_msgs)
 
         # for email in emails:
 
@@ -38,31 +35,23 @@ class location:
 
 
 
-    def addlocation(self):  # define add function that pass the id and the longitude and latitude
+    # def addlocation(self):  # define add function that pass the id and the longitude and latitude
+    #      global f
+    #      self.f.write(" var marker_%d = L.marker([%d,%d],{}).addTo(map_732aa9293105477e92a5a9c8432b1001);"%(self.marker, self.longitude, self.latitude))
+    #     # the js script body with passing the variables to it.
 
-         self.f.write(" var marker_%d = L.marker([%d,%d],{}).addTo(map_732aa9293105477e92a5a9c8432b1001);"%(self.marker, self.longitude, self.latitude))
-        # the js script body with passing the variables to it.
+def add(marker_ID, longitude, latitude):  # define add function that pass the id and the longitude and latitude
+
+    f.write(" var marker_%d = L.marker([%d,%d],{}).addTo(map_732aa9293105477e92a5a9c8432b1001);"%(marker_ID, longitude, latitude))
 
 
 loc=[]
-lists=Model.connection.conection.viber_msgs
-print(lists)
-#loc= location(3.333333,4.444444,5.343)
-print(len(lists))
-print(type(lists))
-for i in range(len(lists)):
-    loc.append(location(lists[i][0],lists[i][1], lists[i][2]))
-    print(loc[i].longitude())
 
+for i in range(len(viber_msgs)):
+    loc.append(location(int(list(viber_msgs[i])[0]),float(list(viber_msgs[i])[1]),float(list(viber_msgs[i])[2])))
+    # loc[i].addlocation()
 
-#laca=location()
+for i in range(len(loc)):
+    add(loc[i].getmarker(), loc[i].getlogtude(), loc[i].getlatitude())
 
-#loc=location(3.3333333,4.44444,5.55555)
-
-#loc.addlocation()
-#print(loc.getlatitude())
-#print(loc.getlogtude())
-#print(loc.getmarker())
-
-
-#loc.f.close()
+f.close()

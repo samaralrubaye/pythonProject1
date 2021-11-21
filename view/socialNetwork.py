@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import pandas as pd
 
 import warnings; warnings.simplefilter('ignore')
 class SocialNetwork:
@@ -65,6 +66,8 @@ class SocialNetwork:
     def Digraph(self):
         G_asymmetric = nx.DiGraph()
         G_asymmetric.add_edge('v','z')
+        return G_asymmetric
+
     def drawdraw(self):
         nx.spring_layout(sn.Digraph())
         nx.draw_networkx(sn.Digraph())
@@ -75,9 +78,10 @@ class SocialNetwork:
     def Circular_layout(self):
         nx.draw_circular(sn.Digraph(), with_labels=True)
         plt.savefig("filename7.png")
+        plt.clf()
 
     # clearing the current plot
-    plt.clf()
+
 
     # drawing in planar layout
     def planner_layout(self):
@@ -117,7 +121,7 @@ class SocialNetwork:
 
     # clearing the current plot
     plt.clf()
-sn= SocialNetwork("qqq","dfdf","EEEE","gggg")
+sn= SocialNetwork("sara","L","samar","A")
 print(sn.theSenderName())
 print(sn.therecepianName())
 print(sn.Gettinginfo())
@@ -126,7 +130,7 @@ print(sn.draw_circlar())
 print(sn.draw_random())
 print(sn.draw_spectral())
 print(sn.drawplanar())
-print(sn.Digraph())
+print('ssss',sn.Digraph())
 print(sn.drawdraw())
 #print(sn.planner_layout())
 #print(sn.random_layout())

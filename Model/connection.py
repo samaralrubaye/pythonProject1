@@ -15,5 +15,7 @@ class conection:
 
   viber_msgs = mycursor.fetchall()
 
+
+
   #for email in emails:
-  print(viber_msgs[0])
+  # print(viber_msgs[0])
