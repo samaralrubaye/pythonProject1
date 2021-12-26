@@ -1,10 +1,11 @@
-import sys
-from PyQt6 import QtWidgets,uic
+fullname= 'samar sami'
+spil=' '
+res=fullname.split(spil)
+print(res)
+fn=[]
+ln=[]
 
-
-app = QtWidgets.QApplication(sys.argv)
-
-window = uic.loadUi("test.ui")
-window.show()
-app.exec()
-
+fn.append(res[0])
+print(fn)
+ln.append(res[1])
+print(ln)

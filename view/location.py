@@ -1,16 +1,32 @@
+
+
 import Model.connection
 f = open("script.js", "w")  # open the script file
 
 Model.connection.conection.mycursor.execute('SELECT idviber_msg,viber_Latitude, vlongitude FROM viber_msg')
 viber_msgs = Model.connection.conection.mycursor.fetchall()
 
+import sys
+from PyQt5.Qt import *
+from PyQt5.QtWebEngineWidgets import *
+from PyQt5.QtWidgets import QApplication
 
 class location :
+
+
+
+
 
     def __init__(self ,marker,longitude,latitude ):
         self.longitude=longitude
         self.latitude=latitude
         self.marker=marker
+
+
+
+
+
+
 
 
 
@@ -54,4 +70,21 @@ for i in range(len(viber_msgs)):
 for i in range(len(loc)):
     add(loc[i].getmarker(), loc[i].getlogtude(), loc[i].getlatitude())
 
+    print(1)
+
+
 f.close()
+
+app = QApplication(sys.argv)
+
+web = QWebEngineView()
+
+web.load(QUrl("http://localhost:63342/pythonProject1/view/test.html?_ijt=iva7ln3q8i8p1hdoa8dsbundsv&_ij_reload=RELOAD_ON_SAVE"))
+url = QUrl.fromLocalFile(r"C:\Users\samar\PycharmProjects\pythonProject1\view\test.html")
+   # url = QUrl.fromLocalFile(r"test.html")
+   # s=open("test.html")
+    #url = QUrl.setUrl(r"view/test.html")
+web.load(url)
+web.show()
+
+sys.exit(app.exec_())

@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QLocale
+from PyQt5.QtWidgets import QFormLayout
 
 
 class Ui_Dialog(object):
@@ -145,6 +147,13 @@ class Ui_Dialog(object):
         self.spectraBtn.clicked.connect(self.SpectraLayout)
         self.RandomBtn.clicked.connect(self.RandomLayout)
         self.barCharthBtn_2.clicked.connect(self.barchart)
+        self.cal = QtWidgets.QDateTimeEdit(Dialog)
+        self.flay = QFormLayout()
+        self.cal.setGeometry(QtCore.QRect(430, 70, 271, 22))
+        self.cal.setCalendarPopup(True)
+        self.cal.setDisplayFormat("yyyy-MM-DD ")
+        self.cal.calendarWidget().setLocale(QLocale(QLocale.English))
+        self.flay.addRow('todate', self.cal)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
