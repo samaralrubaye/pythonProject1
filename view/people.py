@@ -47,6 +47,10 @@ class PeoPle:
     def printing(self):
         print(self.firstName)
 
+    def delete_email(self,ID):
+        ex = Model.connection.conection.mycursor.callproc('PROC_delete_people', [self._peopleid])
+        Model.connection.conection.mycursor.stored_results()
+
 
 
 

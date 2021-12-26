@@ -1,20 +1,20 @@
 import Model.connection
 
 class viberAppAtachment:
-    def __init__(self,  viberAppAtachmentID):
+    def __init__(self,  viberAtachmentID):
         self._type = ''
         self._file=''
-        self._whatsAppMsgID=' '
-        self.viberAppAtachmentID = viberAppAtachmentID
+        self._viberMsgID=' '
+        self.viberAtachmentID = viberAtachmentID
         self.results= []
-        ex = Model.connection.conection.mycursor.callproc('whatsup_attachment_proc', [viberAppAtachmentID, ])
+        ex = Model.connection.conection.mycursor.callproc('viberattachment_proc', [viberAtachmentID, ])
         Model.connection.conection.mycursor.stored_results()
         for result in Model.connection.conection.mycursor.stored_results():
            w= result.fetchall()[0]
            #self.investigationid=str(w[0])
-           self.type=str(w[1])
-           self.file=str(w[2])
-           self.whatsAppMsgID =str(w[3])
+           self.type=str(w[2])
+           self.file=str(w[3])
+           self.viberMsgID =str(w[1])
 
 
 
@@ -35,18 +35,21 @@ class viberAppAtachment:
         self._file=value
 
     @property
-    def whatsAppMsgID(self):
-        return self._whatsAppMsgID
+    def viberMsgID(self):
+        return self._viberMsgID
 
-    @whatsAppMsgID.setter
-    def whatsAppMsgID(self, value):
-        self._whatsAppMsgID = value
+    @viberMsgID.setter
+    def viberMsgID(self, value):
+        self._viberMsgID = value
     @property
-    def whatsAppAtachmentID(self):
-        return self._whatsAppAtachmentID
-    @whatsAppAtachmentID.setter
-    def whatsAppAtachmentID(self,value):
-        self._whatsAppAtachmentID=value
+    def viberAtachmentID(self):
+        return self._viberAtachmentID
+    @viberAtachmentID.setter
+    def viberAtachmentID(self,value):
+        self._viberAtachmentID=value
+    def delete_viberAttachment(self,ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_deleteviberMsg', [self.whatsAppAtachmentID,])
+        Model.connection.conection.mycursor.stored_results()
 
 
 

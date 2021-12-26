@@ -48,7 +48,9 @@ class whatsAppAtachment:
     def whatsAppAtachmentID(self,value):
         self._whatsAppAtachmentID=value
 
-
+    def delete_vibermsg(self, ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_Deletewhatsup_attachment', [self._whatsAppAtachmentID, ])
+        Model.connection.conection.mycursor.stored_results()
 
 
 w=whatsAppAtachment(1)

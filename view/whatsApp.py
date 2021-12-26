@@ -37,6 +37,10 @@ class whatsApp:
     def whatsAppNumber(self,value):
         self._whatsAppNumber=value
 
+    def delete_vibermsg(self, ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_deletwhatsup', [self.whatsAppNumber, ])
+        Model.connection.conection.mycursor.stored_results()
+
 
 
 

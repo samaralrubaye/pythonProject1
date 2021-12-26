@@ -7,7 +7,7 @@ class emailAttached:
         self._file=' '
         self.emailattachedid = emailattachedid
         self.results= []
-        ex = Model.connection.conection.mycursor.callproc('investigatin_proc', [emailattachedid, ])
+        ex = Model.connection.conection.mycursor.callproc('email_attachment_proc', [emailattachedid, ])
         Model.connection.conection.mycursor.stored_results()
         for result in Model.connection.conection.mycursor.stored_results():
            w= result.fetchall()[0]
@@ -51,7 +51,9 @@ class emailAttached:
         self._emailattachedid=value
 
 
-
+    def delete_vibermsg(self, ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_deleteEmail', [self._proc_delet_email_attachment, ])
+        Model.connection.conection.mycursor.stored_results()
 
 w=emailAttached(1)
 

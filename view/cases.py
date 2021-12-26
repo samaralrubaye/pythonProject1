@@ -28,6 +28,17 @@ class cases:
     def caseName(self, value):
         self._caseName = value
 
+    def createCase(self,caseName):
+        ex = Model.connection.conection.mycursor.callproc('proc_addCase', [self.caseName,])
+        Model.connection.conection.mycursor.stored_results()
+
+    def update_Case(self,caseId,caseName):
+        ex = Model.connection.conection.mycursor.callproc('proc_updateCase', [self.caseId,self.caseName])
+        Model.connection.conection.mycursor.stored_results()
+
+    def delete_Case(self,caseId,caseName):
+        ex = Model.connection.conection.mycursor.callproc('proc_deleteCase', [self.caseId,self.caseName])
+        Model.connection.conection.mycursor.stored_results()
 
 z = cases(1)
 print(z.caseId)

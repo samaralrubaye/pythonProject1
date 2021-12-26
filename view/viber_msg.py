@@ -87,15 +87,10 @@ class viberMassages:
     @viberMsgID.setter
     def viberMsgID(self,value):
         self._viberMsgID=value
-    def createNew(self,IP,longTude,latiTude,msg_time,number,reading_time):
-        ex = Model.connection.conection.mycursor.callproc('addviber_proc', [IP,longTude,latiTude,msg_time,number,reading_time])
-        Model.connection.conection.mycursor.stored_results()
-    def update_viber(self,ID,IP,longTude,latiTude,msg_time,number,reading_time):
-        ex = Model.connection.conection.mycursor.callproc('updateviber_proc', [ID,IP,longTude,latiTude,msg_time,number,reading_time])
-        Model.connection.conection.mycursor.stored_results()
 
-    def delete_viber(self,ID):
-        ex = Model.connection.conection.mycursor.callproc('deleteviber_proc', [ID,])
+
+    def delete_vibermsg(self,ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_deleteviberMsg', [self.viberMsgID,])
         Model.connection.conection.mycursor.stored_results()
 
 

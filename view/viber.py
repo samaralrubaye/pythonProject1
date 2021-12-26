@@ -37,6 +37,9 @@ class viber:
     @viberNamber.setter
     def viberNamber(self, value):
         self._viberNamber = value
+    def delete_email(self,ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_deleteViber', [self.viberNamber])
+        Model.connection.conection.mycursor.stored_results()
 
 
 w = viber(10101010)

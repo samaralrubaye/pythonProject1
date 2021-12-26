@@ -67,6 +67,12 @@ class emails:
         self._emailtext = value
 
 
+
+    def delete_email(self,ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_deleteEmail', [self.emailid])
+        Model.connection.conection.mycursor.stored_results()
+
+
 z = emails(24)
 #print(z.Email)
 #print(z.timeDate)

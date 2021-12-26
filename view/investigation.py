@@ -41,6 +41,12 @@ class investGation:
 
 
 
+    def delete_Investigation(self,ID):
+        ex = Model.connection.conection.mycursor.callproc('proc_investigatin', [self.investigationid])
+        Model.connection.conection.mycursor.stored_results()
+
+
+
 
 w=investGation(1)
 print(w.examinerCasrid)

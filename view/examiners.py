@@ -76,7 +76,7 @@ class ExaMiners:
         Model.connection.conection.mycursor.stored_results()
 
     def delete_Examiner(self,ID):
-        ex = Model.connection.conection.mycursor.callproc('deleteviber_proc', [ID,])
+        ex = Model.connection.conection.mycursor.callproc('deleteviber_proc', [self.userid,])
         Model.connection.conection.mycursor.stored_results()
 
 
