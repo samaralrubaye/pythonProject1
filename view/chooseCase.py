@@ -33,8 +33,8 @@ class Ui_FormCases(object):
         self.comboBoxcases.setObjectName("comboBoxcases")
         cases=[]
         print(Examiner.Ui_Dialog.findExaminerID)
-        for i in range(len(Examiner.Ui_Dialog.bein(int(Examiner.Ui_Dialog.findExaminerID)))):
-            cases.append(Examiner.Ui_Dialog.bein(int(Examiner.Ui_Dialog.findExaminerID)[i][1]))
+        for i in range(2):
+            cases.append(str(Examiner.Ui_Dialog.bein(self)[0][1]))
 
         self.comboBoxcases.addItems(cases)
         self.ptnNext = QtWidgets.QPushButton(FormCases)

@@ -52,7 +52,7 @@ class emailAttached:
 
 
     def delete_vibermsg(self, ID):
-        ex = Model.connection.conection.mycursor.callproc('proc_deleteEmail', [self._proc_delet_email_attachment, ])
+        ex = Model.connection.conection.mycursor.callproc('proc_deleteEmail', [self.proc_delet_email_attachment, ])
         Model.connection.conection.mycursor.stored_results()
 
 w=emailAttached(1)
