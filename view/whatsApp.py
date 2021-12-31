@@ -13,6 +13,11 @@ class whatsApp:
            self.WhatsAppOs=str(w[1])
            self.peopleId=str(w[2])
 
+    @classmethod
+    def FromData(cls, WhatsAppOs, peopleId):
+        cls.WhatsAppOs = str(WhatsAppOs)
+        cls.peopleId = str(peopleId)
+        return cls
 
 
     @property
@@ -42,7 +47,15 @@ class whatsApp:
         Model.connection.conection.mycursor.stored_results()
 
 
+    def getAllWhatsApp(self):
+        AllWhatsApp=[]
+        ex = Model.connection.conection.mycursor.callproc('Examiners')
 
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                AllWhatsApp.append(whatsApp.FromData(i[0],i[1]))
+
+        return AllWhatsApp
 
 w = whatsApp(11111111)
 print(w.peopleId)

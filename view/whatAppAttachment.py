@@ -16,6 +16,12 @@ class whatsAppAtachment:
            self.file=str(w[2])
            self.whatsAppMsgID =str(w[3])
 
+    @classmethod
+    def FromData(cls, type, file, whatsAppMsgID ):
+        cls.type = str(type)
+        cls.file = str(file)
+        cls.whatsAppAtachmentID= str(whatsAppMsgID)
+        return cls
 
 
     @property
@@ -52,7 +58,15 @@ class whatsAppAtachment:
         ex = Model.connection.conection.mycursor.callproc('proc_Deletewhatsup_attachment', [self._whatsAppAtachmentID, ])
         Model.connection.conection.mycursor.stored_results()
 
+    def getAllviberMessage(self):
+        AllviberMessage=[]
+        ex = Model.connection.conection.mycursor.callproc('allwhatsAppMsg_proc')
 
-w=whatsAppAtachment(1)
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                AllviberMessage.append(whatsAppAtachment.FromData(i[0],i[1],i[3]))
+
+        return AllviberMessage
+
 
 

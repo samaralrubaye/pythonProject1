@@ -16,7 +16,12 @@ class emailAttached:
            self.type=str(w[2])
            self.file =str(w[3])
 
-
+    @classmethod
+    def FromData(cls, EmailID,type, file ):
+        cls.EmailID = str( EmailID)
+        cls.type = str(type)
+        cls.file= str(file)
+        return cls
 
     @property
     def EmailID(self):
@@ -43,7 +48,6 @@ class emailAttached:
         self._file = value
 
 
-    @property
     def emailattachedid(self):
         return self._emailattachedid
     @emailattachedid.setter
@@ -55,6 +59,16 @@ class emailAttached:
         ex = Model.connection.conection.mycursor.callproc('proc_deleteEmail', [self.proc_delet_email_attachment, ])
         Model.connection.conection.mycursor.stored_results()
 
-w=emailAttached(1)
+    def getAllEmailAttached(self):
+        attachment=[]
+        ex = Model.connection.conection.mycursor.callproc('alltheAttachedemails_proc')
 
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                attachment.append(emailAttached.FromData(i[0],i[1],i[3]))
+
+        return attachment
+
+    getAllEmailAttached()
+#w=emailAttached(1)
 

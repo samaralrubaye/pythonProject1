@@ -14,6 +14,13 @@ class viber:
             self.viberOs = str(w[1])
             self.peopleID = str(w[2])
 
+    @classmethod
+    def FromData(cls,viberOs ,peopleID ):
+        cls.viberOs = str(viberOs)
+        cls.peopleID = str(peopleID)
+        return cls
+
+
     @property
     def viberOs(self):
         return self._viberOs
@@ -37,11 +44,18 @@ class viber:
     @viberNamber.setter
     def viberNamber(self, value):
         self._viberNamber = value
-    def delete_email(self,ID):
+    def delete_viber(self,ID):
         ex = Model.connection.conection.mycursor.callproc('proc_deleteViber', [self.viberNamber])
         Model.connection.conection.mycursor.stored_results()
 
+    def getAllVibers(self):
+        Vibers=[]
+        ex = Model.connection.conection.mycursor.callproc('allvibers_proc')
 
-w = viber(10101010)
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                Vibers.append(viber.FromData(i[0],i[1]))
 
-print(w.peopleID)
+        return Vibers
+
+

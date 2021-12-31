@@ -1,7 +1,7 @@
 
 import Model.connection
 
-class PeoPle:
+class People:
     def __init__(self,  peopleid):
         self._firstName = ''
         self._LastName=''
@@ -14,10 +14,11 @@ class PeoPle:
            self.firstName=str(w[1])
            self.lastName=str(w[2])
 
-
-
-
-
+    @classmethod
+    def FromData(cls, fname, lname):
+        cls.firstName = str(fname)
+        cls.lastName = str(lname)
+        return cls
 
 
 
@@ -51,13 +52,15 @@ class PeoPle:
         ex = Model.connection.conection.mycursor.callproc('PROC_delete_people', [self._peopleid])
         Model.connection.conection.mycursor.stored_results()
 
+    def getAllPeople(self):
+        allpeople = []
+        ex = Model.connection.conection.mycursor.callproc('Examiners')
 
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                allpeople.append(People.FromData(i[0], i[1]))
+        return allpeople
 
-
-w=PeoPle(5)
-print(w.firstName)
-print(w.userid)
-print(w.lastName)
 
 #w.printing()
 

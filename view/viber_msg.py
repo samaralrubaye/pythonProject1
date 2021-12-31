@@ -21,10 +21,20 @@ class viberMassages:
            self._viber_longtude =str(w[3])
            self.viber_latitude = str(w[4])
            self._viberMsgIP = str(w[5])
-           self._viber_msgDateTime=str(w[5])
-           self.viber_readtime=str(w[9])
-
+           self._viber_msgDateTime=str(w[6])
            self.viber_readtime=str(w[10])
+
+
+
+    @classmethod
+    def FromData(cls,viberMsg , viber_longtude,viber_latitude,viberMsgIP, viber_msgDateTime,viber_readtime ):
+        cls.viberMsg = str(viberMsg)
+        cls.viber_latitude = str(viber_latitude)
+        cls.viber_longtude = str(viber_longtude)
+        cls.viberMsgIP = str(viberMsgIP)
+        cls.viber_msgDateTime = str(viber_msgDateTime)
+        cls.viber_readtime = str(viber_readtime)
+        return cls
 
     @property
     def viber_msgDateTime(self):
@@ -93,12 +103,17 @@ class viberMassages:
         ex = Model.connection.conection.mycursor.callproc('proc_deleteviberMsg', [self.viberMsgID,])
         Model.connection.conection.mycursor.stored_results()
 
+    def getAllviberMsg(self):
+        Viber_msgs = []
+        ex = Model.connection.conection.mycursor.callproc('allViberMsgs_proc')
+
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                Viber_msgs.append(viberMassages.FromData(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[10]))
+
+        return Viber_msgs
 
 
-
-
-w=viberMassages(189)
-print(w.whatsAppMsgID)
 
 
 

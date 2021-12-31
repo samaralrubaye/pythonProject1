@@ -1,6 +1,7 @@
 import Model.connection
 
 
+
 class emails:
     def __init__(self, emailid):
         self._emailtext = ' '
@@ -9,6 +10,7 @@ class emails:
         self._email_longtude=' '
         self._email_latitude=' '
         self.emailid = emailid
+        self._peopleID=' '
         ex = Model.connection.conection.mycursor.callproc('email_proc', [emailid, ])
         Model.connection.conection.mycursor.stored_results()
         for result in Model.connection.conection.mycursor.stored_results():
@@ -19,7 +21,17 @@ class emails:
             self.Email=str(w[3])
             self.email_longtude=str(w[4])
             self.email_latitude=str(w[5])
+            self.peopleID=str(w[6])
 
+    @classmethod
+    def FromData(cls, emailtext,timeDate,Email,email_longtude, email_latitude,peopleID):
+        cls.emailtext = str(emailtext)
+        cls.timeDate = str(timeDate)
+        cls.Email=str(Email)
+        cls.email_longtude=str(email_longtude)
+        cls.email_latitude=str(email_latitude)
+        cls.peopleID=str(peopleID)
+        return cls
     @property
     def email_latitude(self):
         return self._email_latitude
@@ -27,6 +39,14 @@ class emails:
     @email_latitude.setter
     def email_latitude(self, value):
         self._email_latitude = value
+
+    @property
+    def peopleID(self):
+        return self._peopleID
+
+    @peopleID.setter
+    def peopleID(self, value):
+        self._peopleID = value
 
     @property
     def email_longtude(self):
@@ -72,7 +92,17 @@ class emails:
         ex = Model.connection.conection.mycursor.callproc('proc_deleteEmail', [self.emailid])
         Model.connection.conection.mycursor.stored_results()
 
+    def getAllEmails(self):
+        Emails=[]
+        ex = Model.connection.conection.mycursor.callproc('allemails_proc')
 
-z = emails(24)
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                Emails.append(emails.FromData(i[0],i[1],i[2],i[3],i[4],i[5],i[6]))
+
+        return Emails
+
+
+#z = emails(24)
 #print(z.Email)
 #print(z.timeDate)

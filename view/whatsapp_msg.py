@@ -18,11 +18,22 @@ class whatsAppMassages:
            #self.investigationid=str(w[0])
            self._whatsAppMsg=str(w[1])
            self._whatsAppMsgIP=str(w[2])
-           self._whatsApp_longtude =str(w[3])
-           self.whatsApp_longtude = str(w[4])
+           self._whatsApp_latitude =str(w[3])
+           self._whatsApp_longtude = str(w[4])
            self._whatsApp_msgDateTime=str(w[5])
            self.whatsApp_Number=str(w[6])
-           self.whatsApp_readtime=str(w[10])
+           self._whatsApp_readtime=str(w[10])
+
+    @classmethod
+    def FromData(cls, whatsAppMsg, whatsAppMsgIP, whatsApp_latitude, whatsApp_longtude, whatsApp_msgDateTime, whatsApp_readtime  ):
+        cls.whatsAppMsg = str(whatsAppMsg)
+        cls.whatsAppMsgIP = str(whatsAppMsgIP)
+        cls.whatsApp_latitude = str(whatsApp_latitude)
+        cls.whatsApp_longtude = str(whatsApp_longtude)
+        cls.whatsApp_msgDateTime = str(whatsApp_msgDateTime)
+        cls. whatsApp_readtime=str( whatsApp_readtime)
+
+        return cls
 
     @property
     def whatsApp_readtime(self):
@@ -80,9 +91,17 @@ class whatsAppMassages:
 
 
 
+    def getAllWhatsApp_msg(self):
+        AllWhatsApp_msg=[]
+        ex = Model.connection.conection.mycursor.callproc('Examiners')
 
-w=whatsAppMassages(36)
-print(w. whatsAppMsgID)
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                AllWhatsApp_msg.append(whatsAppMassages.FromData(i[0],i[1],i[3], i[4], i[5], i[6], i[10]))
+
+        return AllWhatsApp_msg
+
+
 
 
 

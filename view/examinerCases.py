@@ -14,6 +14,12 @@ class eXaminerCases:
             self.examinerID = w[1]
             self.caseId= w[2]
 
+    @classmethod
+    def FromData(cls, examinerID, caseId):
+        cls.examinerID = str(examinerID)
+        cls.caseId = str(caseId)
+        return cls
+
     @property
     def examinerCaseid(self):
         return self.examinerCaseid
@@ -50,7 +56,15 @@ class eXaminerCases:
         ex = Model.connection.conection.mycursor.callproc('proc_deletexaminercase', [self.examinerCaseid,self._examinerID,self.caseId,])
         Model.connection.conection.mycursor.stored_results()
 
+    def getAllCases(self):
+        AllCases = []
+        ex = Model.connection.conection.mycursor.callproc('allexaminercase_proc')
 
+        for result in Model.connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                AllCases.append(eXaminerCases.FromData(i[0], i[1], i[2]))
+
+        return AllCases
 z = eXaminerCases(2222222)
 
 
