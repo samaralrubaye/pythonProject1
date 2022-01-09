@@ -3,6 +3,9 @@ import Model.connection
 
 class eXaminerCases:
     def __init__(self, examinerCaseid):
+        super(examinerCaseid,self).__init__()
+        if examinerCaseid == None:
+            return
         self._examinerID = ' '
         self._caseId=' '
         self.examinerCaseid= examinerCaseid
@@ -14,11 +17,7 @@ class eXaminerCases:
             self.examinerID = w[1]
             self.caseId= w[2]
 
-    @classmethod
-    def FromData(cls, examinerID, caseId):
-        cls.examinerID = str(examinerID)
-        cls.caseId = str(caseId)
-        return cls
+    
 
     @property
     def examinerCaseid(self):
@@ -55,6 +54,11 @@ class eXaminerCases:
     def delete_ExaminerCase(self,ID,examinerID,caseId):
         ex = Model.connection.conection.mycursor.callproc('proc_deletexaminercase', [self.examinerCaseid,self._examinerID,self.caseId,])
         Model.connection.conection.mycursor.stored_results()
+   
+    def FromData(self, examinerID, caseId):
+        self.examinerID = str(examinerID)
+        self.caseId = str(caseId)
+        return self
 
     def getAllCases(self):
         AllCases = []
@@ -62,7 +66,7 @@ class eXaminerCases:
 
         for result in Model.connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                AllCases.append(eXaminerCases.FromData(i[0], i[1], i[2]))
+                AllCases.append(eXaminerCases.FromData(self,i[0], i[1], i[2]))
 
         return AllCases
 z = eXaminerCases(2222222)

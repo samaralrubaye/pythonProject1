@@ -10,12 +10,28 @@ import examiner
 from PyQt5 import QtCore, QtGui, QtWidgets
 import examiners
 import Examiner
-import Model
 
+from Examiner import *
+
+from Analysis11 import Ui_MainWindow
 
 
 class Ui_FormCases(object):
+    def backwindow(self):
+        self.beckwindow=QtWidgets.QDialog()
+        self.ui= Ui_Dialog()
+        self.ui.setupUi(self.backwindow)
+        FormCases.hide()
+        self.backwindow.show()
+
+    def nextwindow(self):
+        self.nextwindow=QtWidgets.QMainWindow()
+        self.ui=  Ui_MainWindow()
+        self.ui.setupUi(self.nextwindow)
+        FormCases.hide()
+        self.nextwindow.show()
     def setupUi(self, FormCases):
+        print(object)
         FormCases.setObjectName("FormCases")
         FormCases.resize(825, 320)
         self.label = QtWidgets.QLabel(FormCases)
@@ -31,18 +47,14 @@ class Ui_FormCases(object):
         self.comboBoxcases = QtWidgets.QComboBox(FormCases)
         self.comboBoxcases.setGeometry(QtCore.QRect(40, 160, 721, 22))
         self.comboBoxcases.setObjectName("comboBoxcases")
-        cases=[]
-        print(Examiner.Ui_Dialog.findExaminerID)
-        for i in range(2):
-            cases.append(str(Examiner.Ui_Dialog.bein(self)[0][1]))
-
-        self.comboBoxcases.addItems(cases)
         self.ptnNext = QtWidgets.QPushButton(FormCases)
         self.ptnNext.setGeometry(QtCore.QRect(710, 240, 93, 28))
         self.ptnNext.setObjectName("ptnNext")
         self.btnBack = QtWidgets.QPushButton(FormCases)
         self.btnBack.setGeometry(QtCore.QRect(50, 240, 93, 28))
         self.btnBack.setObjectName("btnBack")
+        self.btnBack.clicked.connect(self.backwindow)
+        self.ptnNext.clicked.connect(self.nextwindow)
 
 
         self.retranslateUi(FormCases)

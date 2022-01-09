@@ -1,4 +1,4 @@
-import Model.connection
+import connection
 
 class whatsApp:
     def __init__(self, whatsAppNumber):
@@ -6,9 +6,9 @@ class whatsApp:
         self._peopleId =' '
         self.whatsAppNumber = whatsAppNumber
         self.results= []
-        ex = Model.connection.conection.mycursor.callproc('whatsup_proc', [whatsAppNumber, ])
-        Model.connection.conection.mycursor.stored_results()
-        for result in Model.connection.conection.mycursor.stored_results():
+        ex = connection.conection.mycursor.callproc('whatsup_proc', [whatsAppNumber, ])
+        connection.conection.mycursor.stored_results()
+        for result in connection.conection.mycursor.stored_results():
            w= result.fetchall()[0]
            self.WhatsAppOs=str(w[1])
            self.peopleId=str(w[2])
@@ -43,19 +43,17 @@ class whatsApp:
         self._whatsAppNumber=value
 
     def delete_vibermsg(self, ID):
-        ex = Model.connection.conection.mycursor.callproc('proc_deletwhatsup', [self.whatsAppNumber, ])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_deletwhatsup', [self.whatsAppNumber, ])
+        connection.conection.mycursor.stored_results()
 
 
     def getAllWhatsApp(self):
         AllWhatsApp=[]
-        ex = Model.connection.conection.mycursor.callproc('Examiners')
+        ex = connection.conection.mycursor.callproc('Examiners')
 
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
                 AllWhatsApp.append(whatsApp.FromData(i[0],i[1]))
 
         return AllWhatsApp
 
-w = whatsApp(11111111)
-print(w.peopleId)

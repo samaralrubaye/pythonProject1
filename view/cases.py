@@ -1,13 +1,18 @@
-import Model.connection
+import connection
+#import sys
+#sys.path.append("PYTHONPROJECT1/Model.connection.py")
 
 
 class cases:
-    def __init__(self, caseid):
+    def __init__(self, caseid = None):
+        super(cases,self).__init__()
+        if caseid == None:
+            return
         self._caseName = ''
         self.caseid = caseid
-        ex = Model.connection.conection.mycursor.callproc('case_proc', [caseid, ])
-        Model.connection.conection.mycursor.stored_results()
-        for result in Model.connection.conection.mycursor.stored_results():
+        ex = connection.conection.mycursor.callproc('case_proc', [caseid, ])
+        connection.conection.mycursor.stored_results()
+        for result in connection.conection.mycursor.stored_results():
             w = result.fetchall()[0]
             print(w)
             self.caseName = str(w[1])
@@ -35,27 +40,40 @@ class cases:
         self._caseName = value
 
     def createCase(self,caseName):
-        ex = Model.connection.conection.mycursor.callproc('proc_addCase', [self.caseName,])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_addCase', [self.caseName,])
+        connection.conection.mycursor.stored_results()
 
     def update_Case(self,caseId,caseName):
-        ex = Model.connection.conection.mycursor.callproc('proc_updateCase', [self.caseId,self.caseName])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_updateCase', [self.caseId,self.caseName])
+        connection.conection.mycursor.stored_results()
 
     def delete_Case(self,caseId,caseName):
-        ex = Model.connection.conection.mycursor.callproc('proc_deleteCase', [self.caseId,self.caseName])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_deleteCase', [self.caseId,self.caseName])
+        connection.conection.mycursor.stored_results()
 
     def getAllCases(self):
         AllCases=[]
-        ex = Model.connection.conection.mycursor.callproc('allCases_proc')
+        ex =connection.conection.mycursor.callproc('allCases_proc')
 
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
                 AllCases.append( cases.FromData(i[0],i[1]))
 
         return AllCases
 
-z = cases(1)
-print(z.caseId)
-print(z.caseName)
+    def fromData(self,id,name):
+        ex= cases()
+        ex.caseId  = id
+        ex.caseName  = str(name)
+        return ex
+
+    def getAll(self,userID):
+       tempCases = []
+       w = connection.conection.mycursor.callproc('casesforinvestigators',[userID,])
+
+       for result in connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                tempCases.append(cases.fromData(self,i[0],i[1]))
+
+       return tempCases
+

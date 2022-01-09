@@ -1,15 +1,19 @@
-import Model.connection
+import connection
 
 class investGation:
-    def __init__(self,  investigationid):
+    def __init__(self,  investigationid=None):
+        super(investGation,self).__init__()
+        if investigationid == None:
+            return
+        
         self._peopleID = ''
         self._comment=''
         self._examinerCasrid=' '
         self.investigationid = investigationid
         self.results= []
-        ex = Model.connection.conection.mycursor.callproc('investigatin_proc', [investigationid, ])
-        Model.connection.conection.mycursor.stored_results()
-        for result in Model.connection.conection.mycursor.stored_results():
+        ex = connection.conection.mycursor.callproc('investigatin_proc', [investigationid, ])
+        connection.conection.mycursor.stored_results()
+        for result in connection.conection.mycursor.stored_results():
            w= result.fetchall()[0]
            #self.investigationid=str(w[0])
            self.commentnt=str(w[2])
@@ -42,12 +46,27 @@ class investGation:
 
 
     def delete_Investigation(self,ID):
-        ex = Model.connection.conection.mycursor.callproc('proc_investigatin', [self.investigationid])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_investigatin', [self.investigationid])
+        connection.conection.mycursor.stored_results()
+
+    def fromData(self,peopleID,commant,examinercaseID):
+        ex= investGation()
+        ex.peopleID = str(peopleID)
+        ex.commant = str(commant)
+        ex.examinercaseID = examinercaseID
+        return ex
+
+
+    def getAllinvestGation(self):
+        investTemp=[]
+        ex = connection.conection.mycursor.callproc('Examiners')
+
+        for result in connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                investTemp.append(investGation.fromData(self,i[1],i[2],i[3]))
+
+        return investTemp
 
 
 
-
-w=investGation(1)
-print(w.examinerCasrid)
 

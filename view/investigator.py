@@ -1,3 +1,3 @@
-import Model.connection
+import connection
 class investigator:
   pass

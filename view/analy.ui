@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1327</width>
-    <height>927</height>
+    <width>1323</width>
+    <height>918</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="geoloctab">
      <attribute name="title">
@@ -35,17 +35,23 @@
      <attribute name="title">
       <string>Social networ</string>
      </attribute>
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="lbl_Visualization">
       <property name="geometry">
        <rect>
         <x>14</x>
         <y>20</y>
-        <width>761</width>
+        <width>971</width>
         <height>711</height>
        </rect>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>filename4.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox_7">
@@ -207,6 +213,12 @@
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>barchart.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>

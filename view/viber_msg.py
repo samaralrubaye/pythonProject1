@@ -1,7 +1,10 @@
-import Model.connection
+import connection
 
 class viberMassages:
-    def __init__(self,  viberMsgID):
+    def __init__(self,  viberMsgID=None):
+        super(viberMassages,self).__init__()
+        if viberMsgID == None:
+            return
         self._viberMsg = ''
         self._viber_longtude=' '
         self._viber_latitude=' '
@@ -10,9 +13,9 @@ class viberMassages:
         self._viber_readtime = ' '
         self.viberMsgID=viberMsgID
         self.results= []
-        ex = Model.connection.conection.mycursor.callproc('viber_msg_proc', [self.viber_Number, ])
-        Model.connection.conection.mycursor.stored_results()
-        for result in Model.connection.conection.mycursor.stored_results():
+        ex = connection.conection.mycursor.callproc('viber_msg_proc', [self.viber_Number, ])
+        connection.conection.mycursor.stored_results()
+        for result in connection.conection.mycursor.stored_results():
            w= result.fetchall()[0]
            #self.investigationid=str(w[0])
            self.viber_Number = str(w[1])
@@ -26,15 +29,7 @@ class viberMassages:
 
 
 
-    @classmethod
-    def FromData(cls,viberMsg , viber_longtude,viber_latitude,viberMsgIP, viber_msgDateTime,viber_readtime ):
-        cls.viberMsg = str(viberMsg)
-        cls.viber_latitude = str(viber_latitude)
-        cls.viber_longtude = str(viber_longtude)
-        cls.viberMsgIP = str(viberMsgIP)
-        cls.viber_msgDateTime = str(viber_msgDateTime)
-        cls.viber_readtime = str(viber_readtime)
-        return cls
+    
 
     @property
     def viber_msgDateTime(self):
@@ -97,19 +92,30 @@ class viberMassages:
     @viberMsgID.setter
     def viberMsgID(self,value):
         self._viberMsgID=value
+    
+   
+    def FromData(self,viberMsg , viber_longtude,viber_latitude,viberMsgIP, viber_msgDateTime,viber_readtime ):
+        ex=viberMassages()
+        ex.viberMsg = str(viberMsg)
+        ex.viber_latitude = str(viber_latitude)
+        ex.viber_longtude = str(viber_longtude)
+        ex.viberMsgIP = str(viberMsgIP)
+        ex.viber_msgDateTime = str(viber_msgDateTime)
+        ex.viber_readtime = str(viber_readtime)
+        return ex
 
 
     def delete_vibermsg(self,ID):
-        ex = Model.connection.conection.mycursor.callproc('proc_deleteviberMsg', [self.viberMsgID,])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_deleteviberMsg', [self.viberMsgID,])
+        connection.conection.mycursor.stored_results()
 
     def getAllviberMsg(self):
         Viber_msgs = []
-        ex = Model.connection.conection.mycursor.callproc('allViberMsgs_proc')
+        ex = connection.conection.mycursor.callproc('allViberMsgs_proc')
 
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                Viber_msgs.append(viberMassages.FromData(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[10]))
+                Viber_msgs.append(viberMassages.FromData(self,i[0], i[1], i[2], i[3], i[4], i[5], i[6]))
 
         return Viber_msgs
 

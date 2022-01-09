@@ -1,34 +1,19 @@
-
+from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import sys
 
 class Window(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-        layout = QGridLayout()
+        layout = setGeometry(160, 0, 1011, 931)
         self.setLayout(layout)
 
-
-        radiobutton = QRadioButton("Australia")
-        radiobutton.setChecked(True)
-        radiobutton.country = "Australia"
-        radiobutton.toggled.connect(self.onClicked)
-        layout.addWidget(radiobutton, 0, 0)
-
-        radiobutton = QRadioButton("China")
-        radiobutton.country = "China"
-        radiobutton.toggled.connect(self.onClicked)
-        layout.addWidget(radiobutton, 0, 1)
-
-        radiobutton = QRadioButton("Japan")
-        radiobutton.country = "Japan"
-        radiobutton.toggled.connect(self.onClicked)
-        layout.addWidget(radiobutton, 0, 2)
-
-    def onClicked(self):
-        radioButton = self.sender()
-        if radioButton.isChecked():
-            print("Country is %s" % (radioButton.country))
+        label1 = QLabel("Widget in Tab 1.")
+        label2 = QLabel("Widget in Tab 2.")
+        tabwidget = QTabWidget()
+        tabwidget.addTab(label1, "Tab 1")
+        tabwidget.addTab(label2, "Tab 2")
+        layout.addWidget(tabwidget, 0, 0)
 
 app = QApplication(sys.argv)
 screen = Window()

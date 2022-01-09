@@ -1,24 +1,23 @@
-import Model.connection
+import connection
 
 
 class viber:
-    def __init__(self, viberNamber):
+    def __init__(self, viberNamber=None):
+        super(viber,self).__init__()
+        if viberNamber == None:
+            return
         self._viberOs = ' '
         self._peopleID = ' '
         self.viberNamber =viberNamber
         self.results = []
-        ex = Model.connection.conection.mycursor.callproc('viber_proc', [viberNamber, ])
-        Model.connection.conection.mycursor.stored_results()
-        for result in Model.connection.conection.mycursor.stored_results():
+        ex = connection.conection.mycursor.callproc('viber_proc', [viberNamber, ])
+        connection.conection.mycursor.stored_results()
+        for result in connection.conection.mycursor.stored_results():
             w = result.fetchall()[0]
             self.viberOs = str(w[1])
             self.peopleID = str(w[2])
 
-    @classmethod
-    def FromData(cls,viberOs ,peopleID ):
-        cls.viberOs = str(viberOs)
-        cls.peopleID = str(peopleID)
-        return cls
+  
 
 
     @property
@@ -45,16 +44,22 @@ class viber:
     def viberNamber(self, value):
         self._viberNamber = value
     def delete_viber(self,ID):
-        ex = Model.connection.conection.mycursor.callproc('proc_deleteViber', [self.viberNamber])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_deleteViber', [self.viberNamber])
+        connection.conection.mycursor.stored_results()
+  
+    def FromData(self,viberOs ,peopleID ):
+        ex=viber()
+        ex.viberOs = str(viberOs)
+        ex.peopleID = str(peopleID)
+        return ex
 
     def getAllVibers(self):
         Vibers=[]
-        ex = Model.connection.conection.mycursor.callproc('allvibers_proc')
+        ex = connection.conection.mycursor.callproc('allvibers_proc')
 
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                Vibers.append(viber.FromData(i[0],i[1]))
+                Vibers.append(viber.FromData(self,i[0],i[1]))
 
         return Vibers
 

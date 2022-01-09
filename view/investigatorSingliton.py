@@ -1,4 +1,4 @@
-from view.investigator import investigator
+from investigator import investigator
 
 
 class investigatorSinglilton(investigator):

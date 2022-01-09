@@ -1,9 +1,13 @@
-import Model.connection
 
-
+from sys import implementation
+from examiners import ExaMiners
+import connection
 
 class emails:
-    def __init__(self, emailid):
+    def __init__(self, emailid=None):
+        super(ExaMiners,self).__init__()
+        if emailid == None:
+            return
         self._emailtext = ' '
         self._timeDate = ' '
         self._Email = ' '
@@ -11,9 +15,9 @@ class emails:
         self._email_latitude=' '
         self.emailid = emailid
         self._peopleID=' '
-        ex = Model.connection.conection.mycursor.callproc('email_proc', [emailid, ])
-        Model.connection.conection.mycursor.stored_results()
-        for result in Model.connection.conection.mycursor.stored_results():
+        ex = connection.conection.mycursor.callproc('email_proc', [emailid, ])
+        connection.conection.mycursor.stored_results()
+        for result in connection.conection.mycursor.stored_results():
             w = result.fetchall()[0]
             print(w)
             self.emailtext = str(w[1])
@@ -23,15 +27,7 @@ class emails:
             self.email_latitude=str(w[5])
             self.peopleID=str(w[6])
 
-    @classmethod
-    def FromData(cls, emailtext,timeDate,Email,email_longtude, email_latitude,peopleID):
-        cls.emailtext = str(emailtext)
-        cls.timeDate = str(timeDate)
-        cls.Email=str(Email)
-        cls.email_longtude=str(email_longtude)
-        cls.email_latitude=str(email_latitude)
-        cls.peopleID=str(peopleID)
-        return cls
+    
     @property
     def email_latitude(self):
         return self._email_latitude
@@ -89,16 +85,25 @@ class emails:
 
 
     def delete_email(self,ID):
-        ex = Model.connection.conection.mycursor.callproc('proc_deleteEmail', [self.emailid])
-        Model.connection.conection.mycursor.stored_results()
+        ex = connection.conection.mycursor.callproc('proc_deleteEmail', [self.emailid])
+        connection.conection.mycursor.stored_results()
+    
+    def FromData(self, emailtext,timeDate,Email,email_longtude, email_latitude,peopleID):
+        self.emailtext = str(emailtext)
+        self.timeDate = str(timeDate)
+        self.Email=str(Email)
+        self.email_longtude=str(email_longtude)
+        self.email_latitude=str(email_latitude)
+        self.peopleID=str(peopleID)
+        return self
 
     def getAllEmails(self):
         Emails=[]
-        ex = Model.connection.conection.mycursor.callproc('allemails_proc')
+        ex = connection.conection.mycursor.callproc('allemails_proc')
 
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                Emails.append(emails.FromData(i[0],i[1],i[2],i[3],i[4],i[5],i[6]))
+                Emails.append(emails.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6]))
 
         return Emails
 

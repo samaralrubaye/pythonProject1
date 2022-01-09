@@ -1,13 +1,14 @@
+import connection
 
-
-import Model.connection
 f = open("script.js", "w")  # open the script file
 
-Model.connection.conection.mycursor.execute('SELECT idviber_msg,viber_Latitude, vlongitude FROM viber_msg')
-viber_msgs = Model.connection.conection.mycursor.fetchall()
+connection.conection.mycursor.execute('SELECT idviber_msg,viber_Latitude, vlongitude FROM viber_msg')
+viber_msgs = connection.conection.mycursor.fetchall()
 
 import sys
-from PyQt5.Qt import *
+from PyQt5.QtCore import QUrl, QUrlQuery
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5 import QtWidgets
 from PyQt5.QtWebEngineWidgets import *
 from PyQt5.QtWidgets import QApplication
 

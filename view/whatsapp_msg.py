@@ -1,7 +1,10 @@
-import Model.connection
+import connection
 
 class whatsAppMassages:
-    def __init__(self,  whatsAppMsgID):
+    def __init__(self,  whatsAppMsgID= None):
+        super(whatsAppMassages,self).__init__()
+        if whatsAppMsgID == None:
+            return
         self._whatsAppMsg = ''
         self._whatsAppMsgIP=''
         self._whatsApp_longtude=' '
@@ -11,9 +14,9 @@ class whatsAppMassages:
         self._whatsApp_readtime = ' '
         self.whatsAppMsgID = whatsAppMsgID
         self.results= []
-        ex = Model.connection.conection.mycursor.callproc('whatsup_msg_proc', [whatsAppMsgID, ])
-        Model.connection.conection.mycursor.stored_results()
-        for result in Model.connection.conection.mycursor.stored_results():
+        ex = connection.conection.mycursor.callproc('whatsup_msg_proc', [whatsAppMsgID, ])
+        connection.conection.mycursor.stored_results()
+        for result in connection.conection.mycursor.stored_results():
            w= result.fetchall()[0]
            #self.investigationid=str(w[0])
            self._whatsAppMsg=str(w[1])
@@ -24,16 +27,16 @@ class whatsAppMassages:
            self.whatsApp_Number=str(w[6])
            self._whatsApp_readtime=str(w[10])
 
-    @classmethod
-    def FromData(cls, whatsAppMsg, whatsAppMsgIP, whatsApp_latitude, whatsApp_longtude, whatsApp_msgDateTime, whatsApp_readtime  ):
-        cls.whatsAppMsg = str(whatsAppMsg)
-        cls.whatsAppMsgIP = str(whatsAppMsgIP)
-        cls.whatsApp_latitude = str(whatsApp_latitude)
-        cls.whatsApp_longtude = str(whatsApp_longtude)
-        cls.whatsApp_msgDateTime = str(whatsApp_msgDateTime)
-        cls. whatsApp_readtime=str( whatsApp_readtime)
-
-        return cls
+    
+    def FromData(self, whatsAppMsg, whatsAppMsgIP, whatsApp_latitude, whatsApp_longtude, whatsApp_msgDateTime, whatsApp_readtime  ):
+        ex=whatsAppMassages()
+        ex.whatsAppMsg = str(whatsAppMsg)
+        ex.whatsAppMsgIP = str(whatsAppMsgIP)
+        ex.whatsApp_latitude = str(whatsApp_latitude)
+        ex.whatsApp_longtude = str(whatsApp_longtude)
+        ex.whatsApp_msgDateTime = str(whatsApp_msgDateTime)
+        ex. whatsApp_readtime=str( whatsApp_readtime)
+        return ex
 
     @property
     def whatsApp_readtime(self):
@@ -93,11 +96,11 @@ class whatsAppMassages:
 
     def getAllWhatsApp_msg(self):
         AllWhatsApp_msg=[]
-        ex = Model.connection.conection.mycursor.callproc('Examiners')
+        ex = connection.conection.mycursor.callproc('Examiners')
 
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                AllWhatsApp_msg.append(whatsAppMassages.FromData(i[0],i[1],i[3], i[4], i[5], i[6], i[10]))
+                AllWhatsApp_msg.append(whatsAppMassages.FromData(self,i[0],i[1],i[3], i[4], i[5], i[6], i[10]))
 
         return AllWhatsApp_msg
 
