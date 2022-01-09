@@ -9,11 +9,20 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import Model.connection
+import connection
 import examiners
+from examiners import *
+import chooseCase
+from cases import cases
 
 
 class Ui_Dialog(object):
+    def openwindow(self):
+        self.window = QtWidgets.QDialog()
+        self.ui= chooseCase.Ui_FormCases()
+        self.ui.setupUi(self.window)
+        Dialog.hide()
+        self.window.show()
 
 
     def setupUi(self, Dialog):
@@ -42,6 +51,7 @@ class Ui_Dialog(object):
         self.BtnNextExaminer = QtWidgets.QPushButton(Dialog)
         self.BtnNextExaminer.setGeometry(QtCore.QRect(530, 600, 93, 28))
         self.BtnNextExaminer.setObjectName("BtnNextExaminer")
+        self.BtnNextExaminer.clicked.connect(self.openwindow)
         self.BtnFinshExaminer = QtWidgets.QPushButton(Dialog)
         self.BtnFinshExaminer.setGeometry(QtCore.QRect(270, 600, 93, 28))
         self.BtnFinshExaminer.setObjectName("BtnFinshExaminer")
@@ -60,14 +70,14 @@ class Ui_Dialog(object):
         self.comboBox.activated.connect(self.findExaminer)
         self.BtnCancleExaminer.clicked.connect(self.findExaminerID)
 
-        self.BtnNextExaminer.clicked.connect(self.bein)
+        self.BtnNextExaminer.clicked.connect(cases.getAll)
 
-        print('details')
-        for i in range(len(examiners.ex.Details())):
-            p= [examiners.ex.fulName(examiners.ex.Details()[i][0],examiners.ex.Details()[i][1])]
-            self.comboBox.addItems(p)
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+       # print('details')
+        for i in examiners.ExaMiners.getAllExaminers(self):
+            self.comboBox.addItem(i.firstName+" "+i.lastName+" "+str(i.userId))
+            self.retranslateUi(Dialog)
+        
+            QtCore.QMetaObject.connectSlotsByName(Dialog)
     #getting the current selected name from the combobox
 
     def findExaminer(self):
@@ -90,21 +100,21 @@ class Ui_Dialog(object):
         return res[0]
 
     def bein(self):
-        w = Model.connection.conection.mycursor.callproc('casesforinvestigators', [self.findExaminerID, ])
-        Model.connection.conection.mycursor.stored_results()
+        w = connection.conection.mycursor.callproc('casesforinvestigators', [self.findExaminerID, ])
+        connection.conection.mycursor.stored_results()
         cases = []
         mf = []
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             temp = result.fetchall()
             return temp
 
     def login(self):
-        w = Model.connection.conection.mycursor.callproc('procLogin', [self.firsttNames,], [self.lastNames,],
+        w = connection.conection.mycursor.callproc('procLogin', [self.firsttNames,], [self.lastNames,],
                                                         [self.findExaminerID,])
-        Model.connection.conection.mycursor.stored_results()
+        connection.conection.mycursor.stored_results()
         cases = []
         mf = []
-        for result in Model.connection.conection.mycursor.stored_results():
+        for result in connection.conection.mycursor.stored_results():
             temp = result.fetchall()
             return temp
 
