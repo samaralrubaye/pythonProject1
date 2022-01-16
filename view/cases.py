@@ -1,3 +1,4 @@
+#from _typeshed import Self
 import connection
 #import sys
 #sys.path.append("PYTHONPROJECT1/Model.connection.py")
@@ -66,6 +67,7 @@ class cases:
         ex.caseId  = id
         ex.caseName  = str(name)
         return ex
+    
 
     def getAll(self,userID):
        tempCases = []
@@ -76,4 +78,5 @@ class cases:
                 tempCases.append(cases.fromData(self,i[0],i[1]))
 
        return tempCases
+      
 

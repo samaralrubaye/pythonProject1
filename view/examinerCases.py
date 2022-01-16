@@ -2,7 +2,7 @@ import Model.connection
 
 
 class eXaminerCases:
-    def __init__(self, examinerCaseid):
+    def __init__(self, examinerCaseid=None):
         super(examinerCaseid,self).__init__()
         if examinerCaseid == None:
             return
@@ -56,9 +56,10 @@ class eXaminerCases:
         Model.connection.conection.mycursor.stored_results()
    
     def FromData(self, examinerID, caseId):
-        self.examinerID = str(examinerID)
-        self.caseId = str(caseId)
-        return self
+        ex=eXaminerCases()
+        ex.examinerID = str(examinerID)
+        ex.caseId = str(caseId)
+        return ex
 
     def getAllCases(self):
         AllCases = []
@@ -69,6 +70,6 @@ class eXaminerCases:
                 AllCases.append(eXaminerCases.FromData(self,i[0], i[1], i[2]))
 
         return AllCases
-z = eXaminerCases(2222222)
+
 
 

@@ -9,13 +9,18 @@
 
 
 from datetime import date
+
+
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 import PIL.ImageGrab
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1323, 918)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -116,6 +121,7 @@ class Ui_MainWindow(object):
         self.lineEdit_serchKeyWord_ForChat.setObjectName("lineEdit_serchKeyWord_ForChat")
         
         
+
         self.btnKeyWordChat_2 = QtWidgets.QPushButton(self.dockWidgetContents_2)
         self.btnKeyWordChat_2.setGeometry(QtCore.QRect(10, 90, 111, 31))
         self.btnKeyWordChat_2.setObjectName("btnKeyWordChat_2")
@@ -151,15 +157,20 @@ class Ui_MainWindow(object):
         self.dateEdit_dateFrom.setGeometry(QtCore.QRect(80, 20, 110, 22))
         self.dateEdit_dateFrom.setObjectName("dateEdit_dateFrom")
         #setting the calinder
+
         self.dateEdit_dateFrom.setCalendarPopup(True)
         self.dateEdit_dateTo = QtWidgets.QDateEdit(self.groupBox_5)
         self.dateEdit_dateTo.setGeometry(QtCore.QRect(80, 60, 110, 22))
         self.dateEdit_dateTo.setObjectName("dateEdit_dateTo")
+        self.dateEdit_dateTo.dateTimeChanged.connect(lambda: method(self))
+        
+
         #highlight the available dates
        # self.dateEdit_dateFrom.setDateRange(QtCore.QDate(2022,2,2),QtCore.QDate(2022,3,1))
         #setting the calinder
         # self.dateEdit_dateFrom.setGridVisible(True)
         self.dateEdit_dateTo.dateChanged.connect(self.fromlinedittopython)
+        # print("change!!")
         self.dateEdit_dateTo.setMinimumDate(QtCore.QDate(2022,2,2))
         self.dateEdit_dateTo.setMaximumDate(QtCore.QDate(2022,3,1))
         self.dateEdit_dateTo.setCalendarPopup(True)
@@ -305,9 +316,12 @@ class Ui_MainWindow(object):
             response=QtWidgets.QFileDialog.DontUseNativeDialog
             response=QtWidgets.QFileDialog.saveFileContent(self.screenshoting)
             return response
-    def grapaDate(self):
-            self.dateEdit_dateFrom.setDate()
-            print("ddd")
+def grapaDate(self):
+        self.dateEdit_dateTo.setDate()
+        print("ddd")
+
+def method(self):
+       print(self.dateEdit_dateTo.date())
    
            
             

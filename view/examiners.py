@@ -11,6 +11,7 @@ class ExaMiners:
         self._firstName = ''
         self._LastName=''
         self.userid = userid
+        self._examinerPassword=' '
         self.results= []
         ex = connection.conection.mycursor.callproc('examiners_proc', [userid, ])
         connection.conection.mycursor.stored_results()
@@ -18,11 +19,12 @@ class ExaMiners:
            w= result.fetchall()[0]
            self.firstName=str(w[1])
            self.lastName=str(w[2])
+           self.password= str(w[3])
 
 
 
 
-
+       
 
     @property
     def firstName(self):
@@ -41,10 +43,18 @@ class ExaMiners:
         self._LastName=value
     @property
     def userId(self):
-        return self.userid
+        return self._userid
     @userId.setter
     def userId(self,value):
-        self.userid=value
+        self._userid=value
+    
+    @property
+    def examinerPassword(self):
+        return self._examinerPassword
+    
+    @examinerPassword.setter
+    def examinerPassword(self,value):
+        self._examinerPassword=value
 
     def printing(self):
         print(self.firstName)
@@ -68,18 +78,20 @@ class ExaMiners:
         connection.conection.mycursor.stored_results()
 
     def update_Examiner(self,ID,fname,lname):
-        ex = connection.conection.mycursor.callproc('proc_updateExaminer', [self.userid,self.firstName,self.lastName])
+        ex = connection.conection.mycursor.callproc('proc_updateExaminer', [self.userid,self.firstName,self.lastName, self.examinerPassword])
         connection.conection.mycursor.stored_results()
 
     def delete_Examiner(self,ID):
         ex = connection.conection.mycursor.callproc('deleteviber_proc', [self.userid,])
         connection.conection.mycursor.stored_results()
 
-    def fromData(self,fname,lname,id):
+    def fromData(self,fname,lname,id,examonerPassword):
         ex= ExaMiners()
         ex.firstName = str(fname)
         ex.lastName = str(lname)
         ex.userId = id
+        ex.examinerPassword=str(examonerPassword)
+
         return ex
 
 
@@ -92,6 +104,20 @@ class ExaMiners:
                 examiners.append(ExaMiners.fromData(self,i[0],i[1],i[2]))
 
         return examiners
+    
+    def anotherlogin(self, examinerPassword, name):
+         w = connection.conection.mycursor.callproc('Examinerlogin', [self._examinerPassword,], [self.firsttNames,])
+         connection.conection.mycursor.stored_results()
+         cases = []
+         mf = []
+         for result in connection.conection.mycursor.stored_results():
+             temp = result.fetchall()
+         return temp
 
 
 
+
+
+9
+
+    

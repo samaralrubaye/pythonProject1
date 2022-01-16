@@ -58,10 +58,11 @@ class emailAttached:
         ex = connection.conection.mycursor.callproc('proc_deleteEmail', [self.proc_delet_email_attachment, ])
         connection.conection.mycursor.stored_results()
     def FromData(self, EmailID,type, file ):
-        self.EmailID = str( EmailID)
-        self.type = str(type)
-        self.file= str(file)
-        return self
+        ex=emailAttached()
+        ex.EmailID = str( EmailID)
+        ex.type = str(type)
+        ex.file= str(file)
+        return ex
 
     def getAllEmailAttached(self):
         attachment=[]

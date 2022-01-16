@@ -1,7 +1,10 @@
 import connection
 
 class whatsApp:
-    def __init__(self, whatsAppNumber):
+    def __init__(self, whatsAppNumber=None):
+        super(whatsApp,self).__init__()
+        if whatsAppNumber == None:
+            return
         self._WhatsAppOs = ' '
         self._peopleId =' '
         self.whatsAppNumber = whatsAppNumber
@@ -13,11 +16,12 @@ class whatsApp:
            self.WhatsAppOs=str(w[1])
            self.peopleId=str(w[2])
 
-    @classmethod
-    def FromData(cls, WhatsAppOs, peopleId):
-        cls.WhatsAppOs = str(WhatsAppOs)
-        cls.peopleId = str(peopleId)
-        return cls
+   
+    def FromData(self, WhatsAppOs, peopleId):
+        ex=whatsApp()
+        ex.WhatsAppOs = str(WhatsAppOs)
+        ex.peopleId = str(peopleId)
+        return ex
 
 
     @property
@@ -53,7 +57,7 @@ class whatsApp:
 
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                AllWhatsApp.append(whatsApp.FromData(i[0],i[1]))
+                AllWhatsApp.append(whatsApp.FromData(self,i[0],i[1]))
 
         return AllWhatsApp
 

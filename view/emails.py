@@ -89,13 +89,14 @@ class emails:
         connection.conection.mycursor.stored_results()
     
     def FromData(self, emailtext,timeDate,Email,email_longtude, email_latitude,peopleID):
-        self.emailtext = str(emailtext)
-        self.timeDate = str(timeDate)
-        self.Email=str(Email)
-        self.email_longtude=str(email_longtude)
-        self.email_latitude=str(email_latitude)
-        self.peopleID=str(peopleID)
-        return self
+        ex=emails()
+        ex.emailtext = str(emailtext)
+        ex.timeDate = str(timeDate)
+        ex.Email=str(Email)
+        ex.email_longtude=str(email_longtude)
+        ex.email_latitude=str(email_latitude)
+        ex.peopleID=str(peopleID)
+        return ex
 
     def getAllEmails(self):
         Emails=[]
