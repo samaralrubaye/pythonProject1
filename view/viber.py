@@ -62,5 +62,9 @@ class viber:
                 Vibers.append(viber.FromData(self,i[0],i[1]))
 
         return Vibers
+    def selectAllViber(self):
+        ex = connection.conection.mycursor.callproc('selectALLViber')
+        connection.conection.mycursor.stored_results()
+        
 
 

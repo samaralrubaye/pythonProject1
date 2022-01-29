@@ -8,10 +8,11 @@ from datetime import datetime
 import PIL.ImageGrab
 
 class snapshot:
-    
-    
+    # https://www.youtube.com/watch?v=XgK8ZRvcE5E
+    #selct file
+      
     def getfilename(self):
-             fileFilter='Data file (*.png)'
+             fileFilter='PNG (*.png)'
              QFileDialog.getOpenFileName(parent =self, caption ='select a file', directory=os.getcwd(), filter=fileFilter )
              snapshot.getfilename(self)
     def currenttime(self):
@@ -23,34 +24,34 @@ class snapshot:
                  os.makedirs(newpath)
     # getting the path
     def getfilename(self):
-            fileFilter='Data file (*.png)'
+            fileFilter='PNG (*.png)'
             options=QFileDialog.getOpenFileName(parent =self, caption ='select a file', directory=os.getcwd(), filter=fileFilter )
             snapshot.getfilename(self)
             if options:
                 self.whateever.text(str(options))
-
+        # getting the path
     def getdirectory(self):
              response = QtWidgets.QFileDialog.getExistingDirectory(caption= 'Select folder')
              print (response)
              return response
 
     def getsavefilename(self):
-            fileFilter='Data file (*.png)'
-            response=QtWidgets.QFileDialog.getSaveFileName( caption ='select a file', directory='snapshot.png', filter= fileFilter, initialFilter='image file (*.png) '
+            fileFilter='PNG (*.png)'
+            response=QtWidgets.QFileDialog.getSaveFileName( caption ='select a file', directory= self.screenshoting, filter= fileFilter, initialFilter='image file (*.png) '
             )
             return response
 
     def screenshoting(self):
             im = PIL.ImageGrab.grab()
-           # im.save(snapshot.getfilename())
+            im.save(self.getdirectory + '/' + 'screen.png')
             im.show()
-            fileFilter='Data file (*.png)'
+            fileFilter='PNG (*.png)'
             QFileDialog.getSaveFileName(caption ='select a file', directory='snapshot.png', filter= fileFilter, initialFilter='image file (*.png) '
             )
     
             name = QtGui.QFileDialog.getSaveFileName(self,'Save File')
             file = open(name,'w')
-    
+     
  
             file.close()
    

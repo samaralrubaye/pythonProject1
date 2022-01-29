@@ -12,9 +12,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 import PIL.ImageGrab
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from GeographicalLocation import *
+#from GeographicalLocation import *
 from cases import *
 
+ 
+from peoples import People
+from viber import viber
+
+from socialNetwork import*
+
+
+CustomObjectRole=QtCore.Qt.UserRole + 1
 class Ui_DialogAnalysis(object):
     def __init__(self, ex = None):
         self.case =cases ()
@@ -22,8 +30,11 @@ class Ui_DialogAnalysis(object):
         if ex == None:
            return
         
-        self.Case = ex           
-
+        self.Case = ex  
+        self.SocialNetwork= SocialNetwork()  
+        self.SocialNetwork.therecepianName(self.lineEdit_Recepian)   
+        self.activepeople = People()  
+        
    
     
     
@@ -34,6 +45,20 @@ class Ui_DialogAnalysis(object):
     @Case.setter
     def Case(self, value):
         self.case = value
+
+    @property
+    def activepeople(self):
+        return self.activepeople
+    @activepeople.setter
+    def activepeople(self, value):
+        self.activepeople = value
+    @property
+    def SocialNetwork(self):
+        return self.SocialNetwork
+
+    @SocialNetwork.setter
+    def SocialNetwork(self, value):
+        self.SocialNetwork = value
 
     def setupUi(self, DialogAnalysis):
         DialogAnalysis.setObjectName("DialogAnalysis")
@@ -275,6 +300,7 @@ class Ui_DialogAnalysis(object):
         self.label = QtWidgets.QLabel(self.groupBox_5)
         self.label.setGeometry(QtCore.QRect(10, 20, 61, 20))
         self.label.setObjectName("label")
+        #print(SocialNetwork.planner_layout(self.lineEdit_Recepian,self.lineEdit_Sender))
         #date
         self.dateEdit_dateFrom = QtWidgets.QDateEdit(self.groupBox_5)
         self.dateEdit_dateFrom.setGeometry(QtCore.QRect(80, 20, 110, 22))
@@ -286,6 +312,9 @@ class Ui_DialogAnalysis(object):
         self.groupBox_6.setGeometry(QtCore.QRect(10, 460, 241, 80))
         self.groupBox_6.setObjectName("groupBox_6")
         #lineedit sender
+        
+    
+          
         self.lineEdit_Sender = QtWidgets.QLineEdit(self.groupBox_6)
         self.lineEdit_Sender.setGeometry(QtCore.QRect(70, 20, 161, 22))
         self.lineEdit_Sender.setObjectName("lineEdit_Sender")
@@ -304,6 +333,7 @@ class Ui_DialogAnalysis(object):
         self.retranslateUi(DialogAnalysis)
         self.tabWidgetBookMark.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(DialogAnalysis)
+        
 
     def retranslateUi(self, DialogAnalysis):
         _translate = QtCore.QCoreApplication.translate
@@ -353,19 +383,37 @@ class Ui_DialogAnalysis(object):
         self.groupBox_6.setTitle(_translate("DialogAnalysis", "Sender recepian"))
         self.label_3.setText(_translate("DialogAnalysis", "Sender"))
         self.label_4.setText(_translate("DialogAnalysis", "recepian"))
+        
         # add completer to the line editor
-        name = ['apple', 'ape', 'boo', 'baa', 'bee']
+        
+        name = ['aaaa','baaa']
         completer = QtWidgets.QCompleter(name)
         # put the completer in
         self.lineEdit_Recepian.setCompleter(completer)
          # put the completer in
         self.lineEdit_Sender.setCompleter(completer)
+       # for I in People.getAllPeople(self):
+           # print(I)
+           # item = QtWidgets.QListWidgetItem(I.FirstName)
+           # self.lineEdit_Sender.setText(item)
+           # item.setData(CustomObjectRole,I)
+           # self.lineEdit_Sender.text(self.listwidgetclicked)
+        
+        #self.LwCases.addItem(str(cases.getAll(self.ex.)))
+        #self.LwCases.itemClicked.connect(self.listwidgetclicked)
+        #self.BtnNext.clicked.connect(self.openwindow)
+        
+
+        self.retranslateUi(DialogAnalysis)
+        QtCore.QMetaObject.connectSlotsByName(DialogAnalysis)
+        self.dateEdit_dateFrom.dateTimeChanged.connect(lambda: method(self))
+
         # to date functionality
         self.dateEdit_dateFrom.setCalendarPopup(True)
         self.dateEdit_dateFrom.setMinimumDate(QtCore.QDate(2022, 2, 2))
         self.dateEdit_dateFrom.setMaximumDate(QtCore.QDate(2022, 3, 1))
         self.dateEdit_dateFrom.dateChanged.connect(self.fromlinedittopython)
-        self.dateEdit_dateFrom.dateTimeChanged.connect(lambda: method(self))
+        
         # to date functionality
         self.dateEdit_dateTo.setCalendarPopup(True)
         self.dateEdit_dateTo.setMinimumDate(QtCore.QDate(2022, 2, 2))
@@ -395,10 +443,10 @@ class Ui_DialogAnalysis(object):
             print('noemail')
         if self.checkBox_Email.checkState() == 2:
             print('email')
-        if self.checkBox_WhatsApp.checkState() == 0:
-            print('noWATSUP')
-        if self.checkBox_WhatsApp.checkState() == 2:
-            print(' WATSUP')
+        if self.checkBox_Viber.checkState() == 0:
+            print(' ')
+        if self.checkBox_Viber.checkState() == 2:
+            viber.selectAllViber()
         if self.checkBox_WhatsApp.checkState() == 0:
             print('noWATSUP')
         if self.checkBox_Viber.checkState() == 2:
@@ -453,7 +501,9 @@ class Ui_DialogAnalysis(object):
         self.dateEdit_dateTo.setDate()
         print("ddd")
 
-
+  #  def listwidgetclicked(self,item):
+        obj = item.data(CustomObjectRole)
+        self.SelectedCase = obj
 
 
 

@@ -53,7 +53,7 @@ class whatsApp:
 
     def getAllWhatsApp(self):
         AllWhatsApp=[]
-        ex = connection.conection.mycursor.callproc('Examiners')
+        ex = connection.conection.mycursor.callproc('allWhatApp')
 
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():

@@ -85,12 +85,11 @@ class ExaMiners:
         ex = connection.conection.mycursor.callproc('deleteviber_proc', [self.userid,])
         connection.conection.mycursor.stored_results()
 
-    def fromData(self,fname,lname,id,examonerPassword):
+    def fromData(self,fname,lname,id):
         ex= ExaMiners()
         ex.firstName = str(fname)
         ex.lastName = str(lname)
         ex.userId = id
-        ex.examinerPassword=str(examonerPassword)
 
         return ex
 
@@ -105,19 +104,25 @@ class ExaMiners:
 
         return examiners
     
-    def anotherlogin(self, examinerPassword, name):
-         w = connection.conection.mycursor.callproc('Examinerlogin', [self._examinerPassword,], [self.firsttNames,])
+    def anotherlogin(self,  name,examinerPassword):
+     
+         args =[name,examinerPassword]
+         w = connection.conection.mycursor.callproc('ExaminerLogINproc', args)
          connection.conection.mycursor.stored_results()
-         cases = []
-         mf = []
+         
+         ex = ExaMiners()
+
          for result in connection.conection.mycursor.stored_results():
-             temp = result.fetchall()
-         return temp
+            for i in result.fetchall():
+                ex = ExaMiners.fromData(self,i[1],i[2],i[0])
+             
+         return ex
+      
+           
 
 
 
 
 
-9
 
     

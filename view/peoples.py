@@ -3,6 +3,9 @@ import connection
 
 class People:
     def __init__(self,  peopleid= None):
+        super(People,self).__init__()
+        if peopleid == None:
+            return
 
         self._firstName = ''
         self._LastName=''
@@ -16,10 +19,11 @@ class People:
            self.lastName=str(w[2])
 
     
-    def FromData(self, fname, lname):
+    def FromData(self,userid, fname, lname):
         ex=People()
         ex.firstName = str(fname)
         ex.lastName = str(lname)
+        ex.userid= str(userid)
         return ex
 
 
@@ -46,21 +50,24 @@ class People:
     @peopleid.setter
     def peopleid(self,value):
         self._peopleid=value
+   
+    def fullName(fname,lname):
+        return fname+lname
 
     def printing(self):
         print(self.firstName)
 
     def delete_email(self,ID):
-        ex = connection.conection.mycursor.callproc('PROC_delete_people', [self._peopleid])
+        ex = connection.conection.mycursor.callproc('PROC_delete_people', [self._userid])
         connection.conection.mycursor.stored_results()
 
     def getAllPeople(self):
         allpeople = []
-        ex = connection.conection.mycursor.callproc('Examiners')
+        ex = connection.conection.mycursor.callproc('allpeople_proc')
 
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                allpeople.append(People.FromData(i[0], i[1]))
+                allpeople.append(People.FromData(i[0],[1],i[2]))
         return allpeople
 
 

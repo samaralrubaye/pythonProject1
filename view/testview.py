@@ -1,54 +1,103 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-class Ui_MainWindow(object):
-    import datetime
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(30, 90, 311, 301))
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(3)
-        self.tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(240, 430, 75, 23))
-        self.pushButton.setObjectName("pushButton")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+# importing various libraries
+import sys
+from turtle import pd
+from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import matplotlib.pyplot as plt
+import random
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Name"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "From"))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "To"))
-        self.pushButton.setText(_translate("MainWindow", "Load"))
-        self.pushButton.clicked.connect(self.onload)
-    def onload(self):
-        for i in range(10):
-            self.tableWidget.setItem(i[1])
+# main window
+# which inherits QDialog
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+class Window(QDialog):
+
+    # constructor
+    def __init__(self, parent=None):
+        super(Window, self).__init__(parent)
+
+        # a figure instance to plot on
+        self.figure = plt.figure()
+
+        # this is the Canvas Widget that
+        # displays the 'figure'it takes the
+        # 'figure' instance as a parameter to __init__
+        self.canvas = FigureCanvas(self.figure)
+
+        # this is the Navigation widget
+        # it takes the Canvas widget and a parent
+        self.toolbar = NavigationToolbar(self.canvas, self)
+
+        # Just some button connected to 'plot' method
+        self.button = QPushButton('Plot')
+        # Just some button connected to 'plot' method
+        self.button2 = QPushButton('Plot2')
+
+        # adding action to the button
+        self.button.clicked.connect(self.plot)
+        # adding action to the button
+        self.button2.clicked.connect(self.plot2)
+
+        # creating a Vertical Box layout
+        layout = QVBoxLayout()
+
+        # adding tool bar to the layout
+        layout.addWidget(self.toolbar)
+
+        # adding canvas to the layout
+        layout.addWidget(self.canvas)
+
+        # adding push button to the layout
+        layout.addWidget(self.button)
+      # adding push button to the layout
+        layout.addWidget(self.button2)
+
+        # setting layout to the main window
+        self.setLayout(layout)
+
+    # action called by the push button
+    def plot(self):
+          Country = ['USA','Canada','Germany','UK','France']
+          GDP_Per_Capita = [45000,42000,52000,49000,47000]
+          # clearing old figure
+          self.figure.clear()
+          New_Colors = ['green','blue','purple','brown','teal']
+          plt.bar(Country, GDP_Per_Capita, color=New_Colors)
+          plt.title('Amount of suspsous comunication per country', fontsize=14)
+          plt.xlabel('Country', fontsize=14)
+          plt.ylabel('Comunication messages/Emails', fontsize=14)
+          plt.grid(True)
+          # put the figure inside the canavas
+          self.canvas.draw()
+    # action called by the push button
+   
+    def plot2(self):
+         Tasks = [300,500,700]
+         # clearing old figure
+         self.figure.clear()
+         my_labels = 'Tasks Pending','Tasks Ongoing','Tasks Completed'
+         plt.pie(Tasks,labels=my_labels,autopct='%1.1f%%')
+         plt.title('My Tasks')
+         plt.axis('equal')
+         # put the figure inside the canavas
+         self.canvas.draw()
+        
+   
+    
+        
+
+# driver code
+if __name__ == '__main__':
+    
+    # creating apyqt5 application
+    app = QApplication(sys.argv)
+
+    # creating a window object
+    main = Window()
+    
+    # showing the window
+    main.show()
+
+    # loop
     sys.exit(app.exec_())
