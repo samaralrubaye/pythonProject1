@@ -18,20 +18,14 @@ from cases import *
 class ui_Dialog(object):
     def NextWindow(self):
         # the log in is not working
-       try:
+       
         ex = examiners.ExaMiners.anotherlogin(self,self._LnEditName.text(), self.lnEditPassword.text())
         self.window = QtWidgets.QDialog()
         self.ui= Ui_CasesList(ex)
         self.ui.setupUi(self.window)
         Dialog.hide()
         self.window.show()
-       except:
-           if self._LnEditName.text().isspace and self.lnEditPassword.text().isspace  : 
-               print('please write the details')
-               self.lblmsg.setText('please write the details')
-           else:
-               print('the credentials are wrong')
-               self.lblmsg.setText('please wirite the correct credential')
+      
 
            
     def setupui(self, Dialog):

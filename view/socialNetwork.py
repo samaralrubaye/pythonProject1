@@ -1,15 +1,55 @@
+import sys
+from xmlrpc.client import SYSTEM_ERROR
 import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd
+from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
-import warnings; warnings.simplefilter('ignore')
-class SocialNetwork:
+import random
+class SocialNetwork(QDialog):
 
-    def __init__(self,senderFirstName,SenerLastName,recepianFisrtName, RecepianLastName):
-       self.senderFirstNam = senderFirstName
-       self.SenerLastName = SenerLastName
-       self.recepianFisrtName = recepianFisrtName
-       self.RecepianLastName = RecepianLastName
+    def __init__(self, parent=None):
+        super(SocialNetwork, self).__init__(parent)
+        
+        self.figures = plt.figure()
+
+        # this is the Canvas Widget that
+        # displays the 'figures'it takes the
+        # 'figures' instance as a parameter to __init__
+        self.canvases = FigureCanvas(self.figures)
+
+        # this is the Navigation widget
+        # it takes the Canvas widget and a parent
+        self.toolbars = NavigationToolbar(self.canvases, self)
+
+        # Just some button connected to 'plot' method
+       # self.button3 = QPushButton('draw_random')
+        # Just some button connected to 'plot' method
+       # self.button4 = QPushButton('draw_random')
+        self.draw_circlar()
+        # adding action to the button
+      #  self.button3.clicked.connect(self.draw_random)
+        # adding action to the button
+       # self.button4.clicked.connect(self.draw_random)
+
+        # creating a Vertical BoxverticalLayout
+        verticalLayout = QVBoxLayout()
+
+        # adding tool bar to theverticalLayout
+        verticalLayout.addWidget(self.toolbars)
+
+        # adding canvas to theverticalLayout
+        verticalLayout.addWidget(self.canvases)
+
+        # adding push button to theverticalLayout
+        #verticalLayout.addWidget(self.button3)
+      # adding push button to theverticalLayout
+       # verticalLayout.addWidget(self.button4)
+
+        # settingverticalLayout to the main window
+        self.setLayout(verticalLayout)
 
     def theSenderName(self):
         return self.senderFirstNam + self.SenerLastName
@@ -19,122 +59,75 @@ class SocialNetwork:
 
     def Gettinginfo(self):
         G_symmetric = nx.Graph()
-        G_symmetric.add_edge(sn.theSenderName(), sn.therecepianName())
+        G_symmetric.add_edge(self.theSenderName, self.therecepianName)
         return G_symmetric
     def drawNetwork(self):
-         nx.info(sn.Gettinginfo())
-         plt.figure(figsize=(5, 5))
-         nx.draw_networkx(sn.Gettinginfo())
+         nx.info(self.Gettinginfo())
+         plt.figures(figsize=(5, 5))
+         nx.draw_networkx(self.Gettinginfo)
          plt.show()
          plt.savefig("filename.png")
          plt.clf()
 
+     
 
 
 
-
-    # drawing in circular layout
+    # drawing in circularverticalLayout
     def draw_circlar(self):
-        nx.draw_circular(sn.Gettinginfo(), with_labels=True)
+        self.figures.clear()
+        nx.draw_circular(self.Gettinginfo(), with_labels=True)
         plt.savefig("filename1.png")
+        self.canvases.draw()
 
 
 
-    # drawing in planar layout
+    # drawing in planarverticalLayout
     def drawplanar(self):
-        nx.draw_planar(sn.Gettinginfo(), with_labels=True)
+        self.figures.clear()
+        nx.draw_planar(self.Gettinginfo, with_labels=True)
         plt.savefig("filename2.png")
+        self.canvases.draw()
 
 
 
-    # drawing in random layout
+    # drawing in randomverticalLayout
     def draw_random(self):
-        nx.draw_random(sn.Gettinginfo(), with_labels=True)
+        self.figures.clear()
+        nx.draw_random(self.Gettinginfo(), with_labels=True)
         plt.savefig("filename3.png")
+        self.canvases.draw()
 
 
 
-    # drawing in spectral layout
+    # drawing in spectralverticalLayout
     def draw_spectral(self):
-        nx.draw_spectral( sn.Gettinginfo(), with_labels=True)
+        self.figures.clear()
+        nx.draw_spectral( self.Gettinginfo(), with_labels=True)
         plt.savefig("filename4.png")
+        self.canvases.draw()
+
+   
 
 
 
-
-
-    def Digraph(self):
-        G_asymmetric = nx.DiGraph()
-        G_asymmetric.add_edge('v','z')
-        return G_asymmetric
-
-    def drawdraw(self):
-        nx.spring_layout(sn.Digraph())
-        nx.draw_networkx(sn.Digraph())
+    
 
 
 
-    # drawing in circular layout
-    def Circular_layout(self):
-        nx.draw_circular(sn.Digraph(), with_labels=True)
-        plt.savefig("filename7.png")
-        plt.clf()
+ 
 
-    # clearing the current plot
+# driver code
+if __name__ == '__main__':
+    
+    # creating apyqt5 application
+    app = QApplication(sys.argv)
 
+    # creating a window object
+    social = SocialNetwork()
+    
+    # showing the window
+    social.show()
 
-    # drawing in planar layout
-    def planner_layout(self):
-        nx.draw_planar(sn.Digraph(), with_labels=True)
-        plt.savefig("filename8.png")
-
-    # clearing the current plot
-    plt.clf()
-
-    # drawing in random layout
-    def random_layout(self):
-        nx.draw_random(sn.Digraph(), with_labels=True)
-        plt.savefig("filename9.png")
-
-    # clearing the current plot
-    plt.clf()
-
-    # drawing in spectral layout
-    def specral_Layout(self):
-        nx.draw_spectral(sn.Digraph(), with_labels=True)
-        plt.savefig("filename10.png")
-    def clearingPlot(self):
-    # clearing the current plot
-        plt.clf()
-
-    # drawing in spring layout
-    def draw_spring(self):
-        nx.draw_spring(sn.Digraph(), with_labels=True)
-        plt.savefig("filename15.png")
-
-
-
-    # drawing in shell layout
-    def shell_layout(self):
-        nx.draw_shell(sn.Digraph(), with_labels=True)
-        plt.savefig("filename16.png")
-
-    # clearing the current plot
-    plt.clf()
-sn= SocialNetwork("sara","L","samar","A")
-print(sn.theSenderName())
-print(sn.therecepianName())
-print(sn.Gettinginfo())
-print(sn.drawNetwork())
-print(sn.draw_circlar())
-print(sn.draw_random())
-print(sn.draw_spectral())
-print(sn.drawplanar())
-print('ssss',sn.Digraph())
-print(sn.drawdraw())
-#print(sn.planner_layout())
-#print(sn.random_layout())
-#print(sn.shell_layout())
-#print(sn.specral_Layout())
-
-
+    # loop
+    sys.exit(app.exec_())

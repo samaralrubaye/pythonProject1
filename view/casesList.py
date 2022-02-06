@@ -12,7 +12,7 @@ from ast import Import
 from PyQt5 import QtCore, QtGui, QtWidgets
 from login import *
 
-from analysis12 import *
+from Analysis17 import *
 from examiners import ExaMiners
 from cases import *
 
@@ -21,12 +21,11 @@ CustomObjectRole=QtCore.Qt.UserRole + 1
 
 class Ui_CasesList(object):
     def openwindow(self):
-        self.window = QtWidgets.QDialog()
-        # should put ex  inthe folowing command just will solve the getallcases problem
-        self.ui= Ui_DialogAnalysis(self.SelectedCase)
-        self.ui.setupUi(self.window)
-       # self.CasesList.hide()
-        self.window.show()
+       self.window = QtWidgets.QDialog() 
+       self.ui= Ui_DialogAnalysis(self.SelectedCase)
+       self.ui.setupUi(self.window)
+       self.CasesList.hide()
+       self.window.show()
     def openBackwindow(self):
         self.window = QtWidgets.QDialog()
         self.ui= ui_Dialog()

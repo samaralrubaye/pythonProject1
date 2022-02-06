@@ -1,5 +1,6 @@
 import uuid
 import hashlib
+from cryptography.fernet import Fernet
 
 
 def hash_password(password):
