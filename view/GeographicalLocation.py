@@ -5,7 +5,13 @@ from wsgiref.simple_server import sys_version
 from xmlrpc.client import SYSTEM_ERROR
 import folium # pip install folium
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout
-from PyQt5.QtWebEngineWidgets import QWebEngineView # pip install PyQtWebEngine
+from PyQt5.QtWebEngineWidgets import QWebEngineView
+
+from allEmail import allEmail
+
+
+
+
 
 """
 Folium in PyQt5
@@ -17,19 +23,43 @@ class MyApp(QWidget):
         self.setWindowTitle('Folium in PyQt Example')
         self.window_width, self.window_height = 160, 120
         self.setMinimumSize(self.window_width, self.window_height)
+   # def ggg(self):
+        emails=allEmail.getAllEmails(self)
+        
+        map=folium.Map(location=[10.821190,78.4159423],zoom_start=5,titles='stamen Toner')
+        fg= folium.FeatureGroup(name='Marker')
+        for i in emails:
+            print(i.fromEmail_latitude + ' - ' +i.fromEmail_longtude)
+            fg.add_child(folium.Marker(location=[i.fromEmail_latitude, i.fromEmail_longtude],popup=' name'))
 
+    
+        
+
+        map.add_child(fg)
+        map.save("index.html")
+      
+        data = io.BytesIO()
+        map.save(data, close_file=False)
+
+        webView = QWebEngineView()
+        webView.setHtml(data.getvalue().decode())
         layout = QVBoxLayout()
         self.setLayout(layout)
+        layout.addWidget(webView)
 
-        coordinate = (31.233334, 30.033333)
+        
+    def cordinate(self,x,y):
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+        coordinate = (x, y)
         m = folium.Map(
         	tiles='Stamen Terrain',
         	zoom_start=2,
         	location=coordinate
         )
   
-     # 
-        folium.Marker([31.233334, 30.033333],popup=' name' ).add_to(m)
+   
+        folium.Marker([x, y],popup=' name' ).add_to(m)
   # save map data to data object
         data = io.BytesIO()
         m.save(data, close_file=False)

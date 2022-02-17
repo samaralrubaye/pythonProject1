@@ -30,14 +30,18 @@ class Window(QDialog):
         self.toolbar = NavigationToolbar(self.canvas, self)
 
         # Just some button connected to 'plot' method
-        self.button = QPushButton('Plot')
+        self.button = QPushButton('Bar chart')
         # Just some button connected to 'plot' method
-        self.button2 = QPushButton('Plot2')
+        self.button2 = QPushButton('Pie chart')
+        self.button.setStyleSheet("background-color: rgb(217, 240, 255);")
+        self.button2.setStyleSheet("background-color: rgb(217, 240, 255);")
 
         # adding action to the button
         self.button.clicked.connect(self.plot)
+       
         # adding action to the button
         self.button2.clicked.connect(self.plot2)
+        
 
         # creating a Vertical Box layout
         layout = QVBoxLayout()

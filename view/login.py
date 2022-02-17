@@ -13,15 +13,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from casesList import *
 import examiners
 from cases import *
+# from casesList import Ui_CasesList
 #from casesList import Ui_CasesList
 
 class ui_Dialog(object):
     def NextWindow(self):
         # the log in is not working
-       
         ex = examiners.ExaMiners.anotherlogin(self,self._LnEditName.text(), self.lnEditPassword.text())
         self.window = QtWidgets.QDialog()
         self.ui= Ui_CasesList(ex)
+        print("login")
         self.ui.setupUi(self.window)
         Dialog.hide()
         self.window.show()
@@ -33,9 +34,11 @@ class ui_Dialog(object):
         Dialog.resize(1006, 651)
         Dialog.setAutoFillBackground(False)
         Dialog.setStyleSheet("font-size:12pt")
+        Dialog.setStyleSheet("background-color: rgb(243, 247, 255);")
+        
         self.lblloginTitle = QtWidgets.QLabel(Dialog)
         self.lblloginTitle.setGeometry(QtCore.QRect(60, 90, 881, 101))
-        self.lblloginTitle.setStyleSheet("font-size:14pt")
+        self.lblloginTitle.setStyleSheet("font-size:10pt")
         self.lblloginTitle.setObjectName("lblloginTitle")
         self.LblPassword = QtWidgets.QLabel(Dialog)
         self.LblPassword.setGeometry(QtCore.QRect(40, 330, 151, 41))
@@ -49,9 +52,12 @@ class ui_Dialog(object):
         self.BtnLogin.setGeometry(QtCore.QRect(730, 570, 241, 51))
         self.BtnLogin.setObjectName("BtnLogin")
         self.BtnLogin.clicked.connect(self.NextWindow)
+        self.BtnLogin.setStyleSheet("background-color: rgb(222, 223, 255);")
         self.BtnCancleExaminer = QtWidgets.QPushButton(Dialog)
         self.BtnCancleExaminer.setGeometry(QtCore.QRect(30, 577, 221, 51))
         self.BtnCancleExaminer.setObjectName("BtnCancleExaminer")
+        self.BtnCancleExaminer.setStyleSheet("background-color: rgb(222, 223, 255);")
+       
         self._LnEditName = QtWidgets.QLineEdit(Dialog)
         self._LnEditName.setGeometry(QtCore.QRect(200, 250, 591, 22))
         self._LnEditName.setObjectName("_LnEditName")
@@ -59,7 +65,8 @@ class ui_Dialog(object):
         self.LblUserName.setGeometry(QtCore.QRect(40, 250, 101, 20))
         self.LblUserName.setToolTipDuration(-2)
         self.LblUserName.setObjectName("LblUserName")
-        self.BtnCancleExaminer.clicked.connect(Dialog.close)
+       # self.BtnCancleExaminer.clicked.connect(Dialog.close)
+        self.BtnCancleExaminer.clicked.connect(self.hidding)
         self.lblmsg = QtWidgets.QLabel(Dialog)
         self.lblmsg.setGeometry(QtCore.QRect(170, 425, 631, 61))
         self.lblmsg.setText("")
@@ -75,10 +82,11 @@ class ui_Dialog(object):
         self.LblPassword.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:11pt;\">Password</span></p></body></html>"))
         self.BtnLogin.setText(_translate("Dialog", "Log in"))
         self.BtnCancleExaminer.setText(_translate("Dialog", "Cancel"))
-        self.LblUserName.setText(_translate("Dialog", "<html><head/><body><p>User name</p></body></html>"))
+        self.LblUserName.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:11pt;\">Use name</span></p></body></html>"))
         self.lblmsg.setText(_translate("Dialog", " "))
 
-    
+    def hidding(self):
+        Dialog.hide()
 
    
 if __name__ == "__main__":

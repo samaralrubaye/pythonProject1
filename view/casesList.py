@@ -10,28 +10,32 @@
 
 from ast import Import
 from PyQt5 import QtCore, QtGui, QtWidgets
+from pyparsing import CaselessLiteral
 from login import *
 
-from Analysis17 import *
+from Analysis19 import *
 from examiners import ExaMiners
 from cases import *
+import time
 
 
 CustomObjectRole=QtCore.Qt.UserRole + 1
 
 class Ui_CasesList(object):
     def openwindow(self):
-       self.window = QtWidgets.QDialog() 
-       self.ui= Ui_DialogAnalysis(self.SelectedCase)
-       self.ui.setupUi(self.window)
-       self.CasesList.hide()
-       self.window.show()
+        self.window = QtWidgets.QDialog() 
+        self.ui= Ui_DialogAnalysis(self.SelectedCase)
+        print("caselist")
+        self.ui.setupUi(self.window)
+        #CasesList.hide()
+        self.window.show()
     def openBackwindow(self):
         self.window = QtWidgets.QDialog()
-        self.ui= ui_Dialog()
+        self.ui= Ui_DialogAnalysis
         self.ui.setupui(self.window)
-       # self.CasesList.hide()
+        #CasesList.hide()
         self.window.show()
+    
            
     def __init__(self, ex = None):
         self.examiner = ExaMiners()
@@ -43,7 +47,8 @@ class Ui_CasesList(object):
         self.selectedCase = cases()
               
 
-   
+    def hidding(self):
+       CasesList.hide()
     
     
     @property
@@ -67,15 +72,18 @@ class Ui_CasesList(object):
         CasesList.resize(674, 550)
         CasesList.setAutoFillBackground(True)
         CasesList.setSizeGripEnabled(True)
+        CasesList.setStyleSheet("background-color: rgb(243, 247, 255);")
         self.LwCases = QtWidgets.QListWidget(CasesList)
         self.LwCases.setGeometry(QtCore.QRect(80, 80, 481, 341))
         self.LwCases.setObjectName("LwCases")
         self.BtnBack = QtWidgets.QPushButton(CasesList)
+        self.BtnBack.setStyleSheet("background-color: rgb(222, 223, 255);")
         self.BtnBack.setGeometry(QtCore.QRect(20, 480, 93, 28))
         self.BtnBack.setObjectName("BtnBack")
         self.BtnNext = QtWidgets.QPushButton(CasesList)
         self.BtnNext.setGeometry(QtCore.QRect(520, 490, 93, 28))
         self.BtnNext.setObjectName("BtnNext")
+        self.BtnNext.setStyleSheet("background-color: rgb(222, 223, 255);")
         self.lbl_caseliost = QtWidgets.QLabel(CasesList)
         self.lbl_caseliost.setGeometry(QtCore.QRect(70, 10, 181, 41))
         self.lbl_caseliost.setText("")
@@ -93,8 +101,8 @@ class Ui_CasesList(object):
         #self.LwCases.addItem(str(cases.getAll(self.ex.)))
         self.LwCases.itemClicked.connect(self.listwidgetclicked)
         self.BtnNext.clicked.connect(self.openwindow)
-        self.BtnBack.clicked.connect(self.openBackwindow)
-
+        #self.BtnBack.clicked.connect(self.openBackwindow)
+        self.BtnBack.clicked.connect(self.hidding)
 
         self.retranslateUi(CasesList)
         QtCore.QMetaObject.connectSlotsByName(CasesList)

@@ -22,8 +22,14 @@
      <height>941</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-left-color: rgb(0, 0, 0);
+border-color: rgb(0, 0, 0);
+selection-color: rgb(170, 255, 255);
+background-color: rgb(255, 255, 255);</string>
+   </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="geoloctab">
     <attribute name="title">
@@ -53,111 +59,15 @@
        <height>891</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_bookmark">
     <attribute name="title">
      <string>Bookmark</string>
     </attribute>
-    <widget class="QWidget" name="formLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>821</width>
-       <height>821</height>
-      </rect>
-     </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="lbl_fileName">
-        <property name="text">
-         <string> File Name</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_fIstName"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string> Lable</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_Lable"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string> BookMark Number</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_BookMarkNumber"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string> From</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit_from"/>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string> To</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_to"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string> cc</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="lineEdit_CC"/>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string> BCC</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="lineEdit_Bcc"/>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="lbl_AddCooment">
-        <property name="text">
-         <string>Add commant</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <widget class="QLineEdit" name="LnEdtAddCommant"/>
-      </item>
-      <item row="8" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Submit</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
    </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidget_analysis">
@@ -170,7 +80,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">q rgb(250, 235, 255)</string>
+    <string notr="true">
+background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="windowTitle">
     <string>Analysis bar</string>
@@ -247,6 +158,9 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(217, 240, 255);</string>
+     </property>
      <property name="text">
       <string>Search keyword</string>
      </property>
@@ -293,11 +207,14 @@
     <widget class="QPushButton" name="btnVerify">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>10</x>
        <y>860</y>
-       <width>191</width>
+       <width>211</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(217, 240, 255);</string>
      </property>
      <property name="text">
       <string>verify</string>
@@ -387,9 +304,9 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>20</y>
-        <width>55</width>
+        <width>41</width>
         <height>16</height>
        </rect>
       </property>
@@ -465,22 +382,32 @@
       <rect>
        <x>10</x>
        <y>730</y>
-       <width>81</width>
+       <width>211</width>
        <height>51</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(217, 240, 255);</string>
+     </property>
      <property name="text">
-      <string>Snapshot</string>
+      <string>add evedence Item</string>
      </property>
     </widget>
     <widget class="QPushButton" name="btnClear">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>730</y>
-       <width>81</width>
+       <x>10</x>
+       <y>790</y>
+       <width>211</width>
        <height>51</height>
       </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+background-color: rgb(217, 240, 255);</string>
      </property>
      <property name="text">
       <string>clear</string>
