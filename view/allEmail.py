@@ -75,283 +75,285 @@ class allEmail:
        
     #firstName
     @property
-    def fromEmail_firstName(self):
+    def FromEmail_firstName(self):
             return self._fromEmail_firstName
 
-    @fromEmail_firstName.setter
-    def fromEmail_firstName(self, value):
+    @FromEmail_firstName.setter
+    def FromEmail_firstName(self, value):
             self._fromEmail_firstName = value
     
     @property
-    def toEmail_firstName(self):
+    def ToEmail_firstName(self):
             return self._toEmail_firstName
 
-    @toEmail_firstName.setter
-    def toEmail_firstName(self, value):
+    @ToEmail_firstName.setter
+    def ToEmail_firstName(self, value):
             self._toEmail_firstName = value
     
     @property
-    def ccEmail_firstName(self):
+    def CcEmail_firstName(self):
             return self._ccEmail_firstName
 
-    @ccEmail_firstName.setter
-    def ccEmail_firstName(self, value):
+    @CcEmail_firstName.setter
+    def CcEmail_firstName(self, value):
             self._ccEmail_firstName = value
     
     
     @property
-    def bccEmail_firstName(self):
+    def BccEmail_firstName(self):
             return self._bccEmail_firstName
 
-    @bccEmail_firstName.setter
-    def bccEmail_firstName(self, value):
+    @BccEmail_firstName.setter
+    def BccEmail_firstName(self, value):
             self._bccEmail_firstName = value
     
     @property
-    def fromEmail_firstName(self):
+    def FromEmail_firstName(self):
             return self._fromEmail_firstName
 
-    @fromEmail_firstName.setter
-    def email_latitude(self, value):
+    @FromEmail_firstName.setter
+    def FromEmail_firstName(self, value):
             self._fromEmail_firstName = value
     # last name
     @property
-    def toEmail_lastName(self):
+    def ToEmail_lastName(self):
             return self._toEmail_lastname
 
-    @toEmail_lastName.setter
-    def toEmail_lastname(self, value):
+    @ToEmail_lastName.setter
+    def ToEmail_lastname(self, value):
             self._toEmail_lastname = value
     
     @property
-    def ccEmail_lastname(self):
+    def CcEmail_lastname(self):
             return self._ccEmail_lastname
 
-    @ccEmail_lastname.setter
-    def ccEmail_lastname(self, value):
+    @CcEmail_lastname.setter
+    def CcEmail_lastname(self, value):
             self._ccEmail_lastname = value
     
     
    
     @property
-    def bccEmail_lastname(self):
+    def BccEmail_lastname(self):
             return self._bccEmail_lastname
 
-    @bccEmail_lastname.setter
-    def bccEmail_lastname(self, value):
+    @BccEmail_lastname.setter
+    def BccEmail_lastname(self, value):
             self._bccEmail_lastname = value
     @property
-    def fromEmail_lastname(self):
+    def FromEmail_lastname(self):
             return self._fromEmail_lastname
 
-    @fromEmail_lastname.setter
-    def fromEmail_lastname(self, value):
+    @FromEmail_lastname.setter
+    def FromEmail_lastname(self, value):
             self._fromEmail_lastname = value
     #longtude
     @property
-    def toEmail_longtude(self):
+    def ToEmail_longtude(self):
             return self._toEmail_longtude
 
-    @toEmail_longtude.setter
-    def toEmail_longtude(self, value):
+    @ToEmail_longtude.setter
+    def ToEmail_longtude(self, value):
             self._toEmail_longtude = value
     
     @property
-    def ccEmail_longtude(self):
+    def CcEmail_longtude(self):
             return self._ccEmail_longtude
 
-    @ccEmail_longtude.setter
-    def ccEmail_longtude(self, value):
+    @CcEmail_longtude.setter
+    def CcEmail_longtude(self, value):
             self._ccEmail_longtude = value
     
     
     @property
-    def bccEmail_longtude(self):
+    def BccEmail_longtude(self):
             return self._bccEmail_longtude
 
-    @bccEmail_longtude.setter
-    def bccEmail_longtude(self, value):
+    @BccEmail_longtude.setter
+    def BccEmail_longtude(self, value):
             self._bccEmail_longtude = value
     
    
      #latitude
     @property
-    def toEmail_latitude(self):
+    def ToEmail_latitude(self):
             return self._toEmail_latitude
 
-    @toEmail_latitude.setter
-    def toEmail_latitude(self, value):
+    @ToEmail_latitude.setter
+    def ToEmail_latitude(self, value):
             self._toEmail_latitude = value
     
     @property
-    def ccEmail_latitude(self):
+    def CcEmail_latitude(self):
             return self._ccEmail_latitude
 
-    @ccEmail_latitude.setter
-    def ccEmail_latitude(self, value):
+    @CcEmail_latitude.setter
+    def CcEmail_latitude(self, value):
             self._ccEmail_latitude = value
     
     
     @property
-    def bccEmail_latitude(self):
+    def BccEmail_latitude(self):
             return self._bccEmail_latitude
 
-    @bccEmail_latitude.setter
-    def bccEmail_latitude(self, value):
+    @BccEmail_latitude.setter
+    def BccEmail_latitude(self, value):
             self._bccEmail_latitude = value
     
     
     
        #text
     @property
-    def toEmail_content_text(self):
+    def ToEmail_content_text(self):
             return self._toEmail_content_text
 
-    @toEmail_content_text.setter
-    def toEmail_content_text(self, value):
+    @ToEmail_content_text.setter
+    def ToEmail_content_text(self, value):
             self._toEmail_content_text = value
     
     @property
-    def ccEmail_content_text(self):
+    def CcEmail_content_text(self):
             return self._ccEmail_content_text
 
-    @ccEmail_content_text.setter
-    def ccEmail_content_text(self, value):
+    @CcEmail_content_text.setter
+    def CcEmail_content_text(self, value):
             self._ccEmail_content_text = value
     
     
     @property
-    def bccEmail_content_text(self):
+    def BccEmail_content_text(self):
             return self._bccEmail_content_text
 
-    @bccEmail_content_text.setter
-    def bccEmail_content_text(self, value):
+    @BccEmail_content_text.setter
+    def BccEmail_content_text(self, value):
             self._bccEmail_content_text = value
     @property
-    def fromEmail_content_text(self):
+    def FromEmail_content_text(self):
             return self._fromEmail_content_text
 
-    @fromEmail_content_text.setter
-    def fromEmail_content_text(self, value):
+    @FromEmail_content_text.setter
+    def FromEmail_content_text(self, value):
             self._fromEmail_content_text = value
     #date
     @property
-    def toEmail_timeDate(self):
+    def ToEmail_timeDate(self):
             return self._toEmail_timeDate
 
-    @toEmail_timeDate.setter
-    def toEmail_timeDate(self, value):
+    @ToEmail_timeDate.setter
+    def ToEmail_timeDate(self, value):
             self._toEmail_timeDate = value
     
     @property
-    def ccEmail_timeDate(self):
+    def CcEmail_timeDate(self):
             return self._ccEmail_timeDate
 
-    @ccEmail_timeDate.setter
-    def ccEmail_timeDate(self, value):
+    @CcEmail_timeDate.setter
+    def CcEmail_timeDate(self, value):
             self._ccEmail_timeDate = value
     
     @property
-    def fromEmail_timeDate(self):
+    def FromEmail_timeDate(self):
             return self._fromEmail_timeDate
 
-    @fromEmail_timeDate.setter
-    def fromEmail_timeDate(self, value):
+    @FromEmail_timeDate.setter
+    def FromEmail_timeDate(self, value):
             self._fromEmail_timeDate = value
     
     
     @property
-    def bccEmail_timeDate(self):
+    def BccEmail_timeDate(self):
             return self._bccEmail_timeDate
 
-    @bccEmail_timeDate.setter
-    def bccEmail_timeDate(self, value):
+    @BccEmail_timeDate.setter
+    def BccEmail_timeDate(self, value):
             self._bccEmail_timeDate = value
     #date
     @property
-    def toEmail_Email(self):
+    def ToEmail_Email(self):
             return self._toEmail_Email
 
-    @toEmail_timeDate.setter
-    def toEmail_timeDate(self, value):
+    @ToEmail_Email.setter
+    def ToEmail_Email(self, value):
             self._toEmail_Email = value
     
     @property
-    def ccEmail_Email(self):
+    def CcEmail_Email(self):
             return self._ccEmail_Email
 
-    @ccEmail_Email.setter
-    def ccEmail_Email(self, value):
+    @CcEmail_Email.setter
+    def CcEmail_Email(self, value):
             self._ccEmail_Email = value
     
     @property
-    def fromEmail_Email(self):
+    def FromEmail_Email(self):
             return self._fromEmail_Email
 
-    @fromEmail_Email.setter
-    def fromEmail_Email(self, value):
+    @FromEmail_Email.setter
+    def FromEmail_Email(self, value):
             self._fromEmail_Email = value
     
     
     @property
-    def bccEmail_Email(self):
+    def BccEmail_Email(self):
             return self._bccEmail_Email
 
-    @bccEmail_Email.setter
-    def bccEmail_Email(self, value):
+    @BccEmail_Email.setter
+    def BccEmail_Email(self, value):
             self._bccEmail_Email = value
 
 
     @property
-    def fromEmail_latitude(self):
+    def FromEmail_latitude(self):
             return self._fromEmail_latitude
 
-    @fromEmail_latitude.setter
-    def fromEmail_latitude(self, value):
+    @FromEmail_latitude.setter
+    def FromEmail_latitude(self, value):
             self._fromEmail_latitude = value    
 
     @property
-    def fromEmail_longtude(self):
+    def FromEmail_longtude(self):
             return self._fromEmail_longtude
 
-    @fromEmail_longtude.setter
-    def fromEmail_longtude(self, value):
+    @FromEmail_longtude.setter
+    def FromEmail_longtude(self, value):
             self._fromEmail_longtude = value
 
     def FromData(self,fromEmail_firstName,fromEmail_lastname,fromEmail_content_text,fromEmail_timeDate,fromEmail_Email
-    ,fromEmail_latitude,fromEmail_longtude, toEmail_firstName,toEmail_lastname,toEmail_content_text,toEmail_timeDate,toEmail_Email, toEmail_latitude,toEmail_longtude, ccEmail_firstName,ccEmail_lastname,ccEmail_content_text,ccEmail_timeDate,ccEmail_Email,ccEmail_latitude,ccEmail_longtude, bccEmail_firstName,bccEmail_lastname,bccEmail_content_text ,bccEmail_timeDate,bccEmail_Email,bccEmail_latitude,bccEmail_longtude):
+    ,fromEmail_latitude,fromEmail_longtude, toEmail_firstName,toEmail_lastname,toEmail_content_text,toEmail_timeDate,
+    toEmail_Email, toEmail_latitude,toEmail_longtude, ccEmail_firstName,ccEmail_lastname,ccEmail_content_text,ccEmail_timeDate,ccEmail_Email,ccEmail_latitude,ccEmail_longtude, bccEmail_firstName,bccEmail_lastname,bccEmail_content_text ,bccEmail_timeDate,bccEmail_Email,bccEmail_latitude,bccEmail_longtude):
         
         e = allEmail()
-        
-        e.fromEmail_lastname = str(fromEmail_lastname)
-        e.fromEmail_content_text=str(fromEmail_content_text)
-        e.fromEmail_latitude=str(fromEmail_latitude)
-        e.fromEmail_longtude=str(fromEmail_longtude)
-        e.fromEmail_timeDate=(fromEmail_timeDate)
-        e.fromEmail_Email=str(fromEmail_Email)
+        e.FromEmail_firstName=str(fromEmail_firstName)
+        e.FromEmail_lastname = str(fromEmail_lastname)
+        e.FromEmail_content_text=str(fromEmail_content_text)
+        e.FromEmail_latitude=str(fromEmail_latitude)
+        e.FromEmail_longtude=str(fromEmail_longtude)
+        e.FromEmail_timeDate=str(fromEmail_timeDate)
+        e.FromEmail_Email=str(fromEmail_Email)
 
-        e.toEmail_firstName = str(toEmail_firstName)
-        e.toEmail_lastname = str(toEmail_lastname)
-        e.toEmail_content_text=str(toEmail_content_text)
-        e.toEmail_latitude=(toEmail_latitude)
-        e.toEmail_longtude=(toEmail_longtude)
-        e.toEmail_timeDate=(toEmail_timeDate)
+        e.ToEmail_firstName = str(toEmail_firstName)
+        e.ToEmail_lastname = str(toEmail_lastname)
+        e.ToEmail_content_text=str(toEmail_content_text)
+        e.ToEmail_latitude=(toEmail_latitude)
+        e.ToEmail_longtude=str(toEmail_longtude)
+        e.ToEmail_timeDate=str(toEmail_timeDate)
+        e.ToEmail_Email=str(toEmail_Email)
 
-        e.ccEmail_firstName = str(ccEmail_firstName)
-        e.ccEmail_lastname = str(ccEmail_lastname)
-        e.ccEmail_content_text=str(ccEmail_content_text)
-        e.ccEmail_latitude=(ccEmail_latitude)
-        e.ccEmail_longtude=(ccEmail_longtude)
-        e.ccEmail_timeDate=(ccEmail_timeDate)
-        e._ccEmail_Email=str(ccEmail_Email)
+        e.CcEmail_firstName = str(ccEmail_firstName)
+        e.CcEmail_lastname = str(ccEmail_lastname)
+        e.CcEmail_content_text=str(ccEmail_content_text)
+        e.CcEmail_latitude=(ccEmail_latitude)
+        e.CcEmail_longtude=(ccEmail_longtude)
+        e.CcEmail_timeDate=(ccEmail_timeDate)
+        e.CcEmail_Email=str(ccEmail_Email)
         
-        e.bccEmail_firstName = str(bccEmail_firstName)
-        e.bccEmail_lastname = str(bccEmail_lastname)
-        e.bccEmail_content_text=str(bccEmail_content_text)
-        e.bccEmail_latitude=(bccEmail_latitude)
-        e.bccEmail_longtude=(bccEmail_longtude)
-        e.bccEmail_timeDate=(bccEmail_timeDate)
-        e.bccEmail_timeDate=str(bccEmail_Email)
+        e.BccEmail_firstName = str(bccEmail_firstName)
+        e.BccEmail_lastname = str(bccEmail_lastname)
+        e.BccEmail_content_text=str(bccEmail_content_text)
+        e.BccEmail_latitude=(bccEmail_latitude)
+        e.BccEmail_longtude=(bccEmail_longtude)
+        e.BccEmail_timeDate=(bccEmail_timeDate)
+        e.BccEmail_timeDate=str(bccEmail_Email)
         return e
 
     def getAllEmails(self):

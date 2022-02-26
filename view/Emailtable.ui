@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Emails</class>
+ <widget class="QDialog" name="Emails">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1089</width>
+    <height>772</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QTableWidget" name="Tbl_Wgt_Email">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1101</width>
+     <height>751</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>751</height>
+    </size>
+   </property>
+   <property name="cursor" stdset="0">
+    <cursorShape>WhatsThisCursor</cursorShape>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>false</bool>
+   </property>
+   <attribute name="verticalHeaderDefaultSectionSize">
+    <number>455</number>
+   </attribute>
+   <column>
+    <property name="text">
+     <string> From Email</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string> Sent email </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>To email </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string> Received email</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>ccEmail</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>bccEmail</string>
+    </property>
+   </column>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

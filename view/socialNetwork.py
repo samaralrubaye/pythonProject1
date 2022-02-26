@@ -1,3 +1,4 @@
+import email
 import sys
 from xmlrpc.client import SYSTEM_ERROR
 import networkx as nx
@@ -6,9 +7,17 @@ import pandas as pd
 from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-
+from allEmail import allEmail
 import random
+from time import sleep
+
+from allViber import allViber
+from allWhatsApp import allWhatsApp
+G_symmetric_emails = nx.Graph()
+G_symmetric_watsapp = nx.Graph()
+G_symmetric_viper = nx.Graph()
 class SocialNetwork(QDialog):
+    
 
     def __init__(self, parent=None):
         super(SocialNetwork, self).__init__(parent)
@@ -28,7 +37,15 @@ class SocialNetwork(QDialog):
        # self.button3 = QPushButton('draw_random')
         # Just some button connected to 'plot' method
        # self.button4 = QPushButton('draw_random')
-        self.draw_circlar()
+        
+        self.allemails()
+        self.allwatsapp()
+        self.allviper()
+        self.draw_circlar(G_symmetric_emails)
+        sleep(2)
+        self.draw_circlar(G_symmetric_watsapp)
+        sleep(2)
+        self.draw_circlar(G_symmetric_viper)
         # adding action to the button
       #  self.button3.clicked.connect(self.draw_random)
         # adding action to the button
@@ -50,23 +67,65 @@ class SocialNetwork(QDialog):
 
         # settingverticalLayout to the main window
         self.setLayout(verticalLayout)
+        
+        
+   # def theSenderName(self):
+       # for i in email:
+         #  return i.fromEmail_lastname + i.fromEmail_lastname
 
-    def theSenderName(self):
-        return self.senderFirstNam + self.SenerLastName
+   # def therecepianName(self, fname, lname):
+      #  for i in email:
+          #  return fname+ lname
+   # def therecepianName(self):
+        #for i in email:
+       # return 'sera' + 'l'
+    
+    def allemails(self):
+        
+        emails=allEmail.getAllEmails(self)
+        for i in emails:
+           # print(i.toEmail_firstName)
+           self.Gettinginfo(i.FromEmail_firstName,i.ToEmail_firstName,G_symmetric_emails)
+       # self.Gettinginfo('samar','sami','sara','loscomb')
+    
+    def allwatsapp(self):
+        WhatsApps= allWhatsApp.getAllWhatsApp(self)
+        
+        for i in WhatsApps:
+           # print(i.toEmail_firstName)
+           self.Gettinginfo(i.FromWhatsApp_Msg_FirstName,i.ToWhatsApp_Msg_LastName,G_symmetric_watsapp)
+       # self.Gettinginfo('samar','sami','sara','loscomb')
+    
+    def allviper(self):
+        Vibers=allViber.getAllVibers(self)
+       
+        for i in Vibers:
+           # print(i.toEmail_firstName)
+           self.Gettinginfo(i.FromViber_Msg_FirstName,i.ToViber_Msg_FirstName,G_symmetric_viper)
+       # self.Gettinginfo('samar','sami','sara','loscomb')
 
-    def therecepianName(self):
-        return self.recepianFisrtName + self.RecepianLastName
+    def Gettinginfo(self,fnamesender,fnamerecepiant,G_symmetric):
+        
+    
+        
+        #should be like this
+       # print(self.theSenderName)
+       # print(self.therecepianName)
+    #    G_symmetric.add_edge(self.fnamesender, self.fnamerecepiant)
+        
+                               
+        G_symmetric.add_edge(fnamesender, fnamerecepiant)
+        
+        
+    
 
-    def Gettinginfo(self):
-        G_symmetric = nx.Graph()
-        G_symmetric.add_edge(self.theSenderName, self.therecepianName)
-        return G_symmetric
+
     def drawNetwork(self):
-         nx.info(self.Gettinginfo())
+         nx.info(self.Get)
          plt.figures(figsize=(5, 5))
          nx.draw_networkx(self.Gettinginfo)
          plt.show()
-         plt.savefig("filename.png")
+         #plt.savefig("filename.png")
          plt.clf()
 
      
@@ -74,9 +133,10 @@ class SocialNetwork(QDialog):
 
 
     # drawing in circularverticalLayout
-    def draw_circlar(self):
+    def draw_circlar(self, GS):
         self.figures.clear()
-        nx.draw_circular(self.Gettinginfo(), with_labels=True)
+        # print(self.allemails)
+        nx.draw_networkx(GS)
         plt.savefig("filename1.png")
         self.canvases.draw()
 

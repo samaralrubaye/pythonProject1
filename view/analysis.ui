@@ -29,7 +29,7 @@ selection-color: rgb(170, 255, 255);
 background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="geoloctab">
     <attribute name="title">
@@ -50,18 +50,45 @@ background-color: rgb(255, 255, 255);</string>
     <attribute name="title">
      <string>chat</string>
     </attribute>
-    <widget class="QTreeView" name="treeView">
+    <widget class="QTableWidget" name="tableWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
-       <width>901</width>
-       <height>891</height>
+       <y>0</y>
+       <width>1161</width>
+       <height>921</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);</string>
-     </property>
+     <column>
+      <property name="text">
+       <string>Sender first name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Sender last name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Recepiant number</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Reciepiant first name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Recipeant last name </string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Text message</string>
+      </property>
+     </column>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_bookmark">
@@ -81,7 +108,8 @@ background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">
-background-color: rgb(255, 255, 255);</string>
+alternate-background-color: rgb(243, 247, 255);
+</string>
    </property>
    <property name="windowTitle">
     <string>Analysis bar</string>
@@ -90,8 +118,8 @@ background-color: rgb(255, 255, 255);</string>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>400</y>
+       <x>10</x>
+       <y>370</y>
        <width>211</width>
        <height>151</height>
       </rect>
@@ -159,7 +187,7 @@ background-color: rgb(255, 255, 255);</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(217, 240, 255);</string>
+      <string notr="true">background-color: rgb(222, 223, 255);</string>
      </property>
      <property name="text">
       <string>Search keyword</string>
@@ -168,8 +196,8 @@ background-color: rgb(255, 255, 255);</string>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>610</y>
+       <x>0</x>
+       <y>540</y>
        <width>211</width>
        <height>81</height>
       </rect>
@@ -208,13 +236,13 @@ background-color: rgb(255, 255, 255);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>860</y>
+       <y>740</y>
        <width>211</width>
        <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(217, 240, 255);</string>
+      <string notr="true">background-color: rgb(222, 223, 255);</string>
      </property>
      <property name="text">
       <string>verify</string>
@@ -381,13 +409,13 @@ background-color: rgb(255, 255, 255);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>730</y>
+       <y>640</y>
        <width>211</width>
-       <height>51</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(217, 240, 255);</string>
+      <string notr="true">background-color: rgb(222, 223, 255);</string>
      </property>
      <property name="text">
       <string>add evedence Item</string>
@@ -397,20 +425,36 @@ background-color: rgb(255, 255, 255);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>790</y>
+       <y>690</y>
        <width>211</width>
-       <height>51</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">
-background-color: rgb(217, 240, 255);</string>
+      <string notr="true">background-color: rgb(222, 223, 255);
+</string>
      </property>
      <property name="text">
       <string>clear</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>800</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(222, 223, 255);</string>
+     </property>
+     <property name="text">
+      <string>Back</string>
      </property>
     </widget>
    </widget>

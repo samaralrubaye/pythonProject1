@@ -23,15 +23,16 @@ class MyApp(QWidget):
         self.setWindowTitle('Folium in PyQt Example')
         self.window_width, self.window_height = 160, 120
         self.setMinimumSize(self.window_width, self.window_height)
-   # def ggg(self):
+        self.ggg
+    def ggg(self):
         emails=allEmail.getAllEmails(self)
         
         map=folium.Map(location=[10.821190,78.4159423],zoom_start=5,titles='stamen Toner')
         fg= folium.FeatureGroup(name='Marker')
         for i in emails:
-            print(i.fromEmail_latitude + ' - ' +i.fromEmail_longtude)
-            fg.add_child(folium.Marker(location=[i.fromEmail_latitude, i.fromEmail_longtude],popup=' name'))
-
+            print(i.FromEmail_latitude + ' - ' +i.FromEmail_longtude)
+            fg.add_child(folium.Marker(location=[i.FromEmail_latitude, i.FromEmail_longtude],popup=i.FromEmail_lastname))
+        return fg
     
         
 

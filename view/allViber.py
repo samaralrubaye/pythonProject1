@@ -1,14 +1,14 @@
 import connection
 class allViber:
     def __init__(self):
-        self._FromViber_Msg_FirstName=' '
-        self._FromViber_Msg_LastName=' '
-        self._FromViber_Msg_Latitude=' '
-        self._FromViber_Msg_Longtude=' '
-        self._FromViber_Msg_IP=' '
-        self._FromViber_Msg_DateandTime=' '
-        self._FromViber_Msg_number=' '
-        self._FromViber_Msg=' '
+        self._fromViber_Msg_FirstName=' '
+        self._fromViber_Msg_LastName=' '
+        self._fromViber_Msg_Latitude=' '
+        self._fromViber_Msg_Longtude=' '
+        self._fromViber_Msg_IP=' '
+        self._fromViber_Msg_DateandTime=' '
+        self._fromViber_Msg_number=' '
+        self._fromViber_Msg=' '
 
         self._toViber_Msg_FirstName=' '
         self._toViber_Msg_LastName=' '
@@ -46,157 +46,161 @@ class allViber:
 #firstName
     @property
     def FromViber_Msg_FirstName(self):
-            return self._FromViber_Msg_FirstName
+            return self._fromViber_Msg_FirstName
 
     @FromViber_Msg_FirstName.setter
     def FromViber_Msg_FirstName (self, value):
-            self._FromViber_Msg_FirstName = value
+            self._fromViber_Msg_FirstName = value
     
     @property
-    def toViber_Msg_FirstName(self):
+    def ToViber_Msg_FirstName(self):
             return self._toViber_Msg_FirstName
 
-    @toViber_Msg_FirstName.setter
-    def toViber_Msg_FirstName (self, value):
+    @ToViber_Msg_FirstName.setter
+    def ToViber_Msg_FirstName (self, value):
             self._toViber_Msg_FirstName = value
     #lastname
     @property
     def FromViber_Msg_LastName(self):
-            return self._FromViber_Msg_LastName
+            return self._fromViber_Msg_LastName
 
     @FromViber_Msg_LastName.setter
     def FromViber_Msg_LastName (self, value):
-            self._FromViber_Msg_LastName = value
+            self._fromViber_Msg_LastName = value
     
     @property
-    def toViber_Msg_LastName(self):
+    def ToViber_Msg_LastName(self):
             return self._toViber_Msg_LastName
 
-    @toViber_Msg_LastName.setter
-    def toViber_Msg_LastName (self, value):
+    @ToViber_Msg_LastName.setter
+    def ToViber_Msg_LastName(self, value):
             self._toViber_Msg_LastName = value
     #longtude
     @property
     def FromViber_Msg_Longtude(self):
-            return self._FromViber_Msg_Longtude
+            return self._fromViber_Msg_Longtude
 
     @FromViber_Msg_Longtude.setter
-    def FromViber_Msg_Longtude (self, value):
-            self._FromViber_Msg_Longtude = value
+    def FromViber_Msg_Longtude(self, value):
+            self._fromViber_Msg_Longtude = value
     
     @property
-    def toViber_Msg_Longtude(self):
+    def ToViber_Msg_Longtude(self):
             return self._toViber_Msg_Longtude
 
-    @toViber_Msg_Longtude.setter
-    def toViber_Msg_Longtude (self, value):
+    @ToViber_Msg_Longtude.setter
+    def ToViber_Msg_Longtude(self, value):
             self._toViber_Msg_Longtude = value
 
     #Latitudeg
     @property
     def FromViber_Msg_Latitude(self):
-            return self._FromViber_Msg_Latitude
+            return self._fromViber_Msg_Latitude
 
     @FromViber_Msg_Latitude.setter
-    def FromViber_Msg_Latitude (self, value):
-            self._FromViber_Msg_Latitude = value
+    def FromViber_Msg_Latitude(self, value):
+            self._fromViber_Msg_Latitude = value
     
     @property
-    def toViber_Msg_Latitude(self):
+    def ToViber_Msg_Latitude(self):
             return self._toViber_Msg_Latitude
 
-    @toViber_Msg_Latitude.setter
-    def toViber_Msg_Latitude (self, value):
+    @ToViber_Msg_Latitude.setter
+    def ToViber_Msg_Latitude(self, value):
             self._toViber_Msg_Latitude = value
     #IP
     @property
     def FromViber_Msg_IP(self):
-            return self._FromViber_Msg_IP
+            return self._fromViber_Msg_IP
 
     @FromViber_Msg_IP.setter
-    def FromViber_Msg_IP (self, value):
-            self._FromViber_Msg_IP = value
+    def FromViber_Msg_IP(self, value):
+            self._fromViber_Msg_IP = value
     
     @property
-    def toViber_Msg_IP(self):
+    def ToViber_Msg_IP(self):
             return self._toViber_Msg_IP
 
-    @toViber_Msg_IP.setter
-    def toViber_Msg_IP (self, value):
+    @ToViber_Msg_IP.setter
+    def ToViber_Msg_IP(self, value):
             self._toViber_Msg_IP = value
     # msg
      
     @property
     def FromViber_Msg(self):
-            return self._FromViber_Msg
+            return self._fromViber_Msg
 
     @FromViber_Msg.setter
-    def FromViber_Msg (self, value):
-            self._FromViber_Msg = value
+    def FromViber_Msg(self, value):
+            self._fromViber_Msg = value
     
     @property
-    def toViber_Msg(self):
+    def ToViber_Msg(self):
             return self._toViber_Msg
 
-    @toViber_Msg.setter
-    def toViber_Msg (self, value):
+    @ToViber_Msg.setter
+    def ToViber_Msg(self, value):
             self._toViber_Msg = value
     #DateandTime
     
     @property
     def FromViber_Msg_DateandTime(self):
-            return self._FromViber_Msg_DateandTime
+            return self._fromViber_Msg_DateandTime
 
     @FromViber_Msg_DateandTime.setter
-    def FromViber_Msg_DateandTime (self, value):
-            self._FromViber_Msg_DateandTime = value
+    def FromViber_Msg_DateandTime(self, value):
+            self._fromViber_Msg_DateandTime = value
     
     @property
-    def toViber_Msg_DateandTime(self):
+    def ToViber_Msg_DateandTime(self):
             return self._toViber_Msg_DateandTime
 
-    @toViber_Msg_DateandTime.setter
-    def toViber_Msg_DateandTime (self, value):
+    @ToViber_Msg_DateandTime.setter
+    def ToViber_Msg_DateandTime(self, value):
             self._toViber_Msg_DateandTime = value
     
     #number
     
     @property
     def FromViber_Msg_number(self):
-            return self._FromViber_Msg_number
+            return self._fromViber_Msg_number
 
     @FromViber_Msg_number.setter
-    def FromViber_Msg_DateandTime (self, value):
-            self._FromViber_Msg_number = value
+    def FromViber_Msg_number(self, value):
+            self._fromViber_Msg_number = value
     
     @property
-    def toViber_Msg_number(self):
+    def ToViber_Msg_number(self):
             return self._toViber_Msg_number
 
-    @toViber_Msg_number.setter
-    def toViber_Msg_number (self, value):
+    @ToViber_Msg_number.setter
+    def ToViber_Msg_number(self, value):
             self._toViber_Msg_number = value
     
-    def FromData(cls, FromViber_Msg_FirstName,FromViber_Msg_LastName,FromViber_Msg_number,FromViber_Msg_Latitude, FromViber_Msg_Longtude,FromViber_Msg, FromViber_Msg_DateandTime, toViber_Msg_FirstName, toViber_Msg_LastName, toViber_Msg_number, toViber_Msg_Latitude, toViber_Msg_Longtude, toViber_Msg, toViber_Msg_DateandTime ):
-       
-        cls.FromViber_Msg_FirstName = str(FromViber_Msg_FirstName)
-        cls.FromViber_Msg_LastName= str(FromViber_Msg_LastName)
-        cls.FromViber_Msg_number=str(FromViber_Msg_number)
-        cls.FromViber_Msg_Latitude=str(FromViber_Msg_Latitude)
-        cls.FromViber_Msg_Longtude=str(FromViber_Msg_Longtude)
-        cls.FromViber_Msg=str(FromViber_Msg)
-        cls.FromViber_Msg_DateandTime=str(FromViber_Msg_DateandTime)
+    def FromData(self, fromViber_Msg_FirstName,fromViber_Msg_LastName,fromViber_Msg_number, fromViber_Msg_Longtude,fromViber_Msg_Latitude,fromViber_Msg,
+     toViber_Msg_FirstName, 
+     toViber_Msg_LastName, toViber_Msg_number, toViber_Msg_Longtude, toViber_Msg_Latitude, toViber_Msg_IP,
+     toViber_Msg, toViber_Msg_DateandTime ):
+        v=allViber()
+        v.FromViber_Msg_FirstName = str(fromViber_Msg_FirstName)
+        v.FromViber_Msg_LastName= str(fromViber_Msg_LastName)
+        v.FromViber_Msg_number=str(fromViber_Msg_number)
+        v.FromViber_Msg_Latitude=str(fromViber_Msg_Latitude)
+        v.FromViber_Msg_Longtude=str(fromViber_Msg_Longtude)
+        v.FromViber_Msg=str(fromViber_Msg)
+        
 
-        cls.toViber_Msg_FirstName = str(toViber_Msg_FirstName)
-        cls.toViber_Msg_LastName= str(toViber_Msg_LastName)
-        cls.toViber_Msg_number=str(toViber_Msg_number)
-        cls.toViber_Msg_Latitude=str(toViber_Msg_Latitude)
-        cls.toViber_Msg_Longtude=str(toViber_Msg_Longtude)
-        cls.toViber_Msg=str(toViber_Msg)
-        cls.toViber_Msg_DateandTime=str(toViber_Msg_DateandTime)
+        v.ToViber_Msg_FirstName = str(toViber_Msg_FirstName)
+        v.ToViber_Msg_LastName= str(toViber_Msg_LastName)
+        v.ToViber_Msg_number=str(toViber_Msg_number)
+        v.ToViber_Msg_Latitude=str(toViber_Msg_Latitude)
+        v.ToViber_Msg_Longtude=str(toViber_Msg_Longtude)
+        v.ToViber_Msg_IP=str(toViber_Msg_IP)
+        v.ToViber_Msg=str(toViber_Msg)
+        v.ToViber_Msg_DateandTime=str(toViber_Msg_DateandTime)
 
       #  ex.peopleID=str(peopleID)
-        return cls
+        return v
 
     def getAllVibers(self):
         Viberarray=[]
@@ -205,6 +209,6 @@ class allViber:
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
                 Viberarray.append(allViber.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
-
+               
         return Viberarray
 

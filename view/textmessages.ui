@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TextmsgeTable</class>
+ <widget class="QDialog" name="TextmsgeTable">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1093</width>
+    <height>870</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Text Messages</string>
+  </property>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1081</width>
+     <height>841</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Sender first name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Sender last name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Recepiant number</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Reciepiant first name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Recipeant last name </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Text message</string>
+    </property>
+   </column>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

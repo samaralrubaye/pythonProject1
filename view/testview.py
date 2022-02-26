@@ -7,12 +7,15 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 import matplotlib.pyplot as plt
 import random
 
+from geopy.geocoders import Nominatim
+
+from allWhatsApp import allWhatsApp
 # main window
 # which inherits QDialog
 
 
 class Window(QDialog):
-
+   
     # constructor
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
@@ -52,16 +55,20 @@ class Window(QDialog):
         # adding canvas to the layout
         layout.addWidget(self.canvas)
 
-        # adding push button to the layout
+        # adding push button to the layoutset
         layout.addWidget(self.button)
       # adding push button to the layout
         layout.addWidget(self.button2)
-
+      
         # setting layout to the main window
         self.setLayout(layout)
+   
+       
 
     # action called by the push button
     def plot(self):
+         
+# 
           Country = ['USA','Canada','Germany','UK','France']
           GDP_Per_Capita = [45000,42000,52000,49000,47000]
           # clearing old figure
