@@ -197,9 +197,9 @@ class allWhatsApp:
       #  ex.peopleID=str(peopleID)
         return W
 
-    def getAllWhatsApp(self):
+    def getAllWhatsApp(self,caseid, datefrom,dateto, textcontent):
         WhatsAPP=[]
-        ex = connection.conection.mycursor.callproc('selectallwhatsapp')
+        ex = connection.conection.mycursor.callproc('selectallwhatsapp',[textcontent,datefrom,dateto,caseid])
 
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():

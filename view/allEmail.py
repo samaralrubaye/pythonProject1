@@ -326,8 +326,8 @@ class allEmail:
         e.FromEmail_firstName=str(fromEmail_firstName)
         e.FromEmail_lastname = str(fromEmail_lastname)
         e.FromEmail_content_text=str(fromEmail_content_text)
-        e.FromEmail_latitude=str(fromEmail_latitude)
-        e.FromEmail_longtude=str(fromEmail_longtude)
+        e.FromEmail_latitude=(fromEmail_latitude)
+        e.FromEmail_longtude=(fromEmail_longtude)
         e.FromEmail_timeDate=str(fromEmail_timeDate)
         e.FromEmail_Email=str(fromEmail_Email)
 
@@ -356,9 +356,9 @@ class allEmail:
         e.BccEmail_timeDate=str(bccEmail_Email)
         return e
 
-    def getAllEmails(self):
+    def getAllEmails(self,caseid, datefrom,dateto, textcontent):
         Emails=[]
-        ex = connection.conection.mycursor.callproc('selectallemails')
+        ex = connection.conection.mycursor.callproc('selectallemails',[textcontent,datefrom,dateto,caseid])
         j =1
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():

@@ -35,7 +35,7 @@ class comunicationNumberTable(QWidget):
        # Create table
       
         self.tableWidget.setRowCount(9)
-        self.tableWidget.setColumnCount(9)
+        self.tableWidget.setColumnCount(3)
         self.tableWidget.setItem(0,0, QTableWidgetItem("Contact"))
         self.tableWidget.setItem(0,1, QTableWidgetItem("Number of sent"))
         self.tableWidget.setItem(0,2, QTableWidgetItem("Number of receieved"))

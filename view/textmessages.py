@@ -8,7 +8,7 @@ from allViber import allViber
 from allWhatsApp import allWhatsApp
 from allEmail import allEmail
 
-class ViberWatsAppTable(QWidget):
+class emaildetails(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -93,5 +93,5 @@ class ViberWatsAppTable(QWidget):
      
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = ViberWatsAppTable()
+    ex = emaildetails()
     sys.exit(app.exec_())  

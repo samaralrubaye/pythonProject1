@@ -10,6 +10,8 @@
 
 from cgi import test
 from genericpath import exists
+from operator import index
+from unittest import case
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget,QVBoxLayout,QGridLayout
@@ -35,13 +37,18 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from audioop import add
 from mimetypes import init
 import sys
-import testcanavas
+
 #from additem1 import Ui_Evidance
 from allEmail import *
 from allViber import allViber
 
 
+
 from textmessages import *
+from socialNetworkWhatapp import SocialNetworkWhatapp
+from comunicationNumberTabl import comunicationNumberTable
+from contactTimesPerDay import cantactTimesperDate
+from GeographicalLocation import MyApp
 
 
 from watsAppViberTable import ViberWatsAppTable
@@ -59,17 +66,18 @@ class Ui_DialogAnalysis(object):
       #  self.ui.setupUi(self.window)
        # DialogAnalysis.hide()
        # self.window.show()
-    def __init__(self, ex = None):
+       
+    def __init__(self, SelectedCase = None):
         self.case =cases()
         super(Ui_DialogAnalysis,self).__init__()
-        if ex == None:
+        if SelectedCase == None:
            return
         
-        self.Case = ex  
+        self.Case = SelectedCase 
         
          
         self.activepeople = People()  
-        
+     
        
        
 
@@ -101,8 +109,8 @@ class Ui_DialogAnalysis(object):
         self.geoloctab.setObjectName("geoloctab")
         self.tabWidgetBookMark.addTab(MyApp(), "Geographical location")
         self.SocialNetworktab = QtWidgets.QWidget()
-        self.tabWidgetBookMark.addTab(SocialNetwork(),"SocialNetworktab")
-       # self.tabWidgetBookMark.addTab(self.SocialNetworktab, "")
+       
+      
         self.statisictap = QtWidgets.QWidget()
         self.statisictap.setObjectName("statisictap")
         self.tabWidgetBookMark.addTab(Window(),"statisic")
@@ -200,7 +208,7 @@ class Ui_DialogAnalysis(object):
         self.btnClear.setStyleSheet("\n""background-color: rgb(222, 223, 255);")
         self.btnClear.setObjectName("btnClear")
         self.dockWidget_analysis.setWidget(self.dockWidgetContents_2)
-
+    
         self.retranslateUi(DialogAnalysis)
         self.tabWidgetBookMark.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(DialogAnalysis)
@@ -245,39 +253,41 @@ class Ui_DialogAnalysis(object):
         self.btnSnapshot.setText(_translate("DialogAnalysis", "add evedence Item"))
         self.btnClear.setText(_translate("DialogAnalysis", "clear"))
         #self.btnSnapshot.clicked.connect(self.additemWindo)
-        name=['aaaa','bbbb','ccccc']
+        name=['cute','jumbo','ccccc']
         completer = QtWidgets.QCompleter(name)
         # put the completer in
         self.lineEdit_Recepian.setCompleter(completer)
 
          # put the completer in
         self.lineEdit_Sender.setCompleter(completer)
+       
         #getting the value
         self.lineEdit_Recepian.textChanged.connect(self.selectedRecepean)
         self.lineEdit_Sender.textChanged.connect(self.selectedSender)
         self.dateEdit_dateFrom.setCalendarPopup(True)
-        self.dateEdit_dateFrom.setMinimumDate(QtCore.QDate(2022, 2, 2))
-        self.dateEdit_dateFrom.setMaximumDate(QtCore.QDate(2022, 3, 1))
+        self.dateEdit_dateFrom.setMinimumDate(QtCore.QDate(2000, 2, 2))
+        self.dateEdit_dateFrom.setMaximumDate(QtCore.QDate(4000, 3, 1))
        # self.dateEdit_dateFrom.dateChanged.connect(self.fromlinedittopython)
         
         # to date functionality
         self.dateEdit_dateTo.setStyleSheet("\n""background-color: rgb(222, 223, 255);")
         self.dateEdit_dateTo.setCalendarPopup(True)
-        self.dateEdit_dateTo.setMinimumDate(QtCore.QDate(2022, 2, 2))
-        self.dateEdit_dateTo.setMaximumDate(QtCore.QDate(2022, 3, 1))
+        self.dateEdit_dateTo.setMinimumDate(QtCore.QDate(2000, 2, 2))
+        self.dateEdit_dateTo.setMaximumDate(QtCore.QDate(4000, 3, 1))
       #  self.dateEdit_dateTo.dateChanged.connect(self.fromlinedittopython)
-        self.dateEdit_dateTo.dateTimeChanged.connect(lambda: DateTo(self))
+       # self.todate=self.dateEdit_dateTo.dateTimeChanged.connect(lambda: DateTo(self).toPyDate)
 
         
          # to date functionality
         self.dateEdit_dateFrom.setStyleSheet("\n""background-color: rgb(222, 223, 255);")
         self.dateEdit_dateFrom.setCalendarPopup(True)
-        self.dateEdit_dateFrom.setMinimumDate(QtCore.QDate(2022, 2, 2))
-        self.dateEdit_dateFrom.setMaximumDate(QtCore.QDate(2022, 3, 1))
+        self.dateEdit_dateFrom.setMinimumDate(QtCore.QDate(2000, 2, 2))
+        self.dateEdit_dateFrom.setMaximumDate(QtCore.QDate(4000, 3, 1))
   #      self.dateEdit_dateFrom.dateChanged.connect(self.fromlinedittopython)
-        self.dateEdit_dateFrom.dateTimeChanged.connect(lambda: DateFrom(self))
+       # self.fromdate= self.dateEdit_dateFrom.dateTimeChanged.connect(lambda: DateFrom(self))
         self.checkBox_FiterTimeDate.stateChanged.connect(self.checked)
         self.checkBox_filterKeyWord.stateChanged.connect(self.checked)
+       
 
           # activing radio button  
         self.radioButton_viber.toggled.connect(lambda:self.btnstate(self.radioButton_viber))
@@ -310,27 +320,55 @@ class Ui_DialogAnalysis(object):
             self.lineEdit_serchKeyWord_ForChat.setEnabled(True)
             self.btnKeyWordChat_2.setEnabled(True)
     #radio button  function
-    SocialNetwork.draw_circlar(G_symmetric_watsapp)
+    #SocialNetwork.draw_circlar(G_symmetric_watsapp)
     def btnstate(self,b):
         if b.isChecked():
-            if b.text()=="Email":
-                self.x=MyApp()
-                self.x.ggg()
-            
-               
-            if b.text()=="WhatsApp":
-                pass
-                #self.Viberloading()
-                #ViberWatsAppTable.WhatsApploading(self)
-              # if exists:
-                #  self.tabWidgetBookMark.removeTab(ViberWatsAppTable(),"SocialNetworktab")
-            
-              # self.tabWidgetBookMark.addTab(ViberWatsAppTable(),"SocialNetworktab") 
+          if b.text()=="WhatsApp":
+             print('whatsapp')
+             WhatsApps= allWhatsApp.getAllWhatsApp(self,
+                self.case.caseId
+                ,str(self.dateEdit_dateFrom.date().toPyDate())
+                ,str(self.dateEdit_dateTo.date().toPyDate()) ,'')
 
+             self.tabWidgetBookMark.addTab(SocialNetwork(None,None,None,WhatsApps),"SocialNetworktab")
+
+             self.tabWidgetBookMark.removeTab(4)
+             self.tabWidgetBookMark.addTab(comunicationNumberTable(),"phone times")
+           # self.tabWidgetBookMark.addTab(SocialNetworkWhatapp(),"SocialNetworktab")
+            
+             self.tabWidgetBookMark.removeTab(5)
+             self.tabWidgetBookMark.addTab(ViberWatsAppTable(),"Comunication")
+            
+          if b.text()=="Viber":
+                print("Viber")
+                print(str(self.dateEdit_dateFrom.date().toPyDate()))
+                print(str(self.dateEdit_dateTo.date().toPyDate()))
+                print(self.case.caseId)
                
-                 
-            if b.text()=="Viber":
-                 print("Viber")
+                vibers=allViber.getAllVibers(self,
+                self.case.caseId
+                ,str(self.dateEdit_dateFrom.date().toPyDate())
+                ,str(self.dateEdit_dateTo.date().toPyDate()) ,'')
+                
+                self.tabWidgetBookMark.addTab(SocialNetwork(None,vibers),"SocialNetworktab")
+
+               # self.tabWidgetBookMark.removeTab(4)
+                self.tabWidgetBookMark.addTab(comunicationNumberTable(),"phone times")
+               # self.tabWidgetBookMark.removeTab(5)
+                self.tabWidgetBookMark.addTab(ViberWatsAppTable(),"Comunication")
+          if b.text()=="Email":
+                print('email')
+                
+                emails=allEmail.getAllEmails(self,
+                self.case.caseId
+                ,str(self.dateEdit_dateFrom.date().toPyDate())
+                ,str(self.dateEdit_dateTo.date().toPyDate()) ,'')
+                
+                self.tabWidgetBookMark.addTab(SocialNetwork(None,None,emails),"SocialNetworktab")
+                
+            #self.tabWidgetBookMark.addTab(emaildetails(),'EmailComunication')
+            
+        
 
     
      
@@ -343,16 +381,16 @@ class Ui_DialogAnalysis(object):
   
 
 def fromlinedittopython(self):
-        return self.dateEdit_dateTo.date().toPyDate
+        return self.dateEdit_dateTo.date().toPyDate()
     
     
 
 def DateFrom(self):
-            print(self.dateEdit_dateFrom.date())    
+          return self.dateEdit_dateFrom.date().toPyDate()   
     # #select the sender
 
 def DateTo(self):
-             print(self.dateEdit_dateTo.date())   
+        return self.dateEdit_dateTo.date().toPyDate()
 
         
       #  the check button activity

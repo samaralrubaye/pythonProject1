@@ -16,11 +16,11 @@ from allWhatsApp import allWhatsApp
 G_symmetric_emails = nx.Graph()
 G_symmetric_watsapp = nx.Graph()
 G_symmetric_viper = nx.Graph()
-class SocialNetwork(QDialog):
+class SocialNetworkWhatapp(QDialog):
     
 
-    def __init__(self, parent=None,vibers = None,emails = None,watsap = None):
-        super(SocialNetwork, self).__init__(parent)
+    def __init__(self, parent=None):
+        super(SocialNetworkWhatapp, self).__init__(parent)
         
         self.figures = plt.figure()
 
@@ -38,18 +38,14 @@ class SocialNetwork(QDialog):
         # Just some button connected to 'plot' method
        # self.button4 = QPushButton('draw_random')
         
-        if emails != None:
-         self.allemails(emails)
-        if watsap!= None:
-         self.allwatsapp()
-        if vibers != None :
-             self.allviper(vibers)
-
-        self.draw_circlar(G_symmetric_emails)
-        #sleep(2)
-        #self.draw_circlar(G_symmetric_watsapp)
-       # sleep(2)
-       # self.draw_circlar(G_symmetric_viper)
+        self.allemails()
+        self.allwatsapp()
+        self.allviper()
+       # self.draw_circlar(G_symmetric_emails)
+        sleep(2)
+        self.draw_circlar(G_symmetric_watsapp)
+        sleep(2)
+        #self.draw_circlar(G_symmetric_viper)
         # adding action to the button
       #  self.button3.clicked.connect(self.draw_random)
         # adding action to the button
@@ -71,9 +67,7 @@ class SocialNetwork(QDialog):
 
         # settingverticalLayout to the main window
         self.setLayout(verticalLayout)
-        #self.allwatsapp()
-        #self.allemails()
-       # self.allemails()
+        
         
    # def theSenderName(self):
        # for i in email:
@@ -86,23 +80,24 @@ class SocialNetwork(QDialog):
         #for i in email:
        # return 'sera' + 'l'
     
-    def allemails(self,emails):
+    def allemails(self):
         
+        emails=allEmail.getAllEmails(self)
         for i in emails:
            # print(i.toEmail_firstName)
            self.Gettinginfo(i.FromEmail_firstName,i.ToEmail_firstName,G_symmetric_emails)
        # self.Gettinginfo('samar','sami','sara','loscomb')
     
     def allwatsapp(self):
-        WhatsApps= allWhatsApp.getAllWhatsApp(self,88888,'2000/1/1','4000/1/1','')
+        WhatsApps= allWhatsApp.getAllWhatsApp(self)
         
         for i in WhatsApps:
            # print(i.toEmail_firstName)
            self.Gettinginfo(i.FromWhatsApp_Msg_FirstName,i.ToWhatsApp_Msg_LastName,G_symmetric_watsapp)
        # self.Gettinginfo('samar','sami','sara','loscomb')
     
-    def allviper(self,Vibers):
-        # Vibers=allViber.getAllVibers(self,2222222,'2000/1/1','4000/1/1','')
+    def allviper(self):
+        Vibers=allViber.getAllVibers(self)
        
         for i in Vibers:
            # print(i.toEmail_firstName)

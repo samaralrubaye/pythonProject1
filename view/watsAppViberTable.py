@@ -59,7 +59,7 @@ class ViberWatsAppTable(QWidget):
         self.WhatsApploading()
   
     def vibercall(self):
-        vibers=allViber.getAllVibers(self)
+        vibers=allViber.getAllVibers(self,88888,'2000/1/1','4000/1/1','')
         row=1
         self.tableWidget.setRowCount(len(vibers))
         for j in vibers:
@@ -77,7 +77,7 @@ class ViberWatsAppTable(QWidget):
      
      
     def WhatsApploading(self):
-          WhatsApps= allWhatsApp.getAllWhatsApp(self)
+          WhatsApps= allWhatsApp.getAllWhatsApp(self,88888,'2000/1/1','4000/1/1','')
           row=1
           self.tableWidget.setRowCount(len(WhatsApps))
           for j in WhatsApps:

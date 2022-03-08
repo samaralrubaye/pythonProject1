@@ -202,9 +202,9 @@ class allViber:
       #  ex.peopleID=str(peopleID)
         return v
 
-    def getAllVibers(self):
+    def getAllVibers(self,caseid, datefrom,dateto, textcontent):
         Viberarray=[]
-        ex = connection.conection.mycursor.callproc('selectALLViber')
+        ex = connection.conection.mycursor.callproc('selectALLViber',[textcontent,datefrom,dateto,caseid])
 
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
