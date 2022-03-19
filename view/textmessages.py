@@ -1,16 +1,18 @@
+
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QPushButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
-
+import pandas as pd
+import os
 from allViber import allViber
 
 from allWhatsApp import allWhatsApp
 from allEmail import allEmail
-
+import os
 class emaildetails(QWidget):
 
-    def __init__(self):
+    def __init__(self,emails=None):
         super().__init__()
         self.title = 'PyQt5 table - pythonspot.com'
         self.left = 200
@@ -18,6 +20,12 @@ class emaildetails(QWidget):
         self.width = 1500
         self.height = 900
         self.initUI()
+        if emails != None:
+           self.allEmails(emails)
+           self.buttonCVS.clicked.connect(self.buttonCVS_clicked)
+        
+       
+       
         
     def initUI(self):
         self.setWindowTitle(self.title)
@@ -25,13 +33,18 @@ class emaildetails(QWidget):
         
       #  self.createTable()
         self.tableWidget = QTableWidget()
+        self.buttonCVS = QPushButton()
+        self.buttonCVS.setText("Import as a CVS")
+        self.buttonCVS.move(64,32)
         # Add box layout, add table to box layout and add box layout to widget
         self.layout = QVBoxLayout()
+        self.layout.addWidget(self.buttonCVS)
         self.layout.addWidget(self.tableWidget) 
         self.setLayout(self.layout) 
         self.show()
-     
-
+        
+        
+        
    # def createTable(self):
        # Create table
       
@@ -61,14 +74,17 @@ class emaildetails(QWidget):
         self.tableWidget.setColumnWidth(9,200)
         self.tableWidget.setColumnWidth(10,200)
         self.tableWidget.setColumnWidth(11,200)
-        self.allEmails()
+        #self.allEmails()
+        
         #self.WhatsApploading()
-  
-    def allEmails(self):
-        emails=allEmail.getAllEmails(self)
+        
+   
+    def allEmails(self,emails):
+        #emails=allEmail.getAllEmails(self)
         
         row=1
         self.tableWidget.setRowCount(len(emails))
+      
         for i in emails:
                self.tableWidget.setItem(row,0, QTableWidgetItem(i.FromEmail_firstName))
                self.tableWidget.setItem(row,1, QTableWidgetItem(i.FromEmail_lastname))
@@ -89,7 +105,27 @@ class emaildetails(QWidget):
 
        
         self.tableWidget.move(0,0)
+    def buttonCVS_clicked(self,emails):
+         
 
+          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+
+
+          for i in emails:
+              data = {'Sender first Name': [i.FromEmail_firstName],
+             'Sender last Name': [i.FromEmail_lastname],'Sender Email': [i.FromEmail_Email],'The Email text': [i.FromEmail_content_text],'Time sent': [i.FromEmail_timeDate],
+              'Reciepeant Firt Name': [i.ToEmail_firstName],'Reciepeant last Name': [i.ToEmail_lastname],'Reciepeant Email': [i.ToEmail_Email],'Time sent': [i.FromEmail_timeDate],   
+               'Sent Time': [i.ToEmail_timeDate] }
+
+          df = pd.DataFrame(data, columns= ['Product', 'Price'])
+
+          df.to_csv ( desktop+'\export_dataframe.csv', index = False, header=True)
+
+         # print (df)
+          print(desktop)
+        
+   
+   
      
 if __name__ == '__main__':
     app = QApplication(sys.argv)

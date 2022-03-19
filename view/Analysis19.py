@@ -11,6 +11,7 @@
 from cgi import test
 from genericpath import exists
 from operator import index
+
 from unittest import case
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -22,6 +23,7 @@ from folium import Figure
 from matplotlib import axis
 #from GeographicalLocation import *
 from cases import *
+from newtestNetwork import SocialNetworkTest
 
 from socialNetwork import SocialNetwork
 from testview import Window
@@ -45,7 +47,7 @@ from allViber import allViber
 
 
 from textmessages import *
-from socialNetworkWhatapp import SocialNetworkWhatapp
+#from socialNetworkWhatapp import SocialNetworkWhatapp
 from comunicationNumberTabl import comunicationNumberTable
 from contactTimesPerDay import cantactTimesperDate
 from GeographicalLocation import MyApp
@@ -107,13 +109,13 @@ class Ui_DialogAnalysis(object):
         self.tabWidgetBookMark.setObjectName("tabWidgetBookMark")
         self.geoloctab = QtWidgets.QWidget()
         self.geoloctab.setObjectName("geoloctab")
-        self.tabWidgetBookMark.addTab(MyApp(), "Geographical location")
+       
         self.SocialNetworktab = QtWidgets.QWidget()
        
       
         self.statisictap = QtWidgets.QWidget()
         self.statisictap.setObjectName("statisictap")
-        self.tabWidgetBookMark.addTab(Window(),"statisic")
+        
         self.chat_tap = QtWidgets.QWidget()
         self.chat_tap.setObjectName("chat_tap")
         self.tabWidgetBookMark.addTab(ViberWatsAppTable(),"chat_tap")
@@ -146,14 +148,17 @@ class Ui_DialogAnalysis(object):
         self.btnKeyWordChat_2.setStyleSheet("background-color: rgb(222, 223, 255);")
         self.btnKeyWordChat_2.setObjectName("btnKeyWordChat_2")
         self.groupBox_3 = QtWidgets.QGroupBox(self.dockWidgetContents_2)
-        self.groupBox_3.setGeometry(QtCore.QRect(20, 610, 211, 81))
+        self.groupBox_3.setGeometry(QtCore.QRect(20, 570, 221, 101))
         self.groupBox_3.setObjectName("groupBox_3")
         self.checkBox_filterKeyWord = QtWidgets.QCheckBox(self.groupBox_3)
         self.checkBox_filterKeyWord.setGeometry(QtCore.QRect(10, 20, 201, 20))
         self.checkBox_filterKeyWord.setObjectName("checkBox_filterKeyWord")
         self.checkBox_FiterTimeDate = QtWidgets.QCheckBox(self.groupBox_3)
-        self.checkBox_FiterTimeDate.setGeometry(QtCore.QRect(10, 50, 171, 20))
+        self.checkBox_FiterTimeDate.setGeometry(QtCore.QRect(10, 40, 171, 20))
         self.checkBox_FiterTimeDate.setObjectName("checkBox_FiterTimeDate")
+        self.checkBox_senderRecipeant = QtWidgets.QCheckBox(self.groupBox_3)
+        self.checkBox_senderRecipeant.setGeometry(QtCore.QRect(10, 60, 201, 20))
+        self.checkBox_senderRecipeant.setObjectName("checkBox_senderRecipeant")
         self.btnVerify = QtWidgets.QPushButton(self.dockWidgetContents_2)
         self.btnVerify.setGeometry(QtCore.QRect(10, 860, 211, 41))
         self.btnVerify.setStyleSheet("background-color: rgb(222, 223, 255);")
@@ -189,7 +194,7 @@ class Ui_DialogAnalysis(object):
         self.label_4.setGeometry(QtCore.QRect(10, 50, 55, 21))
         self.label_4.setObjectName("label_4")
         self.label_casename = QtWidgets.QLabel(self.dockWidgetContents_2)
-        self.label_casename.setGeometry(QtCore.QRect(100, 20, 81, 20))
+        self.label_casename.setGeometry(QtCore.QRect(100, 30, 81, 20))
         self.label_casename.setText("")
         self.label_casename.setObjectName("label_casename")
         self.label_6 = QtWidgets.QLabel(self.dockWidgetContents_2)
@@ -208,7 +213,7 @@ class Ui_DialogAnalysis(object):
         self.btnClear.setStyleSheet("\n""background-color: rgb(222, 223, 255);")
         self.btnClear.setObjectName("btnClear")
         self.dockWidget_analysis.setWidget(self.dockWidgetContents_2)
-    
+        self.label_casename.setText(self.case.caseName)
         self.retranslateUi(DialogAnalysis)
         self.tabWidgetBookMark.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(DialogAnalysis)
@@ -221,7 +226,7 @@ class Ui_DialogAnalysis(object):
          #   print(i.toEmail_latitude)
             #print(i.toEmail_logtude)
            # MyApp.cordinate(self,i.fromEmail_latitude, i.fromEmail_latitude)
-                   
+               
         
 
     def retranslateUi(self, DialogAnalysis):
@@ -252,6 +257,8 @@ class Ui_DialogAnalysis(object):
         self.label_13.setText(_translate("DialogAnalysis", "case!"))
         self.btnSnapshot.setText(_translate("DialogAnalysis", "add evedence Item"))
         self.btnClear.setText(_translate("DialogAnalysis", "clear"))
+        self.btnClear.clicked.connect(self.clearalltaps)
+        self.checkBox_senderRecipeant.setText(_translate("DialogAnalysis", "Filter by sender and recipiant"))
         #self.btnSnapshot.clicked.connect(self.additemWindo)
         name=['cute','jumbo','ccccc']
         completer = QtWidgets.QCompleter(name)
@@ -283,17 +290,25 @@ class Ui_DialogAnalysis(object):
         self.dateEdit_dateFrom.setCalendarPopup(True)
         self.dateEdit_dateFrom.setMinimumDate(QtCore.QDate(2000, 2, 2))
         self.dateEdit_dateFrom.setMaximumDate(QtCore.QDate(4000, 3, 1))
-  #      self.dateEdit_dateFrom.dateChanged.connect(self.fromlinedittopython)
-       # self.fromdate= self.dateEdit_dateFrom.dateTimeChanged.connect(lambda: DateFrom(self))
-        self.checkBox_FiterTimeDate.stateChanged.connect(self.checked)
-        self.checkBox_filterKeyWord.stateChanged.connect(self.checked)
-       
+        #    check box
+        # self.checkBox_FiterTimeDate.stateChanged.connect(self.checked)
+        # self.checkBox_filterKeyWord.stateChanged.connect(self.checked)
+        # self.checkBox_senderRecipeant.stateChanged.connect(self.checked)
+        self.checkBox_FiterTimeDate.toggled.connect(self.checked)
+        self.checkBox_filterKeyWord.toggled.connect(self.checked)
+        self.checkBox_senderRecipeant.toggled.connect(self.checked)
+        
 
           # activing radio button  
         self.radioButton_viber.toggled.connect(lambda:self.btnstate(self.radioButton_viber))
         self.radioButton_whatsApp.toggled.connect(lambda:self.btnstate(self.radioButton_whatsApp))
         self.radioButtonEmail.toggled.connect(lambda:self.btnstate(self.radioButtonEmail))
-   
+    def clearalltaps(self):
+        for i in range(self.tabWidgetBookMark.count()-1):
+            self.tabWidgetBookMark.removeTab(i)
+            i=i-1 
+            self.tabWidgetBookMark.removeTab(0)
+    
     def selectedRecepean(self):
         print(self.lineEdit_Recepian.text())
       #print(self.lineEdit_Recepian.selectedText())
@@ -304,75 +319,171 @@ class Ui_DialogAnalysis(object):
             self.dateEdit_dateTo.setDate()
             print("ddd")
         # selct the to date
-   
+  
       # select the from date
     def checked(self):
-        if self.checkBox_filterKeyWord.checkState() == 0:
-            self.dateEdit_dateFrom.setEnabled(False)
-            self.dateEdit_dateTo.setEnabled(False)
-        if self.checkBox_filterKeyWord.checkState() == 2:
-            self.dateEdit_dateFrom.setEnabled(True)
-            self.dateEdit_dateTo.setEnabled(True)
-        if self.checkBox_FiterTimeDate.checkState() == 0:
-            self.lineEdit_serchKeyWord_ForChat.setEnabled(False)
-            self.btnKeyWordChat_2.setEnabled(False)
-        if self.checkBox_FiterTimeDate.checkState() == 2:
+        if self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==2:
+            print('shecked')
             self.lineEdit_serchKeyWord_ForChat.setEnabled(True)
             self.btnKeyWordChat_2.setEnabled(True)
-    #radio button  function
+            self.dateEdit_dateFrom.setEnabled(True)
+            self.dateEdit_dateTo.setEnabled(True)
+            self.lineEdit_Recepian.setEnabled(True)
+            self.lineEdit_Sender.setEnabled(True)
+        if  self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==0:
+            print('shecked')
+            self.lineEdit_serchKeyWord_ForChat.setEnabled(True)
+            self.btnKeyWordChat_2.setEnabled(True)
+            self.dateEdit_dateFrom.setEnabled(True)
+            self.dateEdit_dateTo.setEnabled(True)
+            self.lineEdit_Recepian.setEnabled(False)
+            self.lineEdit_Sender.setEnabled(False)
+        if  self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 0 and self.checkBox_senderRecipeant .checkState()==0:
+            print('shecked')
+            self.lineEdit_serchKeyWord_ForChat.setEnabled(True)
+            self.btnKeyWordChat_2.setEnabled(True)
+            self.dateEdit_dateFrom.setEnabled(False)
+            self.dateEdit_dateTo.setEnabled(False)
+            self.lineEdit_Recepian.setEnabled(False)
+            self.lineEdit_Sender.setEnabled(False)
+        if  self.checkBox_filterKeyWord.checkState() == 0 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==2:
+            print('shecked')
+            self.lineEdit_serchKeyWord_ForChat.setEnabled(False)
+            self.btnKeyWordChat_2.setEnabled(False)
+            self.dateEdit_dateFrom.setEnabled(True)
+            self.dateEdit_dateTo.setEnabled(True)
+            self.lineEdit_Recepian.setEnabled(True)
+            self.lineEdit_Sender.setEnabled(True)
+        if  self.checkBox_filterKeyWord.checkState() == 0 and self.checkBox_FiterTimeDate.checkState() == 0 and self.checkBox_senderRecipeant .checkState()==2:
+            print('shecked')
+            self.lineEdit_serchKeyWord_ForChat.setEnabled(False)
+            self.btnKeyWordChat_2.setEnabled(False)
+            self.dateEdit_dateFrom.setEnabled(False)
+            self.dateEdit_dateTo.setEnabled(False)
+            self.lineEdit_Recepian.setEnabled(True)
+            self.lineEdit_Sender.setEnabled(True)
+       
+           
     #SocialNetwork.draw_circlar(G_symmetric_watsapp)
+
+
+        
     def btnstate(self,b):
         if b.isChecked():
+          
           if b.text()=="WhatsApp":
-             print('whatsapp')
-             WhatsApps= allWhatsApp.getAllWhatsApp(self,
-                self.case.caseId
-                ,str(self.dateEdit_dateFrom.date().toPyDate())
+           
+           
+            WhatsApps= allWhatsApp.getAllWhatsApp(self,
+            self.case.caseId
+            ,str(self.dateEdit_dateFrom.date().toPyDate())
                 ,str(self.dateEdit_dateTo.date().toPyDate()) ,'')
-
-             self.tabWidgetBookMark.addTab(SocialNetwork(None,None,None,WhatsApps),"SocialNetworktab")
-
-             self.tabWidgetBookMark.removeTab(4)
-             self.tabWidgetBookMark.addTab(comunicationNumberTable(),"phone times")
-           # self.tabWidgetBookMark.addTab(SocialNetworkWhatapp(),"SocialNetworktab")
             
-             self.tabWidgetBookMark.removeTab(5)
-             self.tabWidgetBookMark.addTab(ViberWatsAppTable(),"Comunication")
+               
+           
+            self.clearalltaps() 
+            self.tabWidgetBookMark.addTab(SocialNetwork(None,None,WhatsApps),"SocialNetworktab")
+            self.tabWidgetBookMark.addTab(MyApp(None,None,WhatsApps), "Geographical location")
+            self.tabWidgetBookMark.addTab(ViberWatsAppTable( WhatsApps, None),"Comunication")
+            self.tabWidgetBookMark.addTab(comunicationNumberTable(),"Comunication Analysis")
+            self.tabWidgetBookMark.addTab(Window(),"statisic")
+
             
           if b.text()=="Viber":
                 print("Viber")
                 print(str(self.dateEdit_dateFrom.date().toPyDate()))
                 print(str(self.dateEdit_dateTo.date().toPyDate()))
-                print(self.case.caseId)
                
+                print(self.btnKeyWordChat_2.text())
+                print(self.tabWidgetBookMark.count())
+       
+                self.clearalltaps()
+               
+                
+                mText=' '
+                
+    
                 vibers=allViber.getAllVibers(self,
                 self.case.caseId
                 ,str(self.dateEdit_dateFrom.date().toPyDate())
                 ,str(self.dateEdit_dateTo.date().toPyDate()) ,'')
                 
-                self.tabWidgetBookMark.addTab(SocialNetwork(None,vibers),"SocialNetworktab")
+                self.tabWidgetBookMark.addTab(SocialNetwork(vibers,None,None),"SocialNetworktab")
+                self.tabWidgetBookMark.addTab(MyApp(vibers,None,None), "Geographical location")
+                self.tabWidgetBookMark.addTab(ViberWatsAppTable(None,vibers),"Comunication")
+                self.tabWidgetBookMark.addTab(comunicationNumberTable(),"Comunication Analysis")
+                self.tabWidgetBookMark.addTab(Window(),"statisic")
 
-               # self.tabWidgetBookMark.removeTab(4)
-                self.tabWidgetBookMark.addTab(comunicationNumberTable(),"phone times")
-               # self.tabWidgetBookMark.removeTab(5)
-                self.tabWidgetBookMark.addTab(ViberWatsAppTable(),"Comunication")
           if b.text()=="Email":
-                print('email')
-                
+                #'email for social network
+                self.clearalltaps()
+                print(self.lineEdit_serchKeyWord_ForChat.text())
+                # if self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==2:
+                #    mText=self.lineEdit_serchKeyWord_ForChat.text()
+                #    mFromDate=self.dateEdit_dateFrom.date()
+                #    mToDate= self.dateEdit_dateTo.date()
+                # if  self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==0:
+                #      mText=self.lineEdit_serchKeyWord_ForChat.text()
+                #      mFromDate=self.dateEdit_dateFrom.date()
+                #      mToDate= '4000/2/2'
+                # if  self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 0 and self.checkBox_senderRecipeant .checkState()==0:
+                #      mText=self.lineEdit_serchKeyWord_ForChat.text()
+                #      mFromDate='2000/2/2'
+                #      mToDate= '4000/2/2'
+                # if  self.checkBox_filterKeyWord.checkState() == 0 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==2:
+                #     mText=' '
+                #     mFromDate=self.dateEdit_dateFrom.date()
+                #     mToDate= self.dateEdit_dateTo.date()
+                # if  self.checkBox_filterKeyWord.checkState() == 0 and self.checkBox_FiterTimeDate.checkState() == 0 and self.checkBox_senderRecipeant .checkState()==2:
+                #     mText=' '
+                #     mFromDate='2000/2/2'
+                #     mToDate= self.dateEdit_dateTo.date() 
+                      
+                # emails=allEmail.getAllEmails(self,
+                # self.case.caseId
+                # ,str( mFromDate)
+                # ,str(mToDate) , mText)
                 emails=allEmail.getAllEmails(self,
                 self.case.caseId
                 ,str(self.dateEdit_dateFrom.date().toPyDate())
-                ,str(self.dateEdit_dateTo.date().toPyDate()) ,'')
-                
-                self.tabWidgetBookMark.addTab(SocialNetwork(None,None,emails),"SocialNetworktab")
-                
-            #self.tabWidgetBookMark.addTab(emaildetails(),'EmailComunication')
+                ,str(self.dateEdit_dateTo.date().toPyDate()) ,' ')
+                self.tabWidgetBookMark.addTab(SocialNetwork(None,emails,None),"SocialNetworktab")
+                self.tabWidgetBookMark.addTab(MyApp(None,emails,None), "Geographical location")
+                self.tabWidgetBookMark.addTab(emaildetails(emails),'EmailComunication')
+                self.tabWidgetBookMark.addTab(cantactTimesperDate(),"DataTime")
+                self.tabWidgetBookMark.addTab(Window(),"statisic")
+                self.tabWidgetBookMark.addTab(SocialNetworkTest(None,emails,None),"SocialNetworktab")
+
+               # for  i in self.tabWidgetBookMark.count():
+                     #self.tabWidgetBookMark.remove(i)
+                     #i=i-1 
+    def checkedInputs(self):
+        if self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==2:
+           mText=self.lineEdit_serchKeyWord_ForChat.text()
+           mFromDate=self.dateEdit_dateFrom.date()
+           mToDate= self.dateEdit_dateTo.date()
+        if  self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==0:
+            mText=self.lineEdit_serchKeyWord_ForChat.text()
+            mFromDate=self.dateEdit_dateFrom.date()
+            mToDate= '4000/2/2'
+        if  self.checkBox_filterKeyWord.checkState() == 2 and self.checkBox_FiterTimeDate.checkState() == 0 and self.checkBox_senderRecipeant .checkState()==0:
+             mText=self.lineEdit_serchKeyWord_ForChat.text()
+             mFromDate='2000/2/2'
+             mToDate= '4000/2/2'
+        if  self.checkBox_filterKeyWord.checkState() == 0 and self.checkBox_FiterTimeDate.checkState() == 2 and self.checkBox_senderRecipeant .checkState()==2:
+            mText=' '
+            mFromDate=self.dateEdit_dateFrom.date()
+            mToDate= self.dateEdit_dateTo.date()
+        if  self.checkBox_filterKeyWord.checkState() == 0 and self.checkBox_FiterTimeDate.checkState() == 0 and self.checkBox_senderRecipeant .checkState()==2:
+             mText=' '
+             mFromDate='2000/2/2'
+             mToDate= self.dateEdit_dateTo.date()      
             
         
 
     
      
-    
+ 
       
      #  select a recepian
     
@@ -395,7 +506,7 @@ def DateTo(self):
         
       #  the check button activity
 
-      
+        
    
    
 

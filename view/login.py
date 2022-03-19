@@ -84,7 +84,7 @@ class ui_Dialog(object):
         self.BtnCancleExaminer.setText(_translate("Dialog", "Cancel"))
         self.LblUserName.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:11pt;\">Use name</span></p></body></html>"))
         self.lblmsg.setText(_translate("Dialog", " "))
-
+    
     def hidding(self):
         Dialog.hide()
 

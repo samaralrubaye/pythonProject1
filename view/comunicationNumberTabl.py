@@ -35,10 +35,12 @@ class comunicationNumberTable(QWidget):
        # Create table
       
         self.tableWidget.setRowCount(9)
-        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setColumnCount(5)
         self.tableWidget.setItem(0,0, QTableWidgetItem("Contact"))
-        self.tableWidget.setItem(0,1, QTableWidgetItem("Number of sent"))
-        self.tableWidget.setItem(0,2, QTableWidgetItem("Number of receieved"))
+        self.tableWidget.setItem(0,1, QTableWidgetItem("the date the items sent"))
+        self.tableWidget.setItem(0,2, QTableWidgetItem("Number of sent"))
+        self.tableWidget.setItem(0,3, QTableWidgetItem("the date the items recived"))
+        self.tableWidget.setItem(0,4, QTableWidgetItem("Number of receieved"))
        
         self.tableWidget.setColumnWidth(0,200)
         self.tableWidget.setColumnWidth(1,200)
@@ -55,12 +57,10 @@ class comunicationNumberTable(QWidget):
             self.tableWidget.setItem(row,0, QTableWidgetItem(j.FromViber_Msg_FirstName))
             self.tableWidget.setItem(row,1, QTableWidgetItem(j.FromViber_Msg_LastName))
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromViber_Msg_number))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.ToViber_Msg))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.ToViber_Msg_DateandTime))
-            self.tableWidget.setItem(row,5, QTableWidgetItem(j.ToViber_Msg_FirstName))
-            self.tableWidget.setItem(row,6, QTableWidgetItem(j.ToViber_Msg_LastName))
-            self.tableWidget.setItem(row,7, QTableWidgetItem(j.ToViber_Msg_number))
-            self.tableWidget.setItem(row,8, QTableWidgetItem(j.ToViber_Msg))
+            self.tableWidget.setItem(row,3, QTableWidgetItem(j.FromViber_Msg_LastName))
+            self.tableWidget.setItem(row,4, QTableWidgetItem(j.FromViber_Msg_number))
+            
+            
             row=row+1
             self.tableWidget.move(0,0)
      
@@ -73,12 +73,10 @@ class comunicationNumberTable(QWidget):
             self.tableWidget.setItem(row,0, QTableWidgetItem(j.FromWhatsApp_Msg_FirstName))
             self.tableWidget.setItem(row,1, QTableWidgetItem(j.FromWhatsApp_Msg_LastName))
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromWhatsApp_Msg_number))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.FromWhatsApp_Msg))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.ToWhatsApp_Msg_DateandTime))
-            self.tableWidget.setItem(row,5, QTableWidgetItem(j.FromWhatsApp_Msg_FirstName))
-            self.tableWidget.setItem(row,6, QTableWidgetItem(j.ToWhatsApp_Msg_LastName))
-            self.tableWidget.setItem(row,7, QTableWidgetItem(j.ToWhatsApp_Msg_number))
-            self.tableWidget.setItem(row,8, QTableWidgetItem(j.ToWhatsApp_Msg_DateandTime))
+            self.tableWidget.setItem(row,3, QTableWidgetItem(j.FromViber_Msg_LastName))
+            self.tableWidget.setItem(row,4, QTableWidgetItem(j.FromViber_Msg_number))
+            
+            
             row=row+1   
             self.tableWidget.move(0,0)
 

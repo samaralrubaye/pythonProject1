@@ -4,13 +4,13 @@ from xmlrpc.client import SYSTEM_ERROR
 import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from allEmail import allEmail
 import random
 from time import sleep
-
 from allViber import allViber
 from allWhatsApp import allWhatsApp
 G_symmetric_emails = nx.Graph()
@@ -19,8 +19,8 @@ G_symmetric_viper = nx.Graph()
 class SocialNetwork(QDialog):
     
 
-    def __init__(self, parent=None,vibers = None,emails = None,watsap = None):
-        super(SocialNetwork, self).__init__(parent)
+    def __init__(self,vibers = None,emails = None,watsap = None):
+        super(SocialNetwork, self).__init__()
         
         self.figures = plt.figure()
 
@@ -29,33 +29,25 @@ class SocialNetwork(QDialog):
         # 'figures' instance as a parameter to __init__
         self.canvases = FigureCanvas(self.figures)
 
-        # this is the Navigation widget
+       
         # it takes the Canvas widget and a parent
         self.toolbars = NavigationToolbar(self.canvases, self)
 
-        # Just some button connected to 'plot' method
-       # self.button3 = QPushButton('draw_random')
-        # Just some button connected to 'plot' method
-       # self.button4 = QPushButton('draw_random')
+       
         
         if emails != None:
-         self.allemails(emails)
+          self.allemails(emails)
         if watsap!= None:
-         self.allwatsapp()
+           self.allwatsapp(watsap)
         if vibers != None :
              self.allviper(vibers)
 
         self.draw_circlar(G_symmetric_emails)
-        #sleep(2)
-        #self.draw_circlar(G_symmetric_watsapp)
-       # sleep(2)
-       # self.draw_circlar(G_symmetric_viper)
-        # adding action to the button
-      #  self.button3.clicked.connect(self.draw_random)
-        # adding action to the button
-       # self.button4.clicked.connect(self.draw_random)
-
-        # creating a Vertical BoxverticalLayout
+      
+        self.draw_circlar(G_symmetric_watsapp)
+      
+        self.draw_circlar(G_symmetric_viper)
+    
         verticalLayout = QVBoxLayout()
 
         # adding tool bar to theverticalLayout
@@ -64,77 +56,23 @@ class SocialNetwork(QDialog):
         # adding canvas to theverticalLayout
         verticalLayout.addWidget(self.canvases)
 
-        # adding push button to theverticalLayout
-        #verticalLayout.addWidget(self.button3)
-      # adding push button to theverticalLayout
-       # verticalLayout.addWidget(self.button4)
+     
 
         # settingverticalLayout to the main window
         self.setLayout(verticalLayout)
-        #self.allwatsapp()
-        #self.allemails()
-       # self.allemails()
-        
-   # def theSenderName(self):
-       # for i in email:
-         #  return i.fromEmail_lastname + i.fromEmail_lastname
 
-   # def therecepianName(self, fname, lname):
-      #  for i in email:
-          #  return fname+ lname
-   # def therecepianName(self):
-        #for i in email:
-       # return 'sera' + 'l'
     
     def allemails(self,emails):
-        
         for i in emails:
-           # print(i.toEmail_firstName)
-           self.Gettinginfo(i.FromEmail_firstName,i.ToEmail_firstName,G_symmetric_emails)
-       # self.Gettinginfo('samar','sami','sara','loscomb')
+           G_symmetric_emails.add_edge(i.FromEmail_firstName,i.ToEmail_firstName) 
     
-    def allwatsapp(self):
-        WhatsApps= allWhatsApp.getAllWhatsApp(self,88888,'2000/1/1','4000/1/1','')
-        
-        for i in WhatsApps:
-           # print(i.toEmail_firstName)
-           self.Gettinginfo(i.FromWhatsApp_Msg_FirstName,i.ToWhatsApp_Msg_LastName,G_symmetric_watsapp)
-       # self.Gettinginfo('samar','sami','sara','loscomb')
+    def allwatsapp(self,watsap):
+        for i in watsap:
+           G_symmetric_watsapp.add_edge(i.FromViber_Msg_FirstName,i.ToWhatsApp_Msg_LastName)
     
-    def allviper(self,Vibers):
-        # Vibers=allViber.getAllVibers(self,2222222,'2000/1/1','4000/1/1','')
-       
-        for i in Vibers:
-           # print(i.toEmail_firstName)
-           self.Gettinginfo(i.FromViber_Msg_FirstName,i.ToViber_Msg_FirstName,G_symmetric_viper)
-       # self.Gettinginfo('samar','sami','sara','loscomb')
-
-    def Gettinginfo(self,fnamesender,fnamerecepiant,G_symmetric):
-        
-    
-        
-        #should be like this
-       # print(self.theSenderName)
-       # print(self.therecepianName)
-    #    G_symmetric.add_edge(self.fnamesender, self.fnamerecepiant)
-        
-                               
-        G_symmetric.add_edge(fnamesender, fnamerecepiant)
-        
-        
-    
-
-
-    def drawNetwork(self):
-         nx.info(self.Get)
-         plt.figures(figsize=(5, 5))
-         nx.draw_networkx(self.Gettinginfo)
-         plt.show()
-         #plt.savefig("filename.png")
-         plt.clf()
-
-     
-
+    def allviper(self, Vibers):
+        for i in Vibers: 
+           G_symmetric_viper.add_edge(i.FromViber_Msg_FirstName,i.ToViber_Msg_FirstName) 
 
 
     # drawing in circularverticalLayout
@@ -142,42 +80,8 @@ class SocialNetwork(QDialog):
         self.figures.clear()
         # print(self.allemails)
         nx.draw_networkx(GS)
-        plt.savefig("filename1.png")
+        #plt.savefig("filename1.png")
         self.canvases.draw()
-
-
-
-    # drawing in planarverticalLayout
-    def drawplanar(self):
-        self.figures.clear()
-        nx.draw_planar(self.Gettinginfo, with_labels=True)
-        plt.savefig("filename2.png")
-        self.canvases.draw()
-
-
-
-    # drawing in randomverticalLayout
-    def draw_random(self):
-        self.figures.clear()
-        nx.draw_random(self.Gettinginfo(), with_labels=True)
-        plt.savefig("filename3.png")
-        self.canvases.draw()
-
-
-
-    # drawing in spectralverticalLayout
-    def draw_spectral(self):
-        self.figures.clear()
-        nx.draw_spectral( self.Gettinginfo(), with_labels=True)
-        plt.savefig("filename4.png")
-        self.canvases.draw()
-
-   
-
-
-
-    
-
 
 
  

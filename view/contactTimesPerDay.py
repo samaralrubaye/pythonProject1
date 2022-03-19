@@ -61,10 +61,7 @@ class cantactTimesperDate(QWidget):
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromViber_Msg_number))
             self.tableWidget.setItem(row,3, QTableWidgetItem(j.ToViber_Msg))
             self.tableWidget.setItem(row,4, QTableWidgetItem(j.ToViber_Msg_DateandTime))
-            self.tableWidget.setItem(row,5, QTableWidgetItem(j.ToViber_Msg_FirstName))
-            self.tableWidget.setItem(row,6, QTableWidgetItem(j.ToViber_Msg_LastName))
-            self.tableWidget.setItem(row,7, QTableWidgetItem(j.ToViber_Msg_number))
-            self.tableWidget.setItem(row,8, QTableWidgetItem(j.ToViber_Msg))
+           
             row=row+1
             self.tableWidget.move(0,0)
      
@@ -79,10 +76,7 @@ class cantactTimesperDate(QWidget):
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromWhatsApp_Msg_number))
             self.tableWidget.setItem(row,3, QTableWidgetItem(j.FromWhatsApp_Msg))
             self.tableWidget.setItem(row,4, QTableWidgetItem(j.ToWhatsApp_Msg_DateandTime))
-            self.tableWidget.setItem(row,5, QTableWidgetItem(j.FromWhatsApp_Msg_FirstName))
-            self.tableWidget.setItem(row,6, QTableWidgetItem(j.ToWhatsApp_Msg_LastName))
-            self.tableWidget.setItem(row,7, QTableWidgetItem(j.ToWhatsApp_Msg_number))
-            self.tableWidget.setItem(row,8, QTableWidgetItem(j.ToWhatsApp_Msg_DateandTime))
+            
             row=row+1   
             self.tableWidget.move(0,0)
 
