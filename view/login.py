@@ -15,6 +15,7 @@ import examiners
 from cases import *
 # from casesList import Ui_CasesList
 #from casesList import Ui_CasesList
+import xlwt
 
 class ui_Dialog(object):
     def NextWindow(self):

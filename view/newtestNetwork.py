@@ -27,9 +27,9 @@ class SocialNetworkTest(QDialog):
         if emails != None:
           self.draw_circlar
         if watsap!= None:
-           self.allwatsapp(watsap)
+           self.draw_circlar
         if vibers != None :
-             self.allviper(vibers)
+             self.draw_circlar
         self.figures = plt.figure()
 
         # this is the Canvas Widget that
@@ -57,12 +57,12 @@ class SocialNetworkTest(QDialog):
         G_symmetric.add_edge(self.theSenderName, self.therecepianName)
         return G_symmetric
     def drawNetwork(self):
+         plt.clf()
          nx.info(self.Gettinginfo())
          plt.figure(figsize=(5, 5))
          nx.draw_networkx(self.Gettinginfo())
-         plt.show()
-         plt.savefig("filename.png")
-         plt.clf()
+        
+        
 
 
 

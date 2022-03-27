@@ -170,27 +170,11 @@ alternate-background-color: rgb(243, 247, 255);
     <widget class="QLineEdit" name="lineEdit_serchKeyWord_ForChat">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>60</y>
-       <width>161</width>
+       <width>181</width>
        <height>31</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnKeyWordChat_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(222, 223, 255);</string>
-     </property>
-     <property name="text">
-      <string>Search keyword</string>
      </property>
     </widget>
     <widget class="QGroupBox" name="groupBox_3">
@@ -231,7 +215,7 @@ alternate-background-color: rgb(243, 247, 255);
        <string>Filter by Date and time only</string>
       </property>
      </widget>
-     <widget class="QCheckBox" name="checkBox_senderRecipeant">
+     <widget class="QCheckBox" name="checkBox_sender">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -241,15 +225,28 @@ alternate-background-color: rgb(243, 247, 255);
        </rect>
       </property>
       <property name="text">
-       <string>Filter by sender and recipiant</string>
+       <string>Filter by sender</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Filter by recepiant</string>
       </property>
      </widget>
     </widget>
     <widget class="QPushButton" name="btnVerify">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>740</y>
+       <x>20</x>
+       <y>790</y>
        <width>211</width>
        <height>41</height>
       </rect>
@@ -421,8 +418,8 @@ alternate-background-color: rgb(243, 247, 255);
     <widget class="QPushButton" name="btnSnapshot">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>640</y>
+       <x>20</x>
+       <y>690</y>
        <width>211</width>
        <height>41</height>
       </rect>
@@ -437,8 +434,8 @@ alternate-background-color: rgb(243, 247, 255);
     <widget class="QPushButton" name="btnClear">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>690</y>
+       <x>20</x>
+       <y>740</y>
        <width>211</width>
        <height>41</height>
       </rect>
@@ -457,8 +454,8 @@ alternate-background-color: rgb(243, 247, 255);
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>800</y>
+       <x>20</x>
+       <y>840</y>
        <width>211</width>
        <height>41</height>
       </rect>
@@ -468,6 +465,38 @@ alternate-background-color: rgb(243, 247, 255);
      </property>
      <property name="text">
       <string>Back</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnshowResult">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>640</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(222, 223, 255);</string>
+     </property>
+     <property name="text">
+      <string>Show result</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(222, 223, 255);</string>
+     </property>
+     <property name="text">
+      <string>   Keyword</string>
      </property>
     </widget>
    </widget>

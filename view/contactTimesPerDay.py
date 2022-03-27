@@ -9,14 +9,19 @@ from allWhatsApp import allWhatsApp
 
 class cantactTimesperDate(QWidget):
 
-    def __init__(self):
+    def __init__(self,email_summary = None):
         super().__init__()
         self.title = 'PyQt5 table - pythonspot.com'
         self.left = 200
         self.top = 0
         self.width = 1500
         self.height = 900
-        self.initUI()
+        self.initUI() 
+        if email_summary!= None:
+           self.emailcall(email_summary)
+           
+        
+            
         
     def initUI(self):
         self.setWindowTitle(self.title)
@@ -51,34 +56,23 @@ class cantactTimesperDate(QWidget):
         #self.vibercall()
        # self.WhatsApploading()
   
-    def vibercall(self):
-        vibers=allViber.getAllVibers(self)
+    def emailcall(self,email_summary):
+        
         row=1
-        self.tableWidget.setRowCount(len(vibers))
-        for j in vibers:
-            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FromViber_Msg_FirstName))
-            self.tableWidget.setItem(row,1, QTableWidgetItem(j.FromViber_Msg_LastName))
-            self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromViber_Msg_number))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.ToViber_Msg))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.ToViber_Msg_DateandTime))
+        self.tableWidget.setRowCount(len(email_summary))
+        for j in email_summary:
+            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FirstName))
+            self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
+            self.tableWidget.setItem(row,2, QTableWidgetItem(j.Email))
+            self.tableWidget.setItem(row,3, QTableWidgetItem(j.SenderCount))
+            self.tableWidget.setItem(row,4, QTableWidgetItem(j.Recepiantcount))
            
             row=row+1
             self.tableWidget.move(0,0)
      
      
-    def WhatsApploading(self):
-          WhatsApps= allWhatsApp.getAllWhatsApp(self)
-          row=1
-          self.tableWidget.setRowCount(len(WhatsApps))
-          for j in WhatsApps:
-            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FromWhatsApp_Msg_FirstName))
-            self.tableWidget.setItem(row,1, QTableWidgetItem(j.FromWhatsApp_Msg_LastName))
-            self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromWhatsApp_Msg_number))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.FromWhatsApp_Msg))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.ToWhatsApp_Msg_DateandTime))
-            
-            row=row+1   
-            self.tableWidget.move(0,0)
+    
+           
 
      
 if __name__ == '__main__':

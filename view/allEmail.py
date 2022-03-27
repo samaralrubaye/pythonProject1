@@ -356,9 +356,9 @@ class allEmail:
         e.BccEmail_timeDate=str(bccEmail_Email)
         return e
 
-    def getAllEmails(self,caseid, datefrom,dateto, textcontent):
+    def getAllEmails(self,caseid, datefrom,dateto, textcontent,txtsender,txtresipain):
         Emails=[]
-        ex = connection.conection.mycursor.callproc('selectallemails',[textcontent,datefrom,dateto,caseid])
+        ex = connection.conection.mycursor.callproc('selectallemails',[textcontent,datefrom,dateto,caseid,txtsender,txtresipain])
         j =1
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():

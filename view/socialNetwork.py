@@ -1,5 +1,6 @@
 import email
 import sys
+from turtle import clear
 from xmlrpc.client import SYSTEM_ERROR
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -23,30 +24,26 @@ class SocialNetwork(QDialog):
         super(SocialNetwork, self).__init__()
         
         self.figures = plt.figure()
-
-        # this is the Canvas Widget that
-        # displays the 'figures'it takes the
-        # 'figures' instance as a parameter to __init__
         self.canvases = FigureCanvas(self.figures)
-
-       
-        # it takes the Canvas widget and a parent
         self.toolbars = NavigationToolbar(self.canvases, self)
 
        
         
         if emails != None:
           self.allemails(emails)
+          self.draw_circlar(G_symmetric_emails)
         if watsap!= None:
            self.allwatsapp(watsap)
+           self.draw_circlar(G_symmetric_watsapp)
         if vibers != None :
              self.allviper(vibers)
+             self.draw_circlar(G_symmetric_viper)
 
-        self.draw_circlar(G_symmetric_emails)
+        
       
-        self.draw_circlar(G_symmetric_watsapp)
+        
       
-        self.draw_circlar(G_symmetric_viper)
+        
     
         verticalLayout = QVBoxLayout()
 
@@ -63,25 +60,33 @@ class SocialNetwork(QDialog):
 
     
     def allemails(self,emails):
+        
         for i in emails:
            G_symmetric_emails.add_edge(i.FromEmail_firstName,i.ToEmail_firstName) 
     
     def allwatsapp(self,watsap):
+       
         for i in watsap:
            G_symmetric_watsapp.add_edge(i.FromViber_Msg_FirstName,i.ToWhatsApp_Msg_LastName)
     
     def allviper(self, Vibers):
+        
         for i in Vibers: 
            G_symmetric_viper.add_edge(i.FromViber_Msg_FirstName,i.ToViber_Msg_FirstName) 
 
 
     # drawing in circularverticalLayout
     def draw_circlar(self, GS):
-        self.figures.clear()
-        # print(self.allemails)
+        
         nx.draw_networkx(GS)
         #plt.savefig("filename1.png")
         self.canvases.draw()
+
+    
+        
+        
+    
+      
 
 
  
