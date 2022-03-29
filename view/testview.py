@@ -1,4 +1,5 @@
 # importing various libraries
+import email
 import sys
 from turtle import pd
 from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout
@@ -6,7 +7,8 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 import random
-
+import matplotlib.pyplot as plt
+import pandas as pd
 from geopy.geocoders import Nominatim
 
 from allWhatsApp import allWhatsApp
@@ -17,34 +19,32 @@ from allWhatsApp import allWhatsApp
 class Window(QDialog):
    
     # constructor
-    def __init__(self, parent=None):
-        super(Window, self).__init__(parent)
-
+    def __init__(self,viber_summary = None,email_summary = None, whatsapp_summary = None):
+        super(Window, self).__init__()
+       
         # a figure instance to plot on
         self.figure = plt.figure()
 
-        # this is the Canvas Widget that
-        # displays the 'figure'it takes the
-        # 'figure' instance as a parameter to __init__
+      
         self.canvas = FigureCanvas(self.figure)
 
-        # this is the Navigation widget
-        # it takes the Canvas widget and a parent
+      
         self.toolbar = NavigationToolbar(self.canvas, self)
 
-        # Just some button connected to 'plot' method
-        self.button = QPushButton('Bar chart')
-        # Just some button connected to 'plot' method
-        self.button2 = QPushButton('Pie chart')
-        self.button.setStyleSheet("background-color: rgb(217, 240, 255);")
-        self.button2.setStyleSheet("background-color: rgb(217, 240, 255);")
+    
 
-        # adding action to the button
-        self.button.clicked.connect(self.plot)
+        if email_summary != None:
+            self.plotemail(email_summary)
+         
+        if whatsapp_summary!= None:
+            self.plotWhatsapp(whatsapp_summary)
+        if viber_summary != None :
+            self.plotViber(viber_summary)
+           
+
+
+      
        
-        # adding action to the button
-        self.button2.clicked.connect(self.plot2)
-        
 
         # creating a Vertical Box layout
         layout = QVBoxLayout()
@@ -55,44 +55,86 @@ class Window(QDialog):
         # adding canvas to the layout
         layout.addWidget(self.canvas)
 
-        # adding push button to the layoutset
-        layout.addWidget(self.button)
-      # adding push button to the layout
-        layout.addWidget(self.button2)
+    
       
         # setting layout to the main window
         self.setLayout(layout)
+    
+        
    
        
 
-    # action called by the push button
-    def plot(self):
+    # actionemai called by the push button
+    def plotemail(self,email_summary):
+        self.figure.clear()
          
-# 
-          Country = ['USA','Canada','Germany','UK','France']
-          GDP_Per_Capita = [45000,42000,52000,49000,47000]
-          # clearing old figure
-          self.figure.clear()
-          New_Colors = ['green','blue','purple','brown','teal']
-          plt.bar(Country, GDP_Per_Capita, color=New_Colors)
-          plt.title('Amount of suspsous comunication per country', fontsize=14)
-          plt.xlabel('Country', fontsize=14)
-          plt.ylabel('Comunication messages/Emails', fontsize=14)
-          plt.grid(True)
+        people = []
+        comunication = []
+        
+        for i in email_summary:
+            people.append(i.FirstName)
+            comunication.append(i.SenderCount)
+        print(people)
+        for i in range(len(people)):
+            plt.bar( people[i],comunication[i])
+      
+        plt.title('Amount of suspsous comunication per person', fontsize=14)
+        plt.xlabel('people', fontsize=14)
+        plt.ylabel('Comunication messages/Emails', fontsize=14)
+        plt.grid(True)
           # put the figure inside the canavas
-          self.canvas.draw()
+        self.canvas.draw()
+       
+        
+    
+    # actionemai called by the push button
+    def plotViber(self,viber_summary):
+            # clearing old figure
+        self.figure.clear()
+         
+        people = []
+        comunication = []
+        for i in viber_summary:
+            people.append(i.FirstName)
+            comunication.append(i.SenderCount)
+        for i in range(len(people)):
+            plt.bar( people[i],comunication[i])
+       
+        plt.title('Amount of suspsous comunication per person', fontsize=14)
+        plt.xlabel('people', fontsize=14)
+        plt.ylabel('Comunication messages/Emails', fontsize=14)
+        plt.grid(True)
+          # put the figure inside the canavas
+        self.canvas.draw()
     # action called by the push button
    
-    def plot2(self):
-         Tasks = [300,500,700]
-         # clearing old figure
-         self.figure.clear()
-         my_labels = 'Tasks Pending','Tasks Ongoing','Tasks Completed'
-         plt.pie(Tasks,labels=my_labels,autopct='%1.1f%%')
-         plt.title('My Tasks')
-         plt.axis('equal')
-         # put the figure inside the canavas
-         self.canvas.draw()
+    
+
+    def plotWhatsapp(self,whatsapp_summary):
+        self.figure.clear()
+        people = []
+        comunication = []
+        for i in whatsapp_summary:
+            people.append(i.FirstName)
+            comunication.append(i.SenderCount)
+        print(comunication)
+        print(people)
+        for i in range(len(people)):
+            plt.bar( people[i],comunication[i])
+       
+        plt.title('Amount of suspsous comunication per person', fontsize=14)
+        plt.xlabel('people', fontsize=14)
+        plt.ylabel('Comunication messages/Emails', fontsize=14)
+        plt.grid(True)
+          # put the figure inside the canavas
+        self.canvas.draw()
+    # action called by the push button
+         
+# 
+          
+   
+   
+
         
    
     

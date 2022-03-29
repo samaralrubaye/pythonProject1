@@ -20,13 +20,16 @@ import xlwt
 class ui_Dialog(object):
     def NextWindow(self):
         # the log in is not working
-        ex = examiners.ExaMiners.anotherlogin(self,self._LnEditName.text(), self.lnEditPassword.text())
-        self.window = QtWidgets.QDialog()
-        self.ui= Ui_CasesList(ex)
-        print("login")
-        self.ui.setupUi(self.window)
-        Dialog.hide()
-        self.window.show()
+        try:
+            ex = examiners.ExaMiners.anotherlogin(self,self._LnEditName.text(), self.lnEditPassword.text())
+            self.window = QtWidgets.QDialog()
+            self.ui= Ui_CasesList(ex)
+            print("login")
+            self.ui.setupUi(self.window)
+            Dialog.hide()
+            self.window.show()
+        except :
+            self.lblmsg.setText ('please write a correct password and username')
       
 
            

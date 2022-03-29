@@ -21,11 +21,11 @@ class ViberWatsAppTable(QWidget):
         self.initUI()
         if WhatsApps != None:
            self.WhatsApploading(WhatsApps)
-           self.buttonCVS.clicked.connect(self.buttonCVS_clicked_whatsapp)
+           self.buttonCVS.clicked.connect(self.buttonCVS_clicked)
            
         if Vibers != None:
            self.vibercall(Vibers)
-           self.buttonCVS.clicked.connect(self.buttonCVS_clicked_viber)
+           self.buttonCVS.clicked.connect(self.buttonCVS_clicked)
         
         
         
@@ -108,37 +108,44 @@ class ViberWatsAppTable(QWidget):
             self.tableWidget.setItem(row,8, QTableWidgetItem(j.ToWhatsApp_Msg_DateandTime))
             row=row+1   
             self.tableWidget.move(0,0)
-    def buttonCVS_clicked_whatsapp(self,WhatsApps):
-        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+    def buttonCVS_clicked(self):
+        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\evidance')
+        rowcount=self.tableWidget.rowCount()
+         
+        sender_firt_name=[]
+        sender_last_name=[]
+        Sender_contact=[]
+        message=[]
+        sending_Time=[]
+        Recipiant_First_name=[]
+        Recepiant_Last_Name=[]
+        Recepiant_contact=[]
+        Sending_dateTime=[]
+         
+         
+          
+        for row  in range(rowcount):
+              sender_firt_name.append(self.tableWidget.item(row,0).text())
+              sender_last_name.append(self.tableWidget.item(row,1).text())
+              Sender_contact.append(self.tableWidget.item(row,2).text())
+              message.append(self.tableWidget.item(row,3).text())
+              sending_Time.append(self.tableWidget.item(row,4).text())
+              Recipiant_First_name.append(self.tableWidget.item(row,5).text())
+              Recepiant_Last_Name.append(self.tableWidget.item(row,6).text())
+              Recepiant_contact.append(self.tableWidget.item(row,7).text())
+              Sending_dateTime.append(self.tableWidget.item(row,8).text())
 
+              data = {'sender_firt_tname': sender_firt_name ,
+             'SenderlastName': sender_last_name,'Sender number': Sender_contact,'The message': message,'Time sent': sending_Time ,
+              'Reciepeant Firt Name': Recipiant_First_name,'Reciepeant last Name': Recepiant_Last_Name,'Recipeant Number': Recepiant_contact,'Sending_dateTime': Sending_dateTime}
 
-        for i in WhatsApps:
-              data = {'Sender first Name': [i.FromWhatsApp_Msg_FirstName],
-             'Sender last Name': [i.FromViber_Msg_LastName],'Number': [i.FromWhatsApp_Msg_number],'The message': [i.FromWhatsApp_Msg],'Time sent': [i.FromWhatsApp_Msg_DateandTime],
-              'Reciepeant Firt Name': [i.ToWhatsApp_Msg_FirstName],'Reciepeant last Name': [i.ToWhatsApp_Msg_LastName],'Recipeant Number': [i.ToWhatsApp_Msg_number],'Time sent': [i.ToViber_Msg],   
-               'read status': [i.ToViber_Msg] }
-
-        df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','Number','Reciepeant Firt Name','Reciepeant last Name','Recipeant Number','Time sent','read status'])
+        df = pd.DataFrame(data, columns= ['sender_firt_name', 'sender_last_name','Sender_contact','Number','Recipiant_First_name','Recepiant_Last_Name','Recepiant_contact','Sending_dateTime'])
 
         df.to_csv ( desktop+'\export_dataframe.csv', index = False, header=True)
 
         print(desktop)
 
-    def buttonCVS_clicked_viber(self,Vibers):
-        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
-
-
-        for i in Vibers:
-              data = {'Sender first Name': [i.FromViber_Msg_FirstName],
-             'Sender last Name': [i.FromWhatsApp_Msg_LastName],'Number': [i.FromViber_Msg_number],'The message': [i.FromWhatsApp_Msg],'Time sent': [i.ToViber_Msg_DateandTime],
-              'Reciepeant Firt Name': [i.ToWhatsApp_Msg_FirstName],'Reciepeant last Name': [i.ToViber_Msg_FirstName],'Recipeant Number': [i.ToViber_Msg_number],'Time sent': [i.ToWhatsApp_Msg_DateandTime],   
-               'read status': [i.ToWhatsApp_Msg_DateandTime] }
-
-        df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','Number','Reciepeant Firt Name','Reciepeant last Name','Recipeant Number','Time sent','read status'])
-
-        df.to_csv ( desktop+'\export_dataframe.csv', index = False, header=True)
-
-        print(desktop)
+   
 
      
 if __name__ == '__main__':

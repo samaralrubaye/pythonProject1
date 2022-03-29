@@ -13,7 +13,7 @@ from genericpath import exists
 from operator import index
 from pickle import TRUE
 from re import T
-
+from Takeasnapshot import *
 from unittest import case
 from xmlrpc.client import TRANSPORT_ERROR
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -31,7 +31,7 @@ from newtestNetwork import SocialNetworkTest
 from socialNetwork import SocialNetwork
 from testview import Window
 from snapshot import*
-from avidance import *
+
  
 from peoples import People
 
@@ -166,7 +166,7 @@ class Ui_DialogAnalysis(object):
         self.checkBox_sender = QtWidgets.QCheckBox(self.groupBox_3)
         self.checkBox_sender.setGeometry(QtCore.QRect(10, 60, 201, 20))
         self.checkBox_sender.setObjectName("checkBox_sender")
-        
+     
        
         self.checkBox = QtWidgets.QCheckBox(self.groupBox_3)
         self.checkBox.setGeometry(QtCore.QRect(10, 80, 141, 20))
@@ -325,14 +325,57 @@ class Ui_DialogAnalysis(object):
         self.checkBox_sender.toggled.connect(self.checked)
         self.checkBox.toggled.connect(self.checked)
         self.btnshowResult.clicked.connect(self.btnstate)
+        self.btnSnapshot.clicked.connect(self.on_click)
         
-        
+       
 
           # activing radio button 
         # def allResult(self): 
         #      self.radioButton_viber.toggled.connect(lambda:self.btnstate(self.radioButton_viber))
         #      self.radioButton_whatsApp.toggled.connect(lambda:self.btnstate(self.radioButton_whatsApp))
-        #      self.radioButtonEmail.toggled.connect(lambda:self.btnstate(self.radioButtonEmail))
+    def on_click(self):
+        import os
+        path = self.getdirectory()
+        for el in path:
+            if os.path.exists(el):
+                time.sleep(2)
+                img = ImageGrab.grab()
+                time_now = time.strftime("%Y%m%d%h%M%S")
+                name = f"screen{time_now}"
+                img.save(f"{path}/{name}.png", "png")
+                name_img = name
+                
+                break
+            else:
+                try:
+                    os.mkdir(path)
+                except OSError:
+                    time.sleep(2)
+                    img = ImageGrab.grab()
+                    time_now = time.strftime("%Y%m%d%h%M%S")
+                    name = f"screen{time_now}"
+                    img.save(f"{path}/{name}.png", "png")
+                    name_img = name
+                    
+                    break
+                else:
+                    time.sleep(2)
+                    img = ImageGrab.grab()
+                    time_now = time.strftime("%Y%m%d%h%M%S")
+                    name = f"screen{time_now}"
+                    img.save(f"{path}/{name}.png", "png")
+                    name_img = name
+                   
+
+                    break
+
+    def getdirectory(self):
+         response = QtWidgets.QFileDialog.getExistingDirectory(caption='Select folder')
+         print(response)
+         return response
+
+
+            #      self.radioButtonEmail.toggled.connect(lambda:self.btnstate(self.radioButtonEmail))
 
     def clearalltaps(self):
        
@@ -540,7 +583,7 @@ class Ui_DialogAnalysis(object):
                  self.case.caseId)
             self.tabWidgetBookMark.addTab(comunicationNumberTable(None,whatsapp_summary),"Comunication Analysis")
            # self.tabWidgetBookMark.addTab(SocialNetworkTest(None,None,WhatsApps),"SocialNetworktab")
-            self.tabWidgetBookMark.addTab(Window(),"statisic")
+            self.tabWidgetBookMark.addTab(Window(None,None,whatsapp_summary),"statisic")
 
             
         if self.radioButton_viber.isChecked():               
@@ -561,7 +604,7 @@ class Ui_DialogAnalysis(object):
                  self.case.caseId)
                 self.tabWidgetBookMark.addTab(comunicationNumberTable(viber_summary,None),"Comunication Analysis")
               #  self.tabWidgetBookMark.addTab(SocialNetworkTest(vibers,None,None),"SocialNetworktab")
-                self.tabWidgetBookMark.addTab(Window(),"statisic")
+                self.tabWidgetBookMark.addTab(Window(viber_summary,None, None),"statisic")
 
         if self.radioButtonEmail.isChecked():
                 #'email for social network
@@ -578,7 +621,7 @@ class Ui_DialogAnalysis(object):
                 email_summary=emailsummary.getAllemailSummary(self,
                  self.case.caseId)
                 self.tabWidgetBookMark.addTab(cantactTimesperDate(email_summary),"DataTime")
-                self.tabWidgetBookMark.addTab(Window(),"statisic")
+                self.tabWidgetBookMark.addTab(Window(None,email_summary,None),"statisic")
       
             
     def checkedInputs(self):
@@ -604,6 +647,7 @@ class Ui_DialogAnalysis(object):
              mText=' '
              mFromDate='2000/2/2'
              mToDate= self.dateEdit_dateTo.date()      
+  
             
         
 
@@ -632,7 +676,6 @@ def DateTo(self):
         
       #  the check button activity
 
-        
    
    
 

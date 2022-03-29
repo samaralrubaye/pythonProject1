@@ -1,7 +1,10 @@
+import csv
+import os
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout, QPushButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
+import pandas as pd
 
 from allViber import allViber
 
@@ -26,26 +29,33 @@ class cantactTimesperDate(QWidget):
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
+              #  self.createTable()
+        self.tableWidget = QTableWidget()
+        self.buttonCVS = QPushButton()
+        self.buttonCVS.setText("Import as a CVS")
+        self.buttonCVS.move(64,32)
         
       #  self.createTable()
-        self.tableWidget = QTableWidget()
+       
         # Add box layout, add table to box layout and add box layout to widget
         self.layout = QVBoxLayout()
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.buttonCVS)
         self.layout.addWidget(self.tableWidget) 
         self.setLayout(self.layout) 
         self.show()
-     
+        self.buttonCVS.clicked.connect(self.buttonCVS_clicked)
 
    # def createTable(self):
        # Create table
       
         self.tableWidget.setRowCount(9)
         self.tableWidget.setColumnCount(5)
-        self.tableWidget.setItem(0,0, QTableWidgetItem("Domain name"))
-        self.tableWidget.setItem(0,1, QTableWidgetItem("Number of send Items"))
-        self.tableWidget.setItem(0,2, QTableWidgetItem("the date the items sent"))
-        self.tableWidget.setItem(0,3, QTableWidgetItem("Number of send Items"))
-        self.tableWidget.setItem(0,4, QTableWidgetItem("the date the items sent"))
+        self.tableWidget.setItem(0,0, QTableWidgetItem("First name"))
+        self.tableWidget.setItem(0,1, QTableWidgetItem("Last name"))
+        self.tableWidget.setItem(0,2, QTableWidgetItem("Email"))
+        self.tableWidget.setItem(0,3, QTableWidgetItem("Number of sent emails"))
+        self.tableWidget.setItem(0,4, QTableWidgetItem("Number of recived emails"))
        
         self.tableWidget.setColumnWidth(0,200)
         self.tableWidget.setColumnWidth(1,200)
@@ -53,8 +63,7 @@ class cantactTimesperDate(QWidget):
         self.tableWidget.setColumnWidth(3,200)
         self.tableWidget.setColumnWidth(4,200)
         
-        #self.vibercall()
-       # self.WhatsApploading()
+  
   
     def emailcall(self,email_summary):
         
@@ -69,7 +78,49 @@ class cantactTimesperDate(QWidget):
            
             row=row+1
             self.tableWidget.move(0,0)
-     
+
+    def buttonCVS_clicked(self):
+         
+
+          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\evidance')
+          rowcount=self.tableWidget.rowCount()
+         
+          senderfirtstname=[]
+          senderlaststname=[]
+          Email=[]
+          number_of_emailssent=[]
+          number_of_emails_recived=[]
+         
+         
+          
+          for row  in range(rowcount):
+              senderfirtstname.append(self.tableWidget.item(row,0).text())
+              senderlaststname.append(self.tableWidget.item(row,1).text())
+              Email.append(self.tableWidget.item(row,2).text())
+              number_of_emailssent.append(self.tableWidget.item(row,3).text())
+              number_of_emails_recived.append(self.tableWidget.item(row,4).text())
+              
+        #   print(Email)
+       
+                   
+       
+          data = {'Sender first Name':senderfirtstname ,'Sender last Name': 
+          senderlaststname,'Email': Email, 'number_of_emailssent': number_of_emailssent,
+           'number_of_emails_recived':number_of_emails_recived}
+
+        
+
+         
+
+          
+          df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','Email ','Number of emails sent', 'Number of emails recived'])
+          
+          df.to_csv (desktop+'\export_dataframe.csv',index = False, header=True)
+        
+          print (df)
+       
+        
+ 
      
     
            

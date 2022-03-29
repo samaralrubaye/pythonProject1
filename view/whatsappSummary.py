@@ -1,3 +1,4 @@
+import os
 import connection
 class whatsAppsummary:
     def __init__(self):
@@ -69,3 +70,6 @@ class whatsAppsummary:
                 for i in result.fetchall():
                     whatsaooarray.append(whatsAppsummary.FromData(self,i[0],i[1],i[2],i[3],i[4])) 
             return whatsaooarray
+ 
+
+    

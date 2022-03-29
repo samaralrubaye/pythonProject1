@@ -177,7 +177,7 @@ class allWhatsApp:
             self._toWhatsApp_Msg_number = value
     
     def FromData(self, fromWhatsApp_Msg_FirstName,fromWhatsApp_Msg_LastName,fromWhatsApp_Msg_number,
-    fromWhatsApp_Msg_Longtude, fromWhatsApp_Msg_Latitude,fromWhatsApp_Msg_IP,toWhatsApp_Msg_FirstName, toWhatsApp_Msg_LastName, toWhatsApp_Msg_number,ToWhatsApp_Msg_Latitude,ToWhatsApp_Msg_Longtude, toWhatsApp_Msg_IP, fromWhatsApp_Msg, toWhatsApp_Msg_DateandTime ):
+    fromWhatsApp_Msg_Longtude, fromWhatsApp_Msg_Latitude,fromWhatsApp_Msg_IP,toWhatsApp_Msg_FirstName, toWhatsApp_Msg_LastName, toWhatsApp_Msg_number,toWhatsApp_Msg_Latitude,toWhatsApp_Msg_Longtude, toWhatsApp_Msg_IP, fromWhatsApp_Msg, toWhatsApp_Msg_DateandTime ):
         W=allWhatsApp()
         W.FromWhatsApp_Msg_FirstName = str(fromWhatsApp_Msg_FirstName)
         W.FromWhatsApp_Msg_LastName= str(fromWhatsApp_Msg_LastName)
@@ -185,13 +185,13 @@ class allWhatsApp:
         W.FromWhatsApp_Msg_Longtude=str(fromWhatsApp_Msg_Longtude)
         W.FromWhatsApp_Msg_Latitude=str(fromWhatsApp_Msg_Latitude)
         W.FromWhatsApp_Msg_IP=str(fromWhatsApp_Msg_IP)
-      #  W.FromWhatsApp_Msg_DateandTime=str(fromWhatsApp_Msg_DateandTime)
+        W.FromWhatsApp_Msg_DateandTime=str(toWhatsApp_Msg_number)
         W.FromWhatsApp_Msg=str(fromWhatsApp_Msg)
         W.ToWhatsApp_Msg_FirstName=str(toWhatsApp_Msg_FirstName)
         W.ToWhatsApp_Msg_LastName=str(toWhatsApp_Msg_LastName)
         W.ToWhatsApp_Msg_number=str( toWhatsApp_Msg_DateandTime)
-        W.ToWhatsApp_Msg_Longtude=str(ToWhatsApp_Msg_Longtude)
-        W.ToWhatsApp_Msg_Latitude=str(ToWhatsApp_Msg_Latitude)
+        W.ToWhatsApp_Msg_Longtude=str(toWhatsApp_Msg_Longtude)
+        W.ToWhatsApp_Msg_Latitude=str(toWhatsApp_Msg_Latitude)
         W.ToWhatsApp_Msg_IP=str(toWhatsApp_Msg_IP)
         W.ToWhatsApp_Msg_DateandTime=str( toWhatsApp_Msg_DateandTime)
       #  ex.peopleID=str(peopleID)

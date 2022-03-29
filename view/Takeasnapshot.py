@@ -8,7 +8,7 @@ from PyQt5.QtCore import pyqtSlot
 from PIL import ImageGrab
 
 
-class App(QMainWindow):
+class snapshot(QMainWindow):
     def __init__(self):
         super().__init__()
         self.title = 'How To Take Screenshot using Python and PyQt5'
@@ -48,7 +48,7 @@ class App(QMainWindow):
                 name = f"screen{time_now}"
                 img.save(f"{path}/{name}.png", "png")
                 name_img = name
-                QMessageBox.question(self, 'Screenshot make!', f"Screenshot save in directory {path}/" + name_img,QMessageBox.Ok,QMessageBox.Ok)
+                
                 break
             else:
                 try:
@@ -60,7 +60,7 @@ class App(QMainWindow):
                     name = f"screen{time_now}"
                     img.save(f"{path}/{name}.png", "png")
                     name_img = name
-                    QMessageBox.question(self, 'Screenshot make!', f"Screenshot save in directory {path}/" + name_img,QMessageBox.Ok,QMessageBox.Ok)
+                    
                     break
                 else:
                     time.sleep(2)
@@ -69,7 +69,7 @@ class App(QMainWindow):
                     name = f"screen{time_now}"
                     img.save(f"{path}/{name}.png", "png")
                     name_img = name
-                    QMessageBox.question(self, 'Screenshot make!', f"Screenshot save in directory {path}/" + name_img,QMessageBox.Ok,QMessageBox.Ok)
+                    
 
                     break
 
@@ -81,5 +81,5 @@ class App(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = App()
+    ex = snapshot()
     sys.exit(app.exec_())

@@ -1,7 +1,9 @@
+import os
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QPushButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
+import pandas as pd
 
 from allViber import allViber
 
@@ -29,11 +31,23 @@ class comunicationNumberTable(QWidget):
         
       #  self.createTable()
         self.tableWidget = QTableWidget()
+        self.buttonCVS = QPushButton()
+        self.buttonCVS.setText("Import as a CVS")
+        self.buttonCVS.move(64,32)
+        # Add box layout, add table to box layout and add box layout to widget
+       
+        
         # Add box layout, add table to box layout and add box layout to widget
         self.layout = QVBoxLayout()
+        self.layout.addWidget(self.buttonCVS)
         self.layout.addWidget(self.tableWidget) 
         self.setLayout(self.layout) 
         self.show()
+        self.buttonCVS.clicked.connect(self.buttonCVS_clicked)
+      
+      
+     
+        
      
 
    # def createTable(self):
@@ -84,6 +98,43 @@ class comunicationNumberTable(QWidget):
             
             row=row+1   
             self.tableWidget.move(0,0)
+    def buttonCVS_clicked(self):
+         
+
+          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\evidance')
+          rowcount=self.tableWidget.rowCount()
+         
+          senderfirtstname=[]
+          senderlaststname=[]
+          contact=[]
+          senderCount=[]
+          RecepiantCount=[]
+         
+         
+          
+          for row  in range(rowcount):
+              senderfirtstname.append(self.tableWidget.item(row,0).text())
+              senderlaststname.append(self.tableWidget.item(row,1).text())
+              contact.append(self.tableWidget.item(row,2).text())
+              senderCount.append(self.tableWidget.item(row,3).text())
+              RecepiantCount.append(self.tableWidget.item(row,4).text())
+              senderfirtstname.remove(senderfirtstname[0])
+
+          print(contact)
+                   
+          
+          data = {'Sender first Name':senderfirtstname ,'Sender last Name': 
+          senderlaststname,'Contact':contact, 'Number of messages sent': senderCount, 'Number of message recived':RecepiantCount}
+
+
+
+          df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','Contact ','Number of messages sent','Number of message recived'])
+               
+          df.to_csv (desktop+'\export_dataframe.csv',index = False, header=True)
+        
+          print (df)
+      
+        
 
      
 if __name__ == '__main__':
