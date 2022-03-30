@@ -67,7 +67,7 @@ class SocialNetwork(QDialog):
     def allwatsapp(self,watsap):
        
         for i in watsap:
-           G_symmetric_watsapp.add_edge(i.FromViber_Msg_FirstName,i.ToWhatsApp_Msg_LastName)
+           G_symmetric_watsapp.add_edge(i.FromWhatsApp_Msg_FirstName,i.ToWhatsApp_Msg_LastName)
     
     def allviper(self, Vibers):
         
