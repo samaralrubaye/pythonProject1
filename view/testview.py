@@ -73,10 +73,15 @@ class Window(QDialog):
         
         for i in email_summary:
             people.append(i.FirstName)
-            comunication.append(i.SenderCount)
-        print(people)
+            comunication.append(int(i.SenderCount))
+        print(type(people))
+        print(type(comunication))
         for i in range(len(people)):
-            plt.bar( people[i],comunication[i])
+             plt.bar( people[i],comunication[i])
+           
+        print(people)
+        print(comunication)
+         
       
         plt.title('Amount of suspsous comunication per person', fontsize=14)
         plt.xlabel('people', fontsize=14)
@@ -97,6 +102,7 @@ class Window(QDialog):
         for i in viber_summary:
             people.append(i.FirstName)
             comunication.append(i.SenderCount)
+        print(type(people))
         for i in range(len(people)):
             plt.bar( people[i],comunication[i])
        
@@ -116,11 +122,12 @@ class Window(QDialog):
         comunication = []
         for i in whatsapp_summary:
             people.append(i.FirstName)
-            comunication.append(i.SenderCount)
+            comunication.append(int(i.SenderCount))
         print(comunication)
         print(people)
         for i in range(len(people)):
             plt.bar( people[i],comunication[i])
+        print(type(comunication[0]))
        
         plt.title('Amount of suspsous comunication per person', fontsize=14)
         plt.xlabel('people', fontsize=14)
