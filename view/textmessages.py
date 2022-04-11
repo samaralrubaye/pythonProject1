@@ -1,5 +1,7 @@
 
+from operator import truediv
 import sys
+import PyQt5
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QPushButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
@@ -10,6 +12,8 @@ from allViber import allViber
 from allWhatsApp import allWhatsApp
 from allEmail import allEmail
 import os
+from mytable import *
+from MyQwidgetItem import MyQwidgetItem
 class emaildetails(QWidget):
 
     def __init__(self,emails=None):
@@ -34,7 +38,7 @@ class emaildetails(QWidget):
         self.setGeometry(self.left, self.top, self.width, self.height)
         
       #  self.createTable()
-        self.tableWidget = QTableWidget()
+        self.tableWidget = MyTableWidget()
         self.buttonCVS = QPushButton()
         self.buttonCVS.setText("Import as a CVS")
         self.buttonCVS.move(64,32)
@@ -52,18 +56,19 @@ class emaildetails(QWidget):
       
         self.tableWidget.setRowCount(9)
         self.tableWidget.setColumnCount(12)
-        self.tableWidget.setItem(0,0, QTableWidgetItem("Sender first Name"))
-        self.tableWidget.setItem(0,1, QTableWidgetItem("Sender last Name"))
-        self.tableWidget.setItem(0,2, QTableWidgetItem("Sender Email"))
-        self.tableWidget.setItem(0,3, QTableWidgetItem("The Email text"))
-        self.tableWidget.setItem(0,4, QTableWidgetItem("Time sent"))
-        self.tableWidget.setItem(0,5, QTableWidgetItem("Reciepeant Firt Name"))
-        self.tableWidget.setItem(0,6, QTableWidgetItem("Reciepeant last Name"))
-        self.tableWidget.setItem(0,7, QTableWidgetItem("Reciepeant Email"))
-        self.tableWidget.setItem(0,8, QTableWidgetItem("time recieved"))
-        self.tableWidget.setItem(0,9, QTableWidgetItem("stats"))
-        self.tableWidget.setItem(0,10, QTableWidgetItem("Bcc"))
-        self.tableWidget.setItem(0,11, QTableWidgetItem("cc"))
+       
+        self.tableWidget.setHorizontalHeaderItem(0, QTableWidgetItem("Sender first Name"))
+        self.tableWidget.setHorizontalHeaderItem(1,  QTableWidgetItem("Sender last Name"))
+        self.tableWidget.setHorizontalHeaderItem(2, QTableWidgetItem("Sender Email"))
+        self.tableWidget.setHorizontalHeaderItem(3, QTableWidgetItem("The Email text"))
+        self.tableWidget.setHorizontalHeaderItem(4, QTableWidgetItem("Time sent"))
+        self.tableWidget.setHorizontalHeaderItem(5, QTableWidgetItem("Reciepeant Firt Name"))
+        self.tableWidget.setHorizontalHeaderItem(6, QTableWidgetItem("Reciepeant last Name"))
+        self.tableWidget.setHorizontalHeaderItem(7, QTableWidgetItem("Reciepeant Email"))
+        self.tableWidget.setHorizontalHeaderItem(8, QTableWidgetItem("time recieved"))
+        self.tableWidget.setHorizontalHeaderItem(9, QTableWidgetItem("stats"))
+        self.tableWidget.setHorizontalHeaderItem(10, QTableWidgetItem("Bcc"))
+        self.tableWidget.setHorizontalHeaderItem(11, QTableWidgetItem("cc"))
         self.tableWidget.setColumnWidth(0,200)
         self.tableWidget.setColumnWidth(1,200)
         self.tableWidget.setColumnWidth(2,200)
@@ -84,11 +89,25 @@ class emaildetails(QWidget):
     def allEmails(self,emails):
         #emails=allEmail.getAllEmails(self)
         
-        row=1
+        row=0
         self.tableWidget.setRowCount(len(emails))
       
         for i in emails:
-               self.tableWidget.setItem(row,0, QTableWidgetItem(i.FromEmail_firstName))
+               
+              # index = PyQt5.QtCore.QPersistentModelIndex(
+               # self.tableWidget.model().index(row, 1))
+               x = QTableWidget.row(self.tableWidget,QTableWidgetItem(i.FromEmail_lastname))
+               if x == True:
+                   print('test')
+                   print(x)
+                   print('test')
+            # row.setitem(row,1, QTableWidgetItem(i.FromEmail_lastname))
+
+            # self.tableWidget.rowAt[i] = row
+
+               test =  MyQwidgetItem(i.FromEmail_firstName)
+               test.ID = i.FromEmail_firstName
+               self.tableWidget.setMyItem(row,0,test)
                self.tableWidget.setItem(row,1, QTableWidgetItem(i.FromEmail_lastname))
                self.tableWidget.setItem(row,2, QTableWidgetItem(i.FromEmail_Email))
                self.tableWidget.setItem(row,3, QTableWidgetItem(i.FromEmail_content_text))
@@ -124,6 +143,10 @@ class emaildetails(QWidget):
           ReciepeantFirtName =[]
           ReciepeantlastName=[]
           ReciepeantEmail=[]
+          #self.tableWidget.cellClicked.connect(self.gosomewhere)
+          self.tableWidget.DoubleClicked(self.gosomewhere)
+         # connect(self.gosomewhere)
+
           
           for row  in range(rowcount):
               senderfirtstname.append(self.tableWidget.item(row,0).text())
@@ -134,6 +157,9 @@ class emaildetails(QWidget):
               ReciepeantFirtName.append(self.tableWidget.item(row,5).text())
               ReciepeantEmail.append(self.tableWidget.item(row,6).text())
               ReciepeantFirtName.append(self.tableWidget.item(row,7).text())
+              
+              
+              
 
        
                    
@@ -170,8 +196,9 @@ class emaildetails(QWidget):
          # df.to_excel (desktop+'\export_dataframe.xls',index = False, header=True)
           print (df)
         #  print(desktop)
-        
-   
+    #https://stackoverflow.com/questions/14588479/retrieving-cell-data-from-a-selected-cell-in-a-tablewidget    
+    def gosomewhere(self):
+        print('happy')
    
      
 if __name__ == '__main__':

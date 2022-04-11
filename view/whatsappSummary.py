@@ -62,9 +62,9 @@ class whatsAppsummary:
             return v
         
 
-    def getAllemailSummary(self,caseid):
+    def getwhatsappSummary(self,caseid, datefrom,dateto, textcontent,txtsender,txtresipain):
             whatsaooarray=[]
-            ex = connection.conection.mycursor.callproc('whatsappSummery',[caseid])
+            ex = connection.conection.mycursor.callproc('whatsappSummery',[textcontent,datefrom,dateto,caseid,txtsender,txtresipain])
 
             for result in connection.conection.mycursor.stored_results():
                 for i in result.fetchall():

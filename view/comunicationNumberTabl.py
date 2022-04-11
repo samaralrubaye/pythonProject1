@@ -8,6 +8,8 @@ import pandas as pd
 from allViber import allViber
 
 from allWhatsApp import allWhatsApp
+from mytable import *
+from MyQwidgetItem import MyQwidgetItem
 
 class comunicationNumberTable(QWidget):
 
@@ -30,7 +32,7 @@ class comunicationNumberTable(QWidget):
         self.setGeometry(self.left, self.top, self.width, self.height)
         
       #  self.createTable()
-        self.tableWidget = QTableWidget()
+        self.tableWidget = MyTableWidget()
         self.buttonCVS = QPushButton()
         self.buttonCVS.setText("Import as a CVS")
         self.buttonCVS.move(64,32)
@@ -55,11 +57,12 @@ class comunicationNumberTable(QWidget):
       
         self.tableWidget.setRowCount(9)
         self.tableWidget.setColumnCount(5)
-        self.tableWidget.setItem(0,0, QTableWidgetItem("Contact"))
-        self.tableWidget.setItem(0,1, QTableWidgetItem("the date the items sent"))
-        self.tableWidget.setItem(0,2, QTableWidgetItem("Number of sent"))
-        self.tableWidget.setItem(0,3, QTableWidgetItem("the date the items recived"))
-        self.tableWidget.setItem(0,4, QTableWidgetItem("Number of receieved"))
+    
+        self.tableWidget.setHorizontalHeaderItem(0, QTableWidgetItem("Contact"))
+        self.tableWidget.setHorizontalHeaderItem(1, QTableWidgetItem("the date the items sent"))
+        self.tableWidget.setHorizontalHeaderItem(2, QTableWidgetItem("Number of sent"))
+        self.tableWidget.setHorizontalHeaderItem(3, QTableWidgetItem("the date the items recived"))
+        self.tableWidget.setHorizontalHeaderItem(4, QTableWidgetItem("Number of receieved"))
        
         self.tableWidget.setColumnWidth(0,200)
         self.tableWidget.setColumnWidth(1,200)
@@ -70,10 +73,12 @@ class comunicationNumberTable(QWidget):
   
     def vibercall(self,viber_summary):
         
-        row=1
+        row=0
         self.tableWidget.setRowCount(len(viber_summary))
         for j in viber_summary:
-            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FirstName))
+            test =  MyQwidgetItem(j.FirstName)
+            test.ID =j.FirstName
+            self.tableWidget.setItem(row,0,(test))
             self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.ViberNumbr))
             self.tableWidget.setItem(row,3, QTableWidgetItem(j.SenderCount))
@@ -86,10 +91,12 @@ class comunicationNumberTable(QWidget):
      
     def WhatsApploading(self, whatsapp_summary):
          
-          row=1
+          row=0
           self.tableWidget.setRowCount(len(whatsapp_summary))
           for j in whatsapp_summary:
-            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FirstName))
+            test =  MyQwidgetItem(j.FirstName)
+            test.ID =j.FirstName
+            self.tableWidget.setItem(row,0, QTableWidgetItem(test))
             self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.WhatsApp))
             self.tableWidget.setItem(row,3, QTableWidgetItem(j.SenderCount))

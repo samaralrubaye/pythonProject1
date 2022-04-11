@@ -151,7 +151,7 @@ class ViberWatsAppTable(QWidget):
 
         df = pd.DataFrame(data, columns= ['sender_firt_name', 'sender_last_name','Sender_contact','Number','Recipiant_First_name','Recepiant_Last_Name','Recepiant_contact','Sending_dateTime'])
 
-        df.to_csv ( desktop+'\export_dataframe.csv', index = False, header=True)
+        df.to_csv ( desktop+'\FilterdUser.csv', index = False, header=True)
 
         print(desktop)
 

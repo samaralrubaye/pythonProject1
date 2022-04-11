@@ -61,9 +61,9 @@ class emailsummary:
             return v
         
 
-    def getAllemailSummary(self,caseid):
+    def getAllemailSummary(self,caseid, datefrom,dateto, textcontent,txtsender,txtresipain):
             emailarray=[]
-            ex = connection.conection.mycursor.callproc('emailSummery',[caseid])
+            ex = connection.conection.mycursor.callproc('emailSummery',[textcontent,datefrom,dateto,caseid,txtsender,txtresipain])
 
             for result in connection.conection.mycursor.stored_results():
                 for i in result.fetchall():

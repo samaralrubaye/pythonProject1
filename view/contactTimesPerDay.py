@@ -9,6 +9,8 @@ import pandas as pd
 from allViber import allViber
 
 from allWhatsApp import allWhatsApp
+from mytable import *
+from MyQwidgetItem import MyQwidgetItem
 
 class cantactTimesperDate(QWidget):
 
@@ -30,7 +32,7 @@ class cantactTimesperDate(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
               #  self.createTable()
-        self.tableWidget = QTableWidget()
+        self.tableWidget = MyTableWidget()
         self.buttonCVS = QPushButton()
         self.buttonCVS.setText("Import as a CVS")
         self.buttonCVS.move(64,32)
@@ -51,11 +53,11 @@ class cantactTimesperDate(QWidget):
       
         self.tableWidget.setRowCount(9)
         self.tableWidget.setColumnCount(5)
-        self.tableWidget.setItem(0,0, QTableWidgetItem("First name"))
-        self.tableWidget.setItem(0,1, QTableWidgetItem("Last name"))
-        self.tableWidget.setItem(0,2, QTableWidgetItem("Email"))
-        self.tableWidget.setItem(0,3, QTableWidgetItem("Number of sent emails"))
-        self.tableWidget.setItem(0,4, QTableWidgetItem("Number of recived emails"))
+        self.tableWidget.setHorizontalHeaderItem(0, QTableWidgetItem("First name"))
+        self.tableWidget.setHorizontalHeaderItem(1, QTableWidgetItem("Last name"))
+        self.tableWidget.setHorizontalHeaderItem(2, QTableWidgetItem("Email"))
+        self.tableWidget.setHorizontalHeaderItem(3, QTableWidgetItem("Number of sent emails"))
+        self.tableWidget.setHorizontalHeaderItem(4, QTableWidgetItem("Number of recived emails"))
        
         self.tableWidget.setColumnWidth(0,200)
         self.tableWidget.setColumnWidth(1,200)
@@ -67,9 +69,12 @@ class cantactTimesperDate(QWidget):
   
     def emailcall(self,email_summary):
         
-        row=1
+        row=0
         self.tableWidget.setRowCount(len(email_summary))
         for j in email_summary:
+            test =  MyQwidgetItem(j.FirstName)
+            test.ID = j.FirstName
+            self.tableWidget.setMyItem(row,0,test)
             self.tableWidget.setItem(row,0, QTableWidgetItem(j.FirstName))
             self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.Email))

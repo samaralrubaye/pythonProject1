@@ -61,9 +61,9 @@ class vibersummary:
             return v
         
 
-    def getAllViberSummary(self,caseid):
+    def getAllViberSummary(self,caseid, datefrom,dateto, textcontent,txtsender,txtresipain):
             Viberarray=[]
-            ex = connection.conection.mycursor.callproc('vberSummery',[caseid])
+            ex = connection.conection.mycursor.callproc('vberSummery',[textcontent,datefrom,dateto,caseid,txtsender,txtresipain])
 
             for result in connection.conection.mycursor.stored_results():
                 for i in result.fetchall():
