@@ -14,7 +14,7 @@ from operator import index
 from pickle import TRUE
 from re import T
 from Takeasnapshot import *
-from unittest import case
+#from unittest import case
 from xmlrpc.client import TRANSPORT_ERROR
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
