@@ -8,13 +8,18 @@ from PyQt5.QtCore import pyqtSlot
 import pandas as pd
 import os
 from allViber import allViber
+import csv
 
 from allWhatsApp import allWhatsApp
 from allEmail import allEmail
 import os
 from mytable import *
 from MyQwidgetItem import MyQwidgetItem
+from datetime import datetime
+
+
 class emaildetails(QWidget):
+    
 
     def __init__(self,emails=None):
         super().__init__()
@@ -129,9 +134,15 @@ class emaildetails(QWidget):
        
         self.tableWidget.move(0,0)
     def buttonCVS_clicked(self):
-         
+          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']))
+          now = datetime.now()
+          now = int(now.strftime("%Y%m%d%H%M%S"))
+          f = open(str(desktop)+'/'+'Desktop/evidance'+'/'+"testdata%d.csv"%now, "a", newline="")  # open csv file
+          print(desktop)
+          c = csv.writer(f)   
+          
 
-          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\evidance')
+          
           rowcount=self.tableWidget.rowCount()
           columncount=self.tableWidget.columnCount()
           senderfirtstname=[]
@@ -144,32 +155,48 @@ class emaildetails(QWidget):
           ReciepeantlastName=[]
           ReciepeantEmail=[]
           #self.tableWidget.cellClicked.connect(self.gosomewhere)
-          self.tableWidget.DoubleClicked(self.gosomewhere)
+          #self.tableWidget.DoubleClicked(self.gosomewhere)
          # connect(self.gosomewhere)
 
-          
+          c.writerow(
+              [str('Sender first Name'), str('Sender last Name'), str('the sender email'),
+              str('The Email text'), str('Reciepeant Firt Name'), str('Reciepeant last Name'), str('Reciepeant Email')
+              ,str('Time sent')]) 
+         
           for row  in range(rowcount):
-              senderfirtstname.append(self.tableWidget.item(row,0).text())
-              senderlaststname.append(self.tableWidget.item(row,1).text())
-              SenderEmail.append(self.tableWidget.item(row,2).text())
-              TheEmailtext.append(self.tableWidget.item(row,3).text())
-              Timesent.append(self.tableWidget.item(row,4).text())
-              ReciepeantFirtName.append(self.tableWidget.item(row,5).text())
-              ReciepeantEmail.append(self.tableWidget.item(row,6).text())
-              ReciepeantFirtName.append(self.tableWidget.item(row,7).text())
-              
-              
-              
+            #   senderfirtstname.append(self.tableWidget.item(row,0).text())
+            #   senderlaststname.append(self.tableWidget.item(row,1).text())
+            #   SenderEmail.append(self.tableWidget.item(row,2).text())
+            #   TheEmailtext.append(self.tableWidget.item(row,3).text())
+            #   Timesent.append(self.tableWidget.item(row,4).text())
+            #   ReciepeantFirtName.append(self.tableWidget.item(row,5).text())
+            #   ReciepeantEmail.append(self.tableWidget.item(row,6).text())
+            #   ReciepeantFirtName.append(self.tableWidget.item(row,7).text())
+              c.writerow(
+              [str(self.tableWidget.item(row,0).text()), str(self.tableWidget.item(row,1).text()), str(self.tableWidget.item(row,2).text()),
+              str(self.tableWidget.item(row,3).text()), str(self.tableWidget.item(row,4).text()), str(self.tableWidget.item(row,5).text()), str(self.tableWidget.item(row,6).text())
+              ,str(self.tableWidget.item(row,7).text())]) 
 
+              
+              
+              
+        #   SenderEmail=[]
        
-                   
-          SenderEmail=[]
+         
+        #   c.writerow(
+        #   [str(senderfirtstname), str(senderlaststname),str(senderlaststname) , str(TheEmailtext),
+        #   str(ReciepeantFirtName), str(ReciepeantlastName), str(ReciepeantEmail), str(Timesent)]) 
+
+          print('doooooooooooooooone')
           #data = {'Sender first Name':senderfirtstname ,'Sender last Name': senderlaststname,'The Email text': TheEmailtext,'Time sent':Timesent ,
                # 'Reciepeant Firt Name':ReciepeantFirtName ,'Reciepeant last Name': ReciepeantlastName,'Reciepeant Email': ReciepeantEmail,'Time sent':Timesent ,   
               #  'Sent Time': Timesent}
-          data = {'Sender first Name':senderfirtstname ,'Sender last Name': senderlaststname,'the sender email':SenderEmail,'The Email text': TheEmailtext,
-                'Reciepeant Firt Name': ReciepeantFirtName,'Reciepeant last Name': ReciepeantlastName,'Reciepeant Email': ReciepeantEmail,'Time sent':Timesent ,   
-                'Sent Time': Timesent}
+        #   data = {'Sender first Name':senderfirtstname ,'Sender last Name': senderlaststname,'the sender email':SenderEmail,'The Email text': TheEmailtext,
+        #         'Reciepeant Firt Name': ReciepeantFirtName,'Reciepeant last Name': ReciepeantlastName,'Reciepeant Email': ReciepeantEmail,'Time sent':Timesent ,   
+        #         'Sent Time': Timesent}
+            
+        
+            
 
           print(SenderEmail)
           
@@ -190,13 +217,17 @@ class emaildetails(QWidget):
          # print(data)  
 
           #df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name', 'The Email text','Time sent', 'Reciepeant last Name','Time sent', 'Sent Time'])
-          df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','sender email ','The Email text'])
+        #   df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','sender email ','The Email text'])
          # pd.read_excel(desktop+'\export_dataframe.xls',index_col='Name')        
-          df.to_csv (desktop+'\export_dataframe.csv',index = False, header=True)
+        #   df.to_csv (desktop+'\export_dataframe.csv',index = False, header=True)
          # df.to_excel (desktop+'\export_dataframe.xls',index = False, header=True)
-          print (df)
+        #   print (df)
         #  print(desktop)
     #https://stackoverflow.com/questions/14588479/retrieving-cell-data-from-a-selected-cell-in-a-tablewidget    
+    
+    
+
+    
     def gosomewhere(self):
         print('happy')
    
