@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 import os
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout, QPushButton
@@ -34,7 +35,7 @@ class cantactTimesperDate(QWidget):
               #  self.createTable()
         self.tableWidget = MyTableWidget()
         self.buttonCVS = QPushButton()
-        self.buttonCVS.setText("Import as a CVS")
+        self.buttonCVS.setText("Export as a CVS")
         self.buttonCVS.move(64,32)
         
       #  self.createTable()
@@ -87,42 +88,34 @@ class cantactTimesperDate(QWidget):
     def buttonCVS_clicked(self):
          
 
-          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\evidance')
+          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']))
+          now = datetime.now()
+          now = int(now.strftime("%Y%m%d%H%M%S"))
+          f = open(str(desktop)+'/'+'Desktop/evidance'+'/'+"emaildataCalculation%d.csv"%now, "a", newline="")  # open csv file
+          print(desktop)
+          c = csv.writer(f)   
           rowcount=self.tableWidget.rowCount()
          
-          senderfirtstname=[]
-          senderlaststname=[]
-          Email=[]
-          number_of_emailssent=[]
-          number_of_emails_recived=[]
-         
+          c.writerow([str('Sender first Name'), str('Sender last Name'), str('Email'), str('number_of_emailssent'), str('number_of_emails_recived')])
          
           
           for row  in range(rowcount):
-              senderfirtstname.append(self.tableWidget.item(row,0).text())
-              senderlaststname.append(self.tableWidget.item(row,1).text())
-              Email.append(self.tableWidget.item(row,2).text())
-              number_of_emailssent.append(self.tableWidget.item(row,3).text())
-              number_of_emails_recived.append(self.tableWidget.item(row,4).text())
+               c.writerow(
+              [str(self.tableWidget.item(row,0).text()), str(self.tableWidget.item(row,1).text()), str(self.tableWidget.item(row,2).text()),
+              str(self.tableWidget.item(row,3).text()), str(self.tableWidget.item(row,4).text())]) 
               
-        #   print(Email)
+        
        
                    
        
-          data = {'Sender first Name':senderfirtstname ,'Sender last Name': 
-          senderlaststname,'Email': Email, 'number_of_emailssent': number_of_emailssent,
-           'number_of_emails_recived':number_of_emails_recived}
+         
 
         
 
          
 
           
-          df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','Email ','Number of emails sent', 'Number of emails recived'])
           
-          df.to_csv (desktop+'\export_dataframe.csv',index = False, header=True)
-        
-          print (df)
        
         
  

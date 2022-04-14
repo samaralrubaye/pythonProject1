@@ -11,13 +11,22 @@ class MyTableWidget(QTableWidget):
         self.setColumnCount(1)
         self.setColumnWidth(0, 400)
         self.setEditTriggers(QAbstractItemView.NoEditTriggers)
-     
+        self.itemClicked.connect(self.handleItemClick)
         
 
     def handleItemClick(self, item):
-        print(str(item.ID))
-
-    def setMyItem(self, row: int, column: int, item: MyQwidgetItem) -> None: 
-        self.setItem(row,column,item)
+        x =self.row(item)
+        print(str(x))
         
-        self.itemClicked.connect(lambda:self.handleItemClick(item))
+       
+    #     self.cellClicked.connect(lambda:self.cell_was_clicked(self.currentRow(),self.currentColumn()))
+    #     print(type(self.currentRow()))
+    #     print(type(self.currentColumn()))
+  
+
+    # def cell_was_clicked(self, row, column):
+    #         item = self.itemAt(self,row, column)
+    #         print(type(self.currentRow()))
+    #         print(type(self.currentColumn()))
+    #         self.ID = item.text()
+        

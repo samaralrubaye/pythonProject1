@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1481</width>
-    <height>1012</height>
+    <width>1485</width>
+    <height>1021</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QTabWidget" name="tabWidgetBookMark">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>270</x>
      <y>0</y>
      <width>1201</width>
      <height>941</height>
@@ -101,7 +101,7 @@ background-color: rgb(255, 255, 255);</string>
    <property name="geometry">
     <rect>
      <x>-10</x>
-     <y>80</y>
+     <y>0</y>
      <width>295</width>
      <height>941</height>
     </rect>
@@ -125,7 +125,7 @@ alternate-background-color: rgb(243, 247, 255);
       </rect>
      </property>
      <property name="title">
-      <string>Plat form</string>
+      <string>Platform</string>
      </property>
      <widget class="QRadioButton" name="radioButtonEmail">
       <property name="geometry">
@@ -342,9 +342,9 @@ alternate-background-color: rgb(243, 247, 255);
     <widget class="QPushButton" name="btnshowResult">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>20</x>
        <y>690</y>
-       <width>241</width>
+       <width>251</width>
        <height>41</height>
       </rect>
      </property>
@@ -384,7 +384,7 @@ alternate-background-color: rgb(243, 247, 255);
     <widget class="QGroupBox" name="groupBox_6">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>20</x>
        <y>470</y>
        <width>251</width>
        <height>80</height>
@@ -443,9 +443,9 @@ alternate-background-color: rgb(243, 247, 255);
     <widget class="QGroupBox" name="groupBox_5">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>570</y>
-       <width>271</width>
+       <width>251</width>
        <height>101</height>
       </rect>
      </property>

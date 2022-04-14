@@ -1,3 +1,5 @@
+import csv
+from datetime import datetime
 import os
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QPushButton
@@ -34,7 +36,7 @@ class comunicationNumberTable(QWidget):
       #  self.createTable()
         self.tableWidget = MyTableWidget()
         self.buttonCVS = QPushButton()
-        self.buttonCVS.setText("Import as a CVS")
+        self.buttonCVS.setText("Export as a CVS")
         self.buttonCVS.move(64,32)
         # Add box layout, add table to box layout and add box layout to widget
        
@@ -108,39 +110,23 @@ class comunicationNumberTable(QWidget):
     def buttonCVS_clicked(self):
          
 
-          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\evidance')
+          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']))
+          now = datetime.now()
+          now = int(now.strftime("%Y%m%d%H%M%S"))
+          f = open(str(desktop)+'/'+'Desktop/evidance'+'/'+"chatdataCalculation%d.csv"%now, "a", newline="")  # open csv file
+          print(desktop)
+          c = csv.writer(f) 
           rowcount=self.tableWidget.rowCount()
          
-          senderfirtstname=[]
-          senderlaststname=[]
-          contact=[]
-          senderCount=[]
-          RecepiantCount=[]
          
-         
+          c.writerow([ str('Sender first Name'), str('Sender last Name'),str('Contact'), str('Number of messages sent'),str( 'Number of message recived')])
           
           for row  in range(rowcount):
-              senderfirtstname.append(self.tableWidget.item(row,0).text())
-              senderlaststname.append(self.tableWidget.item(row,1).text())
-              contact.append(self.tableWidget.item(row,2).text())
-              senderCount.append(self.tableWidget.item(row,3).text())
-              RecepiantCount.append(self.tableWidget.item(row,4).text())
-              senderfirtstname.remove(senderfirtstname[0])
+              c.writerow(
+              [str(self.tableWidget.item(row,0).text()), str(self.tableWidget.item(row,1).text()), str(self.tableWidget.item(row,2).text()),
+              str(self.tableWidget.item(row,3).text()), str(self.tableWidget.item(row,4).text())]) 
 
-          print(contact)
-                   
           
-          data = {'Sender first Name':senderfirtstname ,'Sender last Name': 
-          senderlaststname,'Contact':contact, 'Number of messages sent': senderCount, 'Number of message recived':RecepiantCount}
-
-
-
-          df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','Contact ','Number of messages sent','Number of message recived'])
-               
-          df.to_csv (desktop+'\export_dataframe.csv',index = False, header=True)
-        
-          print (df)
-      
         
 
      

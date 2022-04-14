@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1006</width>
-    <height>651</height>
+    <width>814</width>
+    <height>361</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Login </string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -22,10 +22,10 @@
   <widget class="QLabel" name="lblloginTitle">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>90</y>
-     <width>881</width>
-     <height>101</height>
+     <x>40</x>
+     <y>30</y>
+     <width>691</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -38,9 +38,9 @@
   <widget class="QLabel" name="LblPassword">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>330</y>
-     <width>151</width>
+     <x>30</x>
+     <y>190</y>
+     <width>91</width>
      <height>41</height>
     </rect>
    </property>
@@ -51,8 +51,8 @@
   <widget class="QLineEdit" name="lnEditPassword">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>340</y>
+     <x>150</x>
+     <y>200</y>
      <width>601</width>
      <height>22</height>
     </rect>
@@ -61,10 +61,10 @@
   <widget class="QPushButton" name="BtnLogin">
    <property name="geometry">
     <rect>
-     <x>730</x>
-     <y>570</y>
-     <width>241</width>
-     <height>51</height>
+     <x>650</x>
+     <y>300</y>
+     <width>111</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -74,10 +74,10 @@
   <widget class="QPushButton" name="BtnCancleExaminer">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>577</y>
-     <width>221</width>
-     <height>51</height>
+     <x>60</x>
+     <y>300</y>
+     <width>101</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -87,9 +87,9 @@
   <widget class="QLineEdit" name="_LnEditName">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>250</y>
-     <width>591</width>
+     <x>150</x>
+     <y>150</y>
+     <width>601</width>
      <height>22</height>
     </rect>
    </property>
@@ -97,8 +97,8 @@
   <widget class="QLabel" name="LblUserName">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>250</y>
+     <x>30</x>
+     <y>150</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -113,9 +113,9 @@
   <widget class="QLabel" name="lblmsg">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>425</y>
-     <width>631</width>
+     <x>90</x>
+     <y>230</y>
+     <width>651</width>
      <height>61</height>
     </rect>
    </property>

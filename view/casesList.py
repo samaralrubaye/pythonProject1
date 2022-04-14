@@ -18,6 +18,7 @@ from Analysis19 import *
 from examiners import ExaMiners
 from cases import *
 import time
+from PyQt5.QtWidgets import QMessageBox
 
 
 CustomObjectRole=QtCore.Qt.UserRole + 1
@@ -32,6 +33,8 @@ class Ui_CasesList(object):
             self.ui.setupUi(self.window)
         except:
             print("put micro here")
+            #QMessageBox.about(self, "Title", "please select a case")
+            #QMessageBox.setIcon(QMessageBox.Warning)
         #CasesList.hide()
         self.window.show()
         
@@ -96,9 +99,14 @@ class Ui_CasesList(object):
         self.BtnNext.setObjectName("BtnNext")
         self.BtnNext.setStyleSheet("background-color: rgb(222, 223, 255);")
         self.lbl_caseliost = QtWidgets.QLabel(CasesList)
-        self.lbl_caseliost.setGeometry(QtCore.QRect(70, 10, 181, 41))
-        self.lbl_caseliost.setText("")
+        self.lbl_caseliost.setGeometry(QtCore.QRect(160, 10, 71, 41))
         self.lbl_caseliost.setObjectName("lbl_caseliost")
+        self.lblwelcome = QtWidgets.QLabel(CasesList)
+        self.lblwelcome.setGeometry(QtCore.QRect(30, 10, 101, 41))
+        self.lblwelcome.setObjectName("lblwelcome")
+        self.label_2 = QtWidgets.QLabel(CasesList)
+        self.label_2.setGeometry(QtCore.QRect(240, 20, 20, 20))
+        self.label_2.setObjectName("label_2")
         #self.LwCases.addItem('dfdf')
         self.lbl_caseliost.setText(self.Examiner.firstName)
         
@@ -135,6 +143,8 @@ class Ui_CasesList(object):
         CasesList.setWindowTitle(_translate("CasesList", "Cases List"))
         self.BtnBack.setText(_translate("CasesList", "Back"))
         self.BtnNext.setText(_translate("CasesList", "Next"))
+        self.lblwelcome.setText(_translate("CasesList", "Welcome back"))
+        self.label_2.setText(_translate("CasesList", "!"))
    
 
 if __name__ == "__main__":

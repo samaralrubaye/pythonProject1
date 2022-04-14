@@ -45,7 +45,7 @@ class emaildetails(QWidget):
       #  self.createTable()
         self.tableWidget = MyTableWidget()
         self.buttonCVS = QPushButton()
-        self.buttonCVS.setText("Import as a CVS")
+        self.buttonCVS.setText("export as a CVS")
         self.buttonCVS.move(64,32)
         # Add box layout, add table to box layout and add box layout to widget
         self.layout = QVBoxLayout()
@@ -137,26 +137,14 @@ class emaildetails(QWidget):
           desktop = os.path.join(os.path.join(os.environ['USERPROFILE']))
           now = datetime.now()
           now = int(now.strftime("%Y%m%d%H%M%S"))
-          f = open(str(desktop)+'/'+'Desktop/evidance'+'/'+"testdata%d.csv"%now, "a", newline="")  # open csv file
+          f = open(str(desktop)+'/'+'Desktop/evidance'+'/'+"Emaildata%d.csv"%now, "a", newline="")  # open csv file
           print(desktop)
           c = csv.writer(f)   
           
 
           
           rowcount=self.tableWidget.rowCount()
-          columncount=self.tableWidget.columnCount()
-          senderfirtstname=[]
-          senderlaststname=[]
-          SenderEmail=[]
-          TheEmailtext=[]
-          Timesent=[]
-          TheEmailtext=[]
-          ReciepeantFirtName =[]
-          ReciepeantlastName=[]
-          ReciepeantEmail=[]
-          #self.tableWidget.cellClicked.connect(self.gosomewhere)
-          #self.tableWidget.DoubleClicked(self.gosomewhere)
-         # connect(self.gosomewhere)
+       
 
           c.writerow(
               [str('Sender first Name'), str('Sender last Name'), str('the sender email'),
@@ -164,72 +152,17 @@ class emaildetails(QWidget):
               ,str('Time sent')]) 
          
           for row  in range(rowcount):
-            #   senderfirtstname.append(self.tableWidget.item(row,0).text())
-            #   senderlaststname.append(self.tableWidget.item(row,1).text())
-            #   SenderEmail.append(self.tableWidget.item(row,2).text())
-            #   TheEmailtext.append(self.tableWidget.item(row,3).text())
-            #   Timesent.append(self.tableWidget.item(row,4).text())
-            #   ReciepeantFirtName.append(self.tableWidget.item(row,5).text())
-            #   ReciepeantEmail.append(self.tableWidget.item(row,6).text())
-            #   ReciepeantFirtName.append(self.tableWidget.item(row,7).text())
+          
               c.writerow(
               [str(self.tableWidget.item(row,0).text()), str(self.tableWidget.item(row,1).text()), str(self.tableWidget.item(row,2).text()),
               str(self.tableWidget.item(row,3).text()), str(self.tableWidget.item(row,4).text()), str(self.tableWidget.item(row,5).text()), str(self.tableWidget.item(row,6).text())
               ,str(self.tableWidget.item(row,7).text())]) 
 
-              
-              
-              
-        #   SenderEmail=[]
-       
-         
-        #   c.writerow(
-        #   [str(senderfirtstname), str(senderlaststname),str(senderlaststname) , str(TheEmailtext),
-        #   str(ReciepeantFirtName), str(ReciepeantlastName), str(ReciepeantEmail), str(Timesent)]) 
 
-          print('doooooooooooooooone')
-          #data = {'Sender first Name':senderfirtstname ,'Sender last Name': senderlaststname,'The Email text': TheEmailtext,'Time sent':Timesent ,
-               # 'Reciepeant Firt Name':ReciepeantFirtName ,'Reciepeant last Name': ReciepeantlastName,'Reciepeant Email': ReciepeantEmail,'Time sent':Timesent ,   
-              #  'Sent Time': Timesent}
-        #   data = {'Sender first Name':senderfirtstname ,'Sender last Name': senderlaststname,'the sender email':SenderEmail,'The Email text': TheEmailtext,
-        #         'Reciepeant Firt Name': ReciepeantFirtName,'Reciepeant last Name': ReciepeantlastName,'Reciepeant Email': ReciepeantEmail,'Time sent':Timesent ,   
-        #         'Sent Time': Timesent}
-            
         
-            
-
-          print(SenderEmail)
-          
-          print(Timesent)
-          print(ReciepeantFirtName)
-          print(ReciepeantlastName)
-
-          print('senderfirtstname' + str(len(senderfirtstname)))
-          print('senderlaststname' + str(len(senderlaststname)))
-          print('SenderEmail' + str(len(SenderEmail)))
-          print(' SenderEmail' + str(len( SenderEmail)))
-          print(' TheEmailtext' + str(len( TheEmailtext)))
-          print(' Timesent' + str(len( Timesent)))
-          print(' ReciepeantFirtName' + str(len( ReciepeantFirtName)))
-          print(' ReciepeantlastName' + str(len( ReciepeantlastName)))
-          print('  ReciepeantEmail' + str(len(  ReciepeantEmail))) 
-      
-         # print(data)  
-
-          #df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name', 'The Email text','Time sent', 'Reciepeant last Name','Time sent', 'Sent Time'])
-        #   df = pd.DataFrame(data, columns= ['Sender first Name', 'Sender last Name','sender email ','The Email text'])
-         # pd.read_excel(desktop+'\export_dataframe.xls',index_col='Name')        
-        #   df.to_csv (desktop+'\export_dataframe.csv',index = False, header=True)
-         # df.to_excel (desktop+'\export_dataframe.xls',index = False, header=True)
-        #   print (df)
-        #  print(desktop)
-    #https://stackoverflow.com/questions/14588479/retrieving-cell-data-from-a-selected-cell-in-a-tablewidget    
-    
-    
 
     
-    def gosomewhere(self):
-        print('happy')
+  
    
      
 if __name__ == '__main__':

@@ -1,3 +1,5 @@
+import csv
+from datetime import datetime
 import os
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QPushButton
@@ -119,42 +121,26 @@ class ViberWatsAppTable(QWidget):
             row=row+1   
             self.tableWidget.move(0,0)
     def buttonCVS_clicked(self):
-        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\evidance')
-        rowcount=self.tableWidget.rowCount()
-         
-        sender_firt_name=[]
-        sender_last_name=[]
-        Sender_contact=[]
-        message=[]
-        sending_Time=[]
-        Recipiant_First_name=[]
-        Recepiant_Last_Name=[]
-        Recepiant_contact=[]
-        Sending_dateTime=[]
-         
-         
-          
-        for row  in range(rowcount):
-              sender_firt_name.append(self.tableWidget.item(row,0).text())
-              sender_last_name.append(self.tableWidget.item(row,1).text())
-              Sender_contact.append(self.tableWidget.item(row,2).text())
-              message.append(self.tableWidget.item(row,3).text())
-              sending_Time.append(self.tableWidget.item(row,4).text())
-              Recipiant_First_name.append(self.tableWidget.item(row,5).text())
-              Recepiant_Last_Name.append(self.tableWidget.item(row,6).text())
-              Recepiant_contact.append(self.tableWidget.item(row,7).text())
-              Sending_dateTime.append(self.tableWidget.item(row,8).text())
-
-              data = {'sender_firt_tname': sender_firt_name ,
-             'SenderlastName': sender_last_name,'Sender number': Sender_contact,'The message': message,'Time sent': sending_Time ,
-              'Reciepeant Firt Name': Recipiant_First_name,'Reciepeant last Name': Recepiant_Last_Name,'Recipeant Number': Recepiant_contact,'Sending_dateTime': Sending_dateTime}
-
-        df = pd.DataFrame(data, columns= ['sender_firt_name', 'sender_last_name','Sender_contact','Number','Recipiant_First_name','Recepiant_Last_Name','Recepiant_contact','Sending_dateTime'])
-
-        df.to_csv ( desktop+'\FilterdUser.csv', index = False, header=True)
-
+        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']))
+        now = datetime.now()
+        now = int(now.strftime("%Y%m%d%H%M%S"))
+        f = open(str(desktop)+'/'+'Desktop/evidance'+'/'+"Filteredchatuser%d.csv"%now, "a", newline="")  # open csv file
         print(desktop)
+        c = csv.writer(f) 
+        rowcount=self.tableWidget.rowCount()
+        
+        
+         
 
+        c.writerow(
+              [str('sender_firt_tname'),
+             str('SenderlastName'),str('Sender number'),str('The message'),str('Time sent'),
+              str('Reciepeant Firt Name'),str('Reciepeant last Name'), str('Recipeant Number'), str('Sending_dateTime')])  
+        for row  in range(rowcount):
+                c.writerow(
+              [str(self.tableWidget.item(row,0).text()), str(self.tableWidget.item(row,1).text()), str(self.tableWidget.item(row,2).text()),
+              str(self.tableWidget.item(row,3).text()), str(self.tableWidget.item(row,4).text()), str(self.tableWidget.item(row,5).text()), str(self.tableWidget.item(row,6).text())
+              ,str(self.tableWidget.item(row,7).text()),str(self.tableWidget.item(row,8).text())]) 
    
 
      
