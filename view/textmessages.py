@@ -101,29 +101,26 @@ class emaildetails(QWidget):
                
               # index = PyQt5.QtCore.QPersistentModelIndex(
                # self.tableWidget.model().index(row, 1))
-               x = QTableWidget.row(self.tableWidget,QTableWidgetItem(i.FromEmail_lastname))
-               if x == True:
-                   print('test')
-                   print(x)
-                   print('test')
+            
             # row.setitem(row,1, QTableWidgetItem(i.FromEmail_lastname))
 
             # self.tableWidget.rowAt[i] = row
 
-               test =  MyQwidgetItem(i.FromEmail_firstName)
-               test.ID = i.FromEmail_firstName
-               self.tableWidget.setMyItem(row,0,test)
-               self.tableWidget.setItem(row,1, QTableWidgetItem(i.FromEmail_lastname))
-               self.tableWidget.setItem(row,2, QTableWidgetItem(i.FromEmail_Email))
-               self.tableWidget.setItem(row,3, QTableWidgetItem(i.FromEmail_content_text))
-               self.tableWidget.setItem(row,4, QTableWidgetItem(i.FromEmail_timeDate))
-               self.tableWidget.setItem(row,5, QTableWidgetItem(i.ToEmail_firstName))
-               self.tableWidget.setItem(row,6, QTableWidgetItem(i.ToEmail_lastname))
-               self.tableWidget.setItem(row,7, QTableWidgetItem(i.ToEmail_Email))
-               self.tableWidget.setItem(row,8, QTableWidgetItem(i.ToEmail_timeDate))
-               self.tableWidget.setItem(row,9, QTableWidgetItem(i.ToEmail_timeDate))
-               self.tableWidget.setItem(row,10, QTableWidgetItem(i.BccEmail_Email))
-               self.tableWidget.setItem(row,11, QTableWidgetItem(i.CcEmail_Email))
+               fname =  MyQwidgetItem(i.FromEmail_firstName)
+               fname.ID =i.FromEmail_ID
+               self.tableWidget.setItem(row,0,fname)
+
+               self.tableWidget.setItem(row,1, MyQwidgetItem(i.FromEmail_lastname))
+               self.tableWidget.setItem(row,2, MyQwidgetItem(i.FromEmail_Email))
+               self.tableWidget.setItem(row,3, MyQwidgetItem(i.FromEmail_content_text))
+               self.tableWidget.setItem(row,4, MyQwidgetItem(i.FromEmail_timeDate))
+               self.tableWidget.setItem(row,5, MyQwidgetItem(i.ToEmail_firstName))
+               self.tableWidget.setItem(row,6, MyQwidgetItem(i.ToEmail_lastname))
+               self.tableWidget.setItem(row,7, MyQwidgetItem(i.ToEmail_Email))
+               self.tableWidget.setItem(row,8, MyQwidgetItem(i.ToEmail_timeDate))
+               self.tableWidget.setItem(row,9, MyQwidgetItem(i.ToEmail_timeDate))
+               self.tableWidget.setItem(row,10, MyQwidgetItem(i.BccEmail_Email))
+               self.tableWidget.setItem(row,11, MyQwidgetItem(i.CcEmail_Email))
                row=row+1
         
 
