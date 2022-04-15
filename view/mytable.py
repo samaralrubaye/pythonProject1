@@ -15,8 +15,10 @@ class MyTableWidget(QTableWidget):
         
 
     def handleItemClick(self, item):
-        x =self.row(item)
-        print(str(x))
+        try:
+             print(str(item.ID))
+        except:
+            print('tt')
         
        
     #     self.cellClicked.connect(lambda:self.cell_was_clicked(self.currentRow(),self.currentColumn()))

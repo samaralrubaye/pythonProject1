@@ -9,6 +9,8 @@ class allEmail:
         self._fromEmail_content_text=' '
         self._fromEmail_timeDate=' '
         self._fromEmail_Email=' '
+        self._fromEmail_ID=''
+
        
 
         self._toEmail_firstName=' '
@@ -317,12 +319,22 @@ class allEmail:
     @FromEmail_longtude.setter
     def FromEmail_longtude(self, value):
             self._fromEmail_longtude = value
+    
 
-    def FromData(self,fromEmail_firstName,fromEmail_lastname,fromEmail_content_text,fromEmail_timeDate,fromEmail_Email
+    @property
+    def FromEmail_ID(self):
+            return self._fromEmail_ID
+
+    @FromEmail_ID.setter
+    def FromEmail_ID(self, value):
+            self._fromEmail_ID = value
+
+    def FromData(self,id,fromEmail_firstName,fromEmail_lastname,fromEmail_content_text,fromEmail_timeDate,fromEmail_Email
     ,fromEmail_latitude,fromEmail_longtude, toEmail_firstName,toEmail_lastname,toEmail_content_text,toEmail_timeDate,
     toEmail_Email, toEmail_latitude,toEmail_longtude, ccEmail_firstName,ccEmail_lastname,ccEmail_content_text,ccEmail_timeDate,ccEmail_Email,ccEmail_latitude,ccEmail_longtude, bccEmail_firstName,bccEmail_lastname,bccEmail_content_text ,bccEmail_timeDate,bccEmail_Email,bccEmail_latitude,bccEmail_longtude):
         
         e = allEmail()
+        e.FromEmail_ID = id
         e.FromEmail_firstName=str(fromEmail_firstName)
         e.FromEmail_lastname = str(fromEmail_lastname)
         e.FromEmail_content_text=str(fromEmail_content_text)
@@ -362,7 +374,7 @@ class allEmail:
         j =1
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                Emails.append(allEmail.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14],i[15],i[16],i[17],i[18],i[19],i[20],i[21],i[22],i[23],i[24],i[25],i[26],i[27]))
+                Emails.append(allEmail.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14],i[15],i[16],i[17],i[18],i[19],i[20],i[21],i[22],i[23],i[24],i[25],i[26],i[27],i[28]))
                 j = j + 1
         print(j)
         return Emails

@@ -71,9 +71,17 @@ class emaildetails(QWidget):
 
         # self.WhatsApploading()
 
-        self.tableWidget.setItem(1, 1, QTableWidgetItem('tooo'))
-        self.tableWidget.setItem(1, 2, QTableWidgetItem('i.FromEmail_Email'))
-        self.tableWidget.setItem(1, 3, QTableWidgetItem('i.FromEmail_content_text'))
+        self.tableWidget.insertRow
+        
+        test =MyQwidgetItem('1')
+        test.ID = 111
+        test2 =MyQwidgetItem('2')
+        test2.ID = 222
+        test3 =MyQwidgetItem('3')
+        test3.ID = 333
+        self.tableWidget.setItem(1, 0, test)
+        self.tableWidget.setItem(1, 1, test2)
+        self.tableWidget.setItem(1, 2, test3)
         
         self.tableWidget.move(0, 0)
       

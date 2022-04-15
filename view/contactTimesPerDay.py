@@ -73,9 +73,6 @@ class cantactTimesperDate(QWidget):
         row=0
         self.tableWidget.setRowCount(len(email_summary))
         for j in email_summary:
-            test =  MyQwidgetItem(j.FirstName)
-            test.ID = j.FirstName
-            self.tableWidget.setMyItem(row,0,test)
             self.tableWidget.setItem(row,0, QTableWidgetItem(j.FirstName))
             self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
             self.tableWidget.setItem(row,2, QTableWidgetItem(j.Email))
