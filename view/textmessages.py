@@ -21,29 +21,39 @@ from datetime import datetime
 class emaildetails(QWidget):
     
 
-    def __init__(self,emails=None):
+    def __init__(self,emails=None,cID = None):
         super().__init__()
         self.title = 'PyQt5 table - pythonspot.com'
         self.left = 200
         self.top = 0
         self.width = 1500
         self.height = 900
+        self.caseid = cID 
         self.initUI()
         if emails != None:
            self.allEmails(emails)
            
-          
+       
+
         self.buttonCVS.clicked.connect(self.buttonCVS_clicked)
         
        
-       
+    
+    @property
+    def caseId(self):
+        return self.caseid
+
+    @caseId.setter
+    def caseId(self, value):
+        self.caseid = value
+
         
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         
       #  self.createTable()
-        self.tableWidget = MyTableWidget()
+        self.tableWidget = MyTableWidget(self.caseId,1)
         self.buttonCVS = QPushButton()
         self.buttonCVS.setText("export as a CVS")
         self.buttonCVS.move(64,32)

@@ -380,3 +380,15 @@ class allEmail:
         return Emails
 
    
+    def getEmailsBySenderID(self,caseid, senderID):
+        Emails=[]
+        ex = connection.conection.mycursor.callproc('getEmailsBySenderID',[caseid,senderID])
+        j =1
+        for result in connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                Emails.append(allEmail.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14],i[15],i[16],i[17],i[18],i[19],i[20],i[21],i[22],i[23],i[24],i[25],i[26],i[27],i[28]))
+                j = j + 1
+        print(j)
+        return Emails
+
+   

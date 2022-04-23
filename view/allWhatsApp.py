@@ -18,6 +18,7 @@ class allWhatsApp:
         self._toWhatsApp_Msg_DateandTime=' '
         self._toWhatsApp_Msg_number=' '
         self._toWhatsApp_Msg=' '
+        self._fromWhatsApp_Msg_ID=' '
         # ex = connection.conection.mycursor.callproc('SelectCaseWhatApp_proc', [caseid, ])
         # connection.conection.mycursor.stored_results()
         # for result in connection.conection.mycursor.stored_results():
@@ -176,7 +177,16 @@ class allWhatsApp:
     def ToWhatsApp_Msg_number (self, value):
             self._toWhatsApp_Msg_number = value
     
-    def FromData(self, fromWhatsApp_Msg_FirstName,fromWhatsApp_Msg_LastName,fromWhatsApp_Msg_number,
+    @property
+    def FromWhatsApp_Msg_ID(self):
+            return self._fromWhatsApp_Msg_ID
+
+    @FromWhatsApp_Msg_ID.setter
+    def FromWhatsApp_Msg_ID (self, value):
+            self._fromWhatsApp_Msg_ID = value
+    
+    
+    def FromData(self,ID, fromWhatsApp_Msg_FirstName,fromWhatsApp_Msg_LastName,fromWhatsApp_Msg_number,
     fromWhatsApp_Msg_Longtude, fromWhatsApp_Msg_Latitude,fromWhatsApp_Msg_IP,toWhatsApp_Msg_FirstName, toWhatsApp_Msg_LastName, toWhatsApp_Msg_number,toWhatsApp_Msg_Latitude,toWhatsApp_Msg_Longtude, toWhatsApp_Msg_IP, fromWhatsApp_Msg, toWhatsApp_Msg_DateandTime ):
         W=allWhatsApp()
         W.FromWhatsApp_Msg_FirstName = str(fromWhatsApp_Msg_FirstName)
@@ -194,6 +204,7 @@ class allWhatsApp:
         W.ToWhatsApp_Msg_Latitude=str(toWhatsApp_Msg_Latitude)
         W.ToWhatsApp_Msg_IP=str(toWhatsApp_Msg_IP)
         W.ToWhatsApp_Msg_DateandTime=str( toWhatsApp_Msg_DateandTime)
+        W.FromWhatsApp_Msg_ID=str(ID)
       #  ex.peopleID=str(peopleID)
         return W
 
@@ -203,6 +214,16 @@ class allWhatsApp:
 
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                WhatsAPP.append(allWhatsApp.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+                WhatsAPP.append(allWhatsApp.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14]))
+        print(WhatsAPP)
+        return WhatsAPP
+
+    def getWhatsAppBySenderID(self,caseid, senderID):
+        WhatsAPP=[]
+        ex = connection.conection.mycursor.callproc('getWhatsAppBySenderID',[caseid,senderID])
+
+        for result in connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                WhatsAPP.append(allWhatsApp.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14]))
         print(WhatsAPP)
         return WhatsAPP

@@ -35,7 +35,7 @@ class Ui_bookmark(object):
         self.retranslateUi(bookmark)
         QtCore.QMetaObject.connectSlotsByName(bookmark)
         self.btn_AddNote.clicked.connect(self.writeText)
-       # self.pushButton.clicked.connect()
+        self.pushButton.clicked.connect(self.hidding)
 
     def retranslateUi(self, bookmark):
         _translate = QtCore.QCoreApplication.translate
@@ -43,6 +43,7 @@ class Ui_bookmark(object):
         self.label.setText(_translate("bookmark", "Add note to the bookmark"))
         self.btn_AddNote.setText(_translate("bookmark", "Done"))
         self.pushButton.setText(_translate("bookmark", "Cancle"))
+        self.pushButton
     
     def writeText(self):
          desktop = os.path.join(os.path.join(os.environ['USERPROFILE']))
@@ -53,8 +54,10 @@ class Ui_bookmark(object):
             f.write(self.plainTextEdit.toPlainText())
             print() 
             f.close() 
+         bookmark.close()
+            
     def hidding(self):
-        bookmark = QtWidgets.QDialog()
+        # bookmark = QtWidgets.QDialog()
         bookmark.close()
     
         

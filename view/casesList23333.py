@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_CasesList(object):
     def setupUi(self, CasesList):
         CasesList.setObjectName("CasesList")
-        CasesList.resize(674, 550)
+        CasesList.resize(670, 541)
         CasesList.setAutoFillBackground(True)
         CasesList.setSizeGripEnabled(True)
         self.LwCases = QtWidgets.QListWidget(CasesList)
@@ -27,14 +27,17 @@ class Ui_CasesList(object):
         self.BtnNext.setGeometry(QtCore.QRect(520, 490, 93, 28))
         self.BtnNext.setObjectName("BtnNext")
         self.lbl_caseliost = QtWidgets.QLabel(CasesList)
-        self.lbl_caseliost.setGeometry(QtCore.QRect(140, 10, 71, 41))
+        self.lbl_caseliost.setGeometry(QtCore.QRect(160, 10, 71, 41))
         self.lbl_caseliost.setObjectName("lbl_caseliost")
         self.lblwelcome = QtWidgets.QLabel(CasesList)
-        self.lblwelcome.setGeometry(QtCore.QRect(30, 10, 81, 41))
+        self.lblwelcome.setGeometry(QtCore.QRect(30, 10, 101, 41))
         self.lblwelcome.setObjectName("lblwelcome")
         self.label_2 = QtWidgets.QLabel(CasesList)
-        self.label_2.setGeometry(QtCore.QRect(240, 20, 55, 31))
+        self.label_2.setGeometry(QtCore.QRect(240, 20, 20, 20))
         self.label_2.setObjectName("label_2")
+        self.label_errormsg = QtWidgets.QLabel(CasesList)
+        self.label_errormsg.setGeometry(QtCore.QRect(74, 440, 411, 20))
+        self.label_errormsg.setObjectName("label_errormsg")
 
         self.retranslateUi(CasesList)
         QtCore.QMetaObject.connectSlotsByName(CasesList)
@@ -47,6 +50,7 @@ class Ui_CasesList(object):
         self.lbl_caseliost.setText(_translate("CasesList", "watson"))
         self.lblwelcome.setText(_translate("CasesList", "Welcome back"))
         self.label_2.setText(_translate("CasesList", "!"))
+        self.label_errormsg.setText(_translate("CasesList", " "))
 
 
 if __name__ == "__main__":

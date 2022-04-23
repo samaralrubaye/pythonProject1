@@ -591,12 +591,12 @@ class Ui_DialogAnalysis(object):
             self.clearalltaps() 
             self.tabWidgetBookMark.addTab(SocialNetwork(None,None,WhatsApps),"SocialNetworktab")
             self.tabWidgetBookMark.addTab(MyApp(None,None,WhatsApps), "Geographical location")
-            self.tabWidgetBookMark.addTab(ViberWatsAppTable( WhatsApps, None),"Comunication")
+            self.tabWidgetBookMark.addTab(ViberWatsAppTable( WhatsApps, None,self.Case.caseId),"Comunication")
             whatsapp_summary=whatsAppsummary.getwhatsappSummary(self,
             self.case.caseId
             ,str( mFromDate)
                 ,str(mToDate) , mText,mseander,mrespian)
-            self.tabWidgetBookMark.addTab(comunicationNumberTable(None,whatsapp_summary),"Comunication Analysis")
+            self.tabWidgetBookMark.addTab(comunicationNumberTable(None,whatsapp_summary,self.Case.caseId),"Comunication Analysis")
            # self.tabWidgetBookMark.addTab(SocialNetworkTest(None,None,WhatsApps),"SocialNetworktab")
             self.tabWidgetBookMark.addTab(Window(None,None,whatsapp_summary),"statisic")
 
@@ -614,12 +614,12 @@ class Ui_DialogAnalysis(object):
                 
                 self.tabWidgetBookMark.addTab(SocialNetwork(vibers,None,None),"SocialNetworktab")
                 self.tabWidgetBookMark.addTab(MyApp(vibers,None,None), "Geographical location")
-                self.tabWidgetBookMark.addTab(ViberWatsAppTable(None,vibers),"Comunication")
+                self.tabWidgetBookMark.addTab(ViberWatsAppTable(None,vibers,self.Case.caseId),"Comunication")
                 viber_summary=vibersummary.getAllViberSummary(self,
             self.case.caseId
             ,str( mFromDate)
                 ,str(mToDate) , mText,mseander,mrespian)
-                self.tabWidgetBookMark.addTab(comunicationNumberTable(viber_summary,None),"Comunication Analysis")
+                self.tabWidgetBookMark.addTab(comunicationNumberTable(viber_summary,None,self.Case.caseId),"Comunication Analysis")
               #  self.tabWidgetBookMark.addTab(SocialNetworkTest(vibers,None,None),"SocialNetworktab")
                 self.tabWidgetBookMark.addTab(Window(viber_summary,None, None),"statisic")
 
@@ -634,12 +634,12 @@ class Ui_DialogAnalysis(object):
 
                 self.tabWidgetBookMark.addTab(SocialNetwork(None,emails,None),"SocialNetworktab")
                 self.tabWidgetBookMark.addTab(MyApp(None,emails,None), "Geographical location")
-                self.tabWidgetBookMark.addTab(emaildetails(emails),'EmailComunication')
+                self.tabWidgetBookMark.addTab(emaildetails(emails,self.Case.caseId),'EmailComunication')
                 email_summary=emailsummary.getAllemailSummary(self,
             self.case.caseId
             ,str( mFromDate)
                 ,str(mToDate) , mText,mseander,mrespian)
-                self.tabWidgetBookMark.addTab(cantactTimesperDate(email_summary),"Comunication Analysis")
+                self.tabWidgetBookMark.addTab(cantactTimesperDate(email_summary,self.Case.caseId),"Comunication Analysis")
                 self.tabWidgetBookMark.addTab(Window(None,email_summary,None),"statisic")
       
             

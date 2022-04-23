@@ -9,6 +9,8 @@
 
 
 from ast import Import, Not, Try
+from cProfile import label
+from turtle import goto
 from PyQt5 import QtCore, QtGui, QtWidgets
 from pandas import isnull
 from pyparsing import CaselessLiteral
@@ -28,15 +30,15 @@ class Ui_CasesList(object):
     def openwindow(self):
         self.window = QtWidgets.QDialog() 
         self.ui= Ui_DialogAnalysis(self.SelectedCase)
-        print("caselist")
+      
         try:
             self.ui.setupUi(self.window)
+            self.window.show()
         except:
+            pass
+            self.label_errormsg.setText('Select case please.')
             print("put micro here")
-            #QMessageBox.about(self, "Title", "please select a case")
-            #QMessageBox.setIcon(QMessageBox.Warning)
-        #CasesList.hide()
-        self.window.show()
+           
         
     def openBackwindow(self):
         self.window = QtWidgets.QDialog()
@@ -76,7 +78,7 @@ class Ui_CasesList(object):
     def SelectedCase(self, value):
         self.selectedCase = value
         
-
+ 
        
     def setupUi(self, CasesList):
         CasesList.setObjectName("CasesList")
@@ -89,6 +91,7 @@ class Ui_CasesList(object):
         self.LwCases.setObjectName("LwCases")
         
         self.LwCases.setCurrentRow(0)
+        
         
         self.BtnBack = QtWidgets.QPushButton(CasesList)
         self.BtnBack.setStyleSheet("background-color: rgb(222, 223, 255);")
@@ -107,10 +110,12 @@ class Ui_CasesList(object):
         self.label_2 = QtWidgets.QLabel(CasesList)
         self.label_2.setGeometry(QtCore.QRect(240, 20, 20, 20))
         self.label_2.setObjectName("label_2")
+        self.label_errormsg = QtWidgets.QLabel(CasesList)
+        self.label_errormsg.setGeometry(QtCore.QRect(74, 440, 411, 20))
+        self.label_errormsg.setObjectName("label_errormsg")
         #self.LwCases.addItem('dfdf')
         self.lbl_caseliost.setText(self.Examiner.firstName)
-        
-        
+    
 
         for I in cases.getAll(self,self.Examiner.userId):
                 item = QtWidgets.QListWidgetItem(I.caseName)
@@ -145,7 +150,11 @@ class Ui_CasesList(object):
         self.BtnNext.setText(_translate("CasesList", "Next"))
         self.lblwelcome.setText(_translate("CasesList", "Welcome back"))
         self.label_2.setText(_translate("CasesList", "!"))
-   
+        self.label_errormsg.setText(_translate("CasesList", " "))
+
+    def clickMethod(self):
+        QMessageBox.about(self, "Title", "Message")
+        
 
 if __name__ == "__main__":
     import sys

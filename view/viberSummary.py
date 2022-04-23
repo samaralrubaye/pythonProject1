@@ -6,6 +6,7 @@ class vibersummary:
         self._viberNumbr=''
         self._senderCount=''
         self._recepiantcount=''
+        self._sender_ID=''
 
     @property
     def FirstName(self):
@@ -50,9 +51,18 @@ class vibersummary:
              self._recepiantcount= value
         
 
+    @property
+    def Sender_ID(self):
+            return self._sender_ID
 
-    def FromData(self, firstNme,lastName, viberNumbr,senderCount,recepiantcount ):
+    @Sender_ID.setter
+    def Sender_ID(self, value):
+            self._sender_ID = value
+
+
+    def FromData(self, id,firstNme,lastName, viberNumbr,senderCount,recepiantcount ):
             v=vibersummary()
+            v.Sender_ID = id
             v.FirstName = str(firstNme)
             v.LastName= str(lastName)
             v.ViberNumbr=str(viberNumbr)
@@ -67,5 +77,5 @@ class vibersummary:
 
             for result in connection.conection.mycursor.stored_results():
                 for i in result.fetchall():
-                    Viberarray.append(vibersummary.FromData(self,i[0],i[1],i[2],i[3],i[4])) 
+                    Viberarray.append(vibersummary.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5])) 
             return Viberarray

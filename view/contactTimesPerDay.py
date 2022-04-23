@@ -15,25 +15,34 @@ from MyQwidgetItem import MyQwidgetItem
 
 class cantactTimesperDate(QWidget):
 
-    def __init__(self,email_summary = None):
+    def __init__(self,email_summary = None,cID = None):
         super().__init__()
         self.title = 'PyQt5 table - pythonspot.com'
         self.left = 200
         self.top = 0
         self.width = 1500
         self.height = 900
+        self.caseid = cID
         self.initUI() 
         if email_summary!= None:
            self.emailcall(email_summary)
            
-        
+
+    @property
+    def caseId(self):
+        return self.caseid
+
+    @caseId.setter
+    def caseId(self, value):
+        self.caseid = value
+                
             
         
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
               #  self.createTable()
-        self.tableWidget = MyTableWidget()
+        self.tableWidget = MyTableWidget(self.caseId,1)
         self.buttonCVS = QPushButton()
         self.buttonCVS.setText("Export as a CVS")
         self.buttonCVS.move(64,32)
@@ -73,11 +82,13 @@ class cantactTimesperDate(QWidget):
         row=0
         self.tableWidget.setRowCount(len(email_summary))
         for j in email_summary:
-            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FirstName))
-            self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
-            self.tableWidget.setItem(row,2, QTableWidgetItem(j.Email))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.SenderCount))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.Recepiantcount))
+            fname =  MyQwidgetItem(j.FirstName)
+            fname.ID =j.FromEmail_ID
+            self.tableWidget.setItem(row,0,fname )
+            self.tableWidget.setItem(row,1, MyQwidgetItem(j.LastName))
+            self.tableWidget.setItem(row,2, MyQwidgetItem(j.Email))
+            self.tableWidget.setItem(row,3, MyQwidgetItem(j.SenderCount))
+            self.tableWidget.setItem(row,4, MyQwidgetItem(j.Recepiantcount))
            
             row=row+1
             self.tableWidget.move(0,0)

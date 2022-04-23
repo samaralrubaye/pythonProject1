@@ -7,6 +7,7 @@ class whatsAppsummary:
         self._whatsApp=''
         self._senderCount=''
         self._recepiantcount=''
+        self._sender_ID=''
 
     @property
     def FirstName(self):
@@ -51,9 +52,18 @@ class whatsAppsummary:
              self._recepiantcount= value
         
 
+    @property
+    def Sender_ID(self):
+            return self._sender_ID
 
-    def FromData(self, firstNme,lastName, whatsApp,senderCount,recepiantcount ):
+    @Sender_ID.setter
+    def Sender_ID(self, value):
+            self._sender_ID = value
+
+
+    def FromData(self,id, firstNme,lastName, whatsApp,senderCount,recepiantcount ):
             v=whatsAppsummary()
+            v.Sender_ID = id
             v.FirstName = str(firstNme)
             v.LastName= str(lastName)
             v.WhatsApp=str(whatsApp)
@@ -68,7 +78,7 @@ class whatsAppsummary:
 
             for result in connection.conection.mycursor.stored_results():
                 for i in result.fetchall():
-                    whatsaooarray.append(whatsAppsummary.FromData(self,i[0],i[1],i[2],i[3],i[4])) 
+                    whatsaooarray.append(whatsAppsummary.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5])) 
             return whatsaooarray
  
 

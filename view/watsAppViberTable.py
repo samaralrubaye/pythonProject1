@@ -15,13 +15,21 @@ from MyQwidgetItem import MyQwidgetItem
 
 class ViberWatsAppTable(QWidget):
 
-    def __init__(self,  WhatsApps=None,Vibers=None):
+    def __init__(self,  WhatsApps=None,Vibers=None,cID = None):
         super().__init__()
         self.title = 'PyQt5 table - pythonspot.com'
         self.left = 200
         self.top = 0
         self.width = 1500
         self.height = 900
+        self.type = 0
+        self.caseid = cID
+        if WhatsApps != None:
+           self.type = 2
+           
+        if Vibers != None:
+           self.type = 3
+           
         self.initUI()
         if WhatsApps != None:
            self.WhatsApploading(WhatsApps)
@@ -32,17 +40,34 @@ class ViberWatsAppTable(QWidget):
            self.buttonCVS.clicked.connect(self.buttonCVS_clicked)
         
         
+    
+    @property
+    def Type(self):
+        return self.type
+
+    @Type.setter
+    def Type(self, value):
+        self.type = value
+
+
+    @property
+    def caseId(self):
+        return self.caseid
+
+    @caseId.setter
+    def caseId(self, value):
+        self.caseid = value
         
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         
       #  self.createTable()
-        self.tableWidget = MyTableWidget()
+        # self.tableWidget = MyTableWidget()
         
         # Add box layout, add table to box layout and add box layout to widget
         self.layout = QVBoxLayout()
-        self.tableWidget = MyTableWidget()
+        self.tableWidget = MyTableWidget(self.caseId,self.Type)
         
         self.buttonCVS = QPushButton()
         self.buttonCVS.setText("Export as a CVS")
@@ -85,18 +110,18 @@ class ViberWatsAppTable(QWidget):
         row=0
         self.tableWidget.setRowCount(len(vibers))
         for j in vibers:
-            test =  MyQwidgetItem(j.FromViber_Msg_FirstName)
-            test.ID =j.FromViber_Msg_FirstName
-            self.tableWidget.setItem(row,0,(test))
-            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FromViber_Msg_FirstName))
-            self.tableWidget.setItem(row,1, QTableWidgetItem(j.FromViber_Msg_LastName))
-            self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromViber_Msg_number))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.ToViber_Msg))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.ToViber_Msg_DateandTime))
-            self.tableWidget.setItem(row,5, QTableWidgetItem(j.ToViber_Msg_FirstName))
-            self.tableWidget.setItem(row,6, QTableWidgetItem(j.ToViber_Msg_LastName))
-            self.tableWidget.setItem(row,7, QTableWidgetItem(j.ToViber_Msg_number))
-            self.tableWidget.setItem(row,8, QTableWidgetItem(j.ToViber_Msg))
+            fname =  MyQwidgetItem(j.FromViber_Msg_FirstName)
+            fname.ID =j.FromViber_Msg_ID
+            self.tableWidget.setItem(row,0,fname)
+          
+            self.tableWidget.setItem(row,1, MyQwidgetItem(j.FromViber_Msg_LastName))
+            self.tableWidget.setItem(row,2, MyQwidgetItem(j.FromViber_Msg_number))
+            self.tableWidget.setItem(row,3, MyQwidgetItem(j.ToViber_Msg))
+            self.tableWidget.setItem(row,4, MyQwidgetItem(j.ToViber_Msg_DateandTime))
+            self.tableWidget.setItem(row,5, MyQwidgetItem(j.ToViber_Msg_FirstName))
+            self.tableWidget.setItem(row,6, MyQwidgetItem(j.ToViber_Msg_LastName))
+            self.tableWidget.setItem(row,7, MyQwidgetItem(j.ToViber_Msg_number))
+            self.tableWidget.setItem(row,8, MyQwidgetItem(j.ToViber_Msg))
             row=row+1
             self.tableWidget.move(0,0)
      
@@ -106,18 +131,17 @@ class ViberWatsAppTable(QWidget):
           row=0
           self.tableWidget.setRowCount(len(WhatsApps))
           for j in WhatsApps:
-            test =  MyQwidgetItem(j.FromWhatsApp_Msg_FirstName)
-            test.ID =j.FromWhatsApp_Msg_FirstName
-            self.tableWidget.setItem(row,0,(test))
-            self.tableWidget.setItem(row,0, QTableWidgetItem(j.FromWhatsApp_Msg_FirstName))
-            self.tableWidget.setItem(row,1, QTableWidgetItem(j.FromWhatsApp_Msg_LastName))
-            self.tableWidget.setItem(row,2, QTableWidgetItem(j.FromWhatsApp_Msg_number))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.FromWhatsApp_Msg))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.FromWhatsApp_Msg_DateandTime))
-            self.tableWidget.setItem(row,5, QTableWidgetItem(j.ToWhatsApp_Msg_FirstName))
-            self.tableWidget.setItem(row,6, QTableWidgetItem(j.ToWhatsApp_Msg_LastName))
-            self.tableWidget.setItem(row,7, QTableWidgetItem(j.ToWhatsApp_Msg_number))
-            self.tableWidget.setItem(row,8, QTableWidgetItem(j.ToWhatsApp_Msg_DateandTime))
+            fname =  MyQwidgetItem(j.FromWhatsApp_Msg_FirstName)
+            fname.ID =j.FromWhatsApp_Msg_ID
+            self.tableWidget.setItem(row,0,fname)
+            self.tableWidget.setItem(row,1, MyQwidgetItem(j.FromWhatsApp_Msg_LastName))
+            self.tableWidget.setItem(row,2, MyQwidgetItem(j.FromWhatsApp_Msg_number))
+            self.tableWidget.setItem(row,3, MyQwidgetItem(j.FromWhatsApp_Msg))
+            self.tableWidget.setItem(row,4, MyQwidgetItem(j.FromWhatsApp_Msg_DateandTime))
+            self.tableWidget.setItem(row,5, MyQwidgetItem(j.ToWhatsApp_Msg_FirstName))
+            self.tableWidget.setItem(row,6, MyQwidgetItem(j.ToWhatsApp_Msg_LastName))
+            self.tableWidget.setItem(row,7, MyQwidgetItem(j.ToWhatsApp_Msg_number))
+            self.tableWidget.setItem(row,8, MyQwidgetItem(j.ToWhatsApp_Msg_DateandTime))
             row=row+1   
             self.tableWidget.move(0,0)
     def buttonCVS_clicked(self):

@@ -9,6 +9,8 @@ class allViber:
         self._fromViber_Msg_DateandTime=' '
         self._fromViber_Msg_number=' '
         self._fromViber_Msg=' '
+        self._fromViber_Msg_ID =' '
+
 
         self._toViber_Msg_FirstName=' '
         self._toViber_Msg_LastName=' '
@@ -169,15 +171,16 @@ class allViber:
     def FromViber_Msg_number(self, value):
             self._fromViber_Msg_number = value
     
-    @property
-    def ToViber_Msg_number(self):
-            return self._toViber_Msg_number
-
-    @ToViber_Msg_number.setter
-    def ToViber_Msg_number(self, value):
-            self._toViber_Msg_number = value
     
-    def FromData(self, fromViber_Msg_FirstName,fromViber_Msg_LastName,fromViber_Msg_number, fromViber_Msg_Longtude,fromViber_Msg_Latitude,fromViber_Msg,
+    @property
+    def FromViber_Msg_ID(self):
+            return self._fromViber_Msg_ID
+
+    @FromViber_Msg_ID.setter
+    def FromViber_Msg_ID(self, value):
+            self._fromViber_Msg_ID = value
+    
+    def FromData(self,ID, fromViber_Msg_FirstName,fromViber_Msg_LastName,fromViber_Msg_number, fromViber_Msg_Longtude,fromViber_Msg_Latitude,fromViber_Msg,
      toViber_Msg_FirstName, 
      toViber_Msg_LastName, toViber_Msg_number, toViber_Msg_Longtude, toViber_Msg_Latitude, toViber_Msg_IP,
      toViber_Msg, toViber_Msg_DateandTime ):
@@ -188,6 +191,7 @@ class allViber:
         v.FromViber_Msg_Latitude=str(fromViber_Msg_Latitude)
         v.FromViber_Msg_Longtude=str(fromViber_Msg_Longtude)
         v.FromViber_Msg=str(fromViber_Msg)
+        v.FromViber_Msg_ID=str(ID)
         
 
         v.ToViber_Msg_FirstName = str(toViber_Msg_FirstName)
@@ -208,7 +212,16 @@ class allViber:
 
         for result in connection.conection.mycursor.stored_results():
             for i in result.fetchall():
-                Viberarray.append(allViber.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13]))
+                Viberarray.append(allViber.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14]))
                
         return Viberarray
 
+    def getVibersBySenderID(self,caseid, senderID):
+        Viberarray=[]
+        ex = connection.conection.mycursor.callproc('getVibersBySenderID',[caseid,senderID])
+
+        for result in connection.conection.mycursor.stored_results():
+            for i in result.fetchall():
+                Viberarray.append(allViber.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14]))
+               
+        return Viberarray

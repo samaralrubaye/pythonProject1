@@ -6,6 +6,7 @@ class emailsummary:
         self._email=''
         self._senderCount=''
         self._recepiantcount=''
+        self._fromEmail_ID=''
 
     @property
     def FirstName(self):
@@ -50,9 +51,18 @@ class emailsummary:
              self._recepiantcount= value
         
 
+    @property
+    def FromEmail_ID(self):
+            return self._fromEmail_ID
 
-    def FromData(self, firstNme,lastName, email,senderCount,recepiantcount ):
+    @FromEmail_ID.setter
+    def FromEmail_ID(self, value):
+            self._fromEmail_ID = value
+
+
+    def FromData(self,id, firstNme,lastName, email,senderCount,recepiantcount ):
             v=emailsummary()
+            v.FromEmail_ID = id
             v.FirstName = str(firstNme)
             v.LastName= str(lastName)
             v.Email=str(email)
@@ -67,5 +77,5 @@ class emailsummary:
 
             for result in connection.conection.mycursor.stored_results():
                 for i in result.fetchall():
-                    emailarray.append(emailsummary.FromData(self,i[0],i[1],i[2],i[3],i[4])) 
+                    emailarray.append(emailsummary.FromData(self,i[0],i[1],i[2],i[3],i[4],i[5])) 
             return emailarray

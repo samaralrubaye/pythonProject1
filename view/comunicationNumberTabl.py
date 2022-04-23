@@ -15,13 +15,20 @@ from MyQwidgetItem import MyQwidgetItem
 
 class comunicationNumberTable(QWidget):
 
-    def __init__(self,viber_summary = None,whatsapp_summary = None):
+    def __init__(self,viber_summary = None,whatsapp_summary = None,cID = None):
         super().__init__()
         self.title = 'PyQt5 table - pythonspot.com'
         self.left = 200
         self.top = 0
         self.width = 1500
         self.height = 900
+        self.type = 0
+        self.caseid = cID
+        if whatsapp_summary != None:
+           self.type = 2
+           
+        if viber_summary != None:
+           self.type = 3
         self.initUI()
         if whatsapp_summary!= None:
            self.WhatsApploading(whatsapp_summary)
@@ -29,12 +36,30 @@ class comunicationNumberTable(QWidget):
         if viber_summary != None :
              self.vibercall(viber_summary)
         
+    
+    @property
+    def Type(self):
+        return self.type
+
+    @Type.setter
+    def Type(self, value):
+        self.type = value
+
+
+    @property
+    def caseId(self):
+        return self.caseid
+
+    @caseId.setter
+    def caseId(self, value):
+        self.caseid = value
+        
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         
       #  self.createTable()
-        self.tableWidget = MyTableWidget()
+        self.tableWidget = MyTableWidget(self.caseId,self.Type)
         self.buttonCVS = QPushButton()
         self.buttonCVS.setText("Export as a CVS")
         self.buttonCVS.move(64,32)
@@ -78,15 +103,16 @@ class comunicationNumberTable(QWidget):
         row=0
         self.tableWidget.setRowCount(len(viber_summary))
         for j in viber_summary:
-            test =  MyQwidgetItem(j.FirstName)
-            test.ID =j.FirstName
-            self.tableWidget.setItem(row,0,(test))
-            self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
-            self.tableWidget.setItem(row,2, QTableWidgetItem(j.ViberNumbr))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.SenderCount))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.Recepiantcount))
+            fname =  MyQwidgetItem(j.FirstName)
+            # change the quiry    fname.ID =j.FirstName_ID
+            fname.ID =j.Sender_ID
+            self.tableWidget.setItem(row,0,fname)
             
             
+            self.tableWidget.setItem(row,1, MyQwidgetItem(j.LastName))
+            self.tableWidget.setItem(row,2, MyQwidgetItem(j.ViberNumbr))
+            self.tableWidget.setItem(row,3, MyQwidgetItem(j.SenderCount))
+            self.tableWidget.setItem(row,4, MyQwidgetItem(j.Recepiantcount))
             row=row+1
             self.tableWidget.move(0,0)
      
@@ -96,20 +122,18 @@ class comunicationNumberTable(QWidget):
           row=0
           self.tableWidget.setRowCount(len(whatsapp_summary))
           for j in whatsapp_summary:
-            test =  MyQwidgetItem(j.FirstName)
-            test.ID =j.FirstName
-            self.tableWidget.setItem(row,0, QTableWidgetItem(test))
-            self.tableWidget.setItem(row,1, QTableWidgetItem(j.LastName))
-            self.tableWidget.setItem(row,2, QTableWidgetItem(j.WhatsApp))
-            self.tableWidget.setItem(row,3, QTableWidgetItem(j.SenderCount))
-            self.tableWidget.setItem(row,4, QTableWidgetItem(j.Recepiantcount))
-            
-            
-            row=row+1   
-            self.tableWidget.move(0,0)
-    def buttonCVS_clicked(self):
-         
+                 fname =  MyQwidgetItem(j.FirstName)
+                 # change the quiry    fname.ID =j.FirstName_ID
+                 fname.ID =j.Sender_ID
+                 self.tableWidget.setItem(row,0,fname)
+                 self.tableWidget.setItem(row,1, MyQwidgetItem(j.LastName))
+                 self.tableWidget.setItem(row,2, MyQwidgetItem(j.WhatsApp))
+                 self.tableWidget.setItem(row,3, MyQwidgetItem(j.SenderCount))
+                 self.tableWidget.setItem(row,4, MyQwidgetItem(j.Recepiantcount))
+                 row=row+1   
+                 self.tableWidget.move(0,0)
 
+    def buttonCVS_clicked(self):
           desktop = os.path.join(os.path.join(os.environ['USERPROFILE']))
           now = datetime.now()
           now = int(now.strftime("%Y%m%d%H%M%S"))
