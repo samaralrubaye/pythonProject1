@@ -1,8 +1,10 @@
 import sys
+import sys
+import time
 from typing import overload
 from PyQt5.QtWidgets import *
 
-
+from mytable import *
 from MyQwidgetItem import MyQwidgetItem
 
 import csv
@@ -11,7 +13,7 @@ import os
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout,QPushButton
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot,QTimer
 import pandas as pd
 
 from viber import viber
@@ -23,9 +25,12 @@ from allWhatsApp import allWhatsApp
 from allViber import allViber
 
 
+
+
 class MyTableWidget(QTableWidget):
     def __init__(self,cID = None,ctype = None):
         super().__init__()
+        
          
         self.caseid = cID        
         self.type = ctype
@@ -80,6 +85,23 @@ class MyTableWidget(QTableWidget):
 
     def handleItemClick(self, item):
         try:
+            # self.progressBar.setValue(self.counter)
+            # if self.counter == int(self.n * 0.3):
+            #     self.labelDescription.setText('<strong>Working on Task #2</strong>')
+            # elif self.counter == int(self.n * 0.6):
+            #     self.labelDescription.setText('<strong>Working on Task #3</strong>')
+            # elif self.counter >= self.n:
+            #  self.timer.stop()
+            #  self.close()
+
+            #  time.sleep(1)
+
+            # self.SplashScreen= SplashScreen()
+            # self.SplashScreen.show()
+
+            #  self.counter += 1
+         
+             
              self.title = 'PyQt5 table'
              self.left = 20000
              self.top = 200
@@ -144,7 +166,9 @@ class MyTableWidget(QTableWidget):
                self.tableWidget.setItem(row,10, MyQwidgetItem(i.BccEmail_Email))
                self.tableWidget.setItem(row,11, MyQwidgetItem(i.CcEmail_Email))
                row=row+1
-
+            
+               self.tableWidget.move(0,0)
+               
     def vibercall(self, senderID):
         vibers=allViber.getVibersBySenderID(self,self.CaseID,senderID)
         row=0
