@@ -30,12 +30,15 @@ class SocialNetwork(QDialog):
        
         
         if emails != None:
+          G_symmetric_emails.clear()
           self.allemails(emails)
           self.draw_circlar(G_symmetric_emails)
         if watsap!= None:
+           G_symmetric_watsapp.clear()
            self.allwatsapp(watsap)
            self.draw_circlar(G_symmetric_watsapp)
         if vibers != None :
+             G_symmetric_viper.clear()
              self.allviper(vibers)
              self.draw_circlar(G_symmetric_viper)
 
