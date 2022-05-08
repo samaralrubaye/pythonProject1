@@ -73,7 +73,10 @@ class Window(QDialog):
         
         for i in email_summary:
             people.append(i.FirstName)
-            comunication.append(int(i.SenderCount))
+            count  =0
+            if (i.SenderCount != "None"):
+                count = int(i.SenderCount)
+            comunication.append(count)
         print(type(people))
         print(type(comunication))
         for i in range(len(people)):
@@ -101,7 +104,10 @@ class Window(QDialog):
         comunication = []
         for i in viber_summary:
             people.append(i.FirstName)
-            comunication.append(i.SenderCount)
+            count  =0
+            if (i.SenderCount != "None"):
+                count = int(i.SenderCount)
+            comunication.append(count)
         print(type(people))
         for i in range(len(people)):
             plt.bar( people[i],comunication[i])
@@ -122,7 +128,10 @@ class Window(QDialog):
         comunication = []
         for i in whatsapp_summary:
             people.append(i.FirstName)
-            comunication.append(int(i.SenderCount))
+            count  =0
+            if (i.SenderCount != "None"):
+                count = int(i.SenderCount)
+            comunication.append(count)
         print(comunication)
         print(people)
         for i in range(len(people)):

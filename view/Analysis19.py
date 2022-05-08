@@ -79,10 +79,8 @@ class Ui_DialogAnalysis(object):
        # DialogAnalysis.hide()
        # self.window.show()
     def bookmarknote(self):
-        self.window=QtWidgets.QDialog()
         self.ui=Ui_bookmark()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        self.ui.setupUi()
         
        
     def __init__(self, SelectedCase = None):
@@ -573,7 +571,7 @@ class Ui_DialogAnalysis(object):
             mFromDate=self.dateEdit_dateFrom.date().toString('yyyy/MM/dd')
             mToDate= self.dateEdit_dateTo.date().toString('yyyy/MM/dd')
         if  self.checkBox.checkState() == 2 :
-            mFromDate=self.lineEdit_Recepian.text()
+            mrespian=self.lineEdit_Recepian.text()
            
 
        

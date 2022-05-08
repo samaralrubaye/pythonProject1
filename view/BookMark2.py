@@ -16,26 +16,29 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_bookmark(object):
-    def setupUi(self, bookmark):
-        bookmark.setObjectName("bookmark")
-        bookmark.resize(676, 446)
-        self.label = QtWidgets.QLabel(bookmark)
+    def setupUi(self):
+        
+        self.bookmark = QtWidgets.QDialog()
+        self.bookmark.setObjectName("bookmark")
+        self.bookmark.resize(676, 446)
+        self.label = QtWidgets.QLabel(self.bookmark)
         self.label.setGeometry(QtCore.QRect(50, 40, 401, 41))
         self.label.setObjectName("label")
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(bookmark)
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.bookmark)
         self.plainTextEdit.setGeometry(QtCore.QRect(40, 90, 581, 231))
         self.plainTextEdit.setObjectName("plainTextEdit")
-        self.btn_AddNote = QtWidgets.QPushButton(bookmark)
+        self.btn_AddNote = QtWidgets.QPushButton(self.bookmark)
         self.btn_AddNote.setGeometry(QtCore.QRect(70, 350, 93, 28))
         self.btn_AddNote.setObjectName("btn_AddNote")
-        self.pushButton = QtWidgets.QPushButton(bookmark)
+        self.pushButton = QtWidgets.QPushButton(self.bookmark)
         self.pushButton.setGeometry(QtCore.QRect(500, 360, 93, 28))
         self.pushButton.setObjectName("pushButton")
 
-        self.retranslateUi(bookmark)
-        QtCore.QMetaObject.connectSlotsByName(bookmark)
+        self.retranslateUi(self.bookmark)
+        QtCore.QMetaObject.connectSlotsByName(self.bookmark)
         self.btn_AddNote.clicked.connect(self.writeText)
         self.pushButton.clicked.connect(self.hidding)
+        self.bookmark.show()
 
     def retranslateUi(self, bookmark):
         _translate = QtCore.QCoreApplication.translate
@@ -54,11 +57,11 @@ class Ui_bookmark(object):
             f.write(self.plainTextEdit.toPlainText())
             print() 
             f.close() 
-         bookmark.close()
+         self.bookmark.close()
             
     def hidding(self):
         # bookmark = QtWidgets.QDialog()
-        bookmark.close()
+        self.bookmark.close()
     
         
 
@@ -66,8 +69,6 @@ class Ui_bookmark(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    bookmark = QtWidgets.QDialog()
     ui = Ui_bookmark()
-    ui.setupUi(bookmark)
-    bookmark.show()
+    ui.setupUi()
     sys.exit(app.exec_())
